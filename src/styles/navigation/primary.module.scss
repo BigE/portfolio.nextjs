@@ -1,0 +1,25 @@
+@use "../variables";
+
+.link, .link:focus {
+	background-color: variables.$main;
+	color: variables.$light_shade;
+}
+
+.link:hover, .pure-menu-active .link {
+	background-color: variables.$light_shade;
+	color: variables.$main;
+}
+
+.text {
+	display: inline-block;
+	line-height: 4rem;
+	position: relative;
+	width: 100%;
+
+	& > :first-child {
+		font-size: 1.2em;
+		line-height: 4rem;
+		left: 0;
+		position: absolute;
+	}
+}

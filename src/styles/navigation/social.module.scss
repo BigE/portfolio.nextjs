@@ -1,0 +1,29 @@
+@use "./primary.module.scss";
+
+.social {
+    bottom: 0.2em;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+.social .link {
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    border-radius: 1rem;
+    padding: 0.5em;
+}
+
+.social .text {
+    display: inline;
+    font-size: 0px;
+    line-height: 1em;
+    visibility: collapse;
+}
+
+.social .text > :first-child {
+    line-height: 1em;
+    font-size: 3.2rem;
+    position: relative;
+    visibility: visible;
+}

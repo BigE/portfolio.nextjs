@@ -1,0 +1,35 @@
+@use './variables';
+
+.hero {
+	background-color: rgba(variables.$dark_shade,0.65);
+	color: variables.$light_shade;
+	display: table-cell;
+	height: 75vh;
+	padding: 3rem;
+	position: relative;
+	text-align: center;
+	vertical-align: middle;
+	width: 100vw;
+	@media (min-width: 1024px) {
+		font-size: 3rem;
+	}
+
+	h1 {
+		@media (min-width: 1024px) {
+			font-size: 6rem;
+		}
+	}
+}
+
+.backgroundImage {
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	background-size: cover;
+	bottom: 0;
+	content: '';
+	left: 0;
+	right: 0;
+	position: absolute;
+	top: 0;
+	z-index: -1;
+}

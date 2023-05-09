@@ -1,0 +1,75 @@
+/*
+	This comment is because this framework sucks!
+ */
+@use './variables';
+
+html,body {
+    overflow-x: hidden;
+}
+
+html {
+    font-size: 10px;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: variables.$light_shade;
+    color: variables.$dark_shade;
+    font-size: 1.6rem;
+    @media (min-width: 1024px) {
+        font-size: 2rem;
+    }
+}
+
+a {
+    &, a:visited {
+        color: blue;
+    }
+}
+
+p {
+    margin-block-start: 0;
+    margin-block-end: 1em;
+}
+
+#resume {
+    @media (min-width: 768px) {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 65%;
+    }
+}
+
+.button:before {
+    font-family: FontAwesome;
+    padding: 0 0.4em 0 0;
+}
+
+.centered {
+    text-align: center !important;
+}
+
+.error-list {
+    margin: 0 0 0 11em;
+}
+
+.error {
+    color: variables.$error;
+}
+
+.link-text:before {
+    font-family: FontAwesome;
+    padding: 0 0.6rem 0 1rem;
+}
+
+.profile-success {
+    padding: 0 0 1.8rem 0;
+}
+
+.right {
+    text-align: right;
+}
+
+.success {
+    color: variables.$success;
+}
