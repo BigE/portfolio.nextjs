@@ -13,9 +13,10 @@ export type NavigationProps = {
 
 export default function Navigation( props: NavigationProps ) {
 	const { sections, pages } = props.items;
-	var clicked = false, menu_items = Array();
+	var clicked = false, menu_items = new Array();
 
 	useEffect(() => {
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		menu_items = document.body.querySelectorAll('nav[role=main] .pure-menu-item');
 		document.body.querySelectorAll('.menu-trigger').forEach(element => addEventListener('click', handleClick.bind(element)));
 		window.addEventListener('scroll', handleScroll);
