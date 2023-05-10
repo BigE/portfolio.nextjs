@@ -45,7 +45,7 @@ export function renderSection( section:  IHero | IPageSection, sectionCounter: {
 	if (section.sys.contentType.sys.id === 'hero')
 		return renderHero(section as IHero);
 	else if (section.sys.contentType.sys.id === 'pageSection') {
-		return renderPageSection(section as  IPageSection, (sectionCounter.counter++ % 2 !== 0));
+		return renderPageSection(section as  IPageSection, (sectionCounter.counter++ % 2 !== 0), 'menu-block');
 	}
 
 	return <section key={section.sys.id} id={section.sys.id}></section>

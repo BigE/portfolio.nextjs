@@ -5,7 +5,7 @@
 	color: variables.$light_shade;
 }
 
-.link:hover, .pure-menu-active .link {
+.link:hover, .active .link {
 	background-color: variables.$light_shade;
 	color: variables.$main;
 }
