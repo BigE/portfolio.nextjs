@@ -1,7 +1,65 @@
-/*
-	This comment is because this framework sucks!
- */
 @use "./variables";
+@use "./mixins";
+
+.content, .footer, .menuToggle {
+    @include mixins.transition(transform, 0.5s ease);
+}
+
+body.showNav {
+    overflow: hidden;
+
+    .content, .menuToggle, .footer {
+        @include mixins.transform(translateX(27.5rem));
+    }
+
+    .header {
+        @include mixins.transform(translateX(0));
+    }
+
+    .content {
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+
+        &::before {
+            animation: fadeBackground 0.5s;
+            animation-fill-mode: forwards;
+            background-color: rgba(0, 0, 0, 0.85);
+            content: '';
+            display: block;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            z-index: 1000;
+        }
+    }
+}
+
+@keyframes fadeBackground {
+    from { background-color: rgba(0, 0, 0, 0); }
+    to { background-color: rgba(0, 0, 0, 0.85); }
+}
+
+.menuToggle {
+    color: variables.$main;
+    display: inline-block;
+    left: 0.25rem;
+    position: fixed;
+    top: 0.25rem;
+    z-index: 1001;
+
+    .toggle {
+        background-color: variables.$dark_shade;
+        border: 0.1rem solid variables.$dark_accent;
+        border-radius: 0.5rem;
+        color: variables.$main;
+        display: block;
+        font-size: 2rem;
+        line-height: 4rem;
+        width: 5rem;
+        text-align: center;
+    }
+}
 
 .header {
     background-color: variables.$main;
@@ -10,6 +68,8 @@
     left: 0;
     position: fixed;
     text-align: right;
+    @include mixins.transform(translateX(-27.5rem));
+    @include mixins.transition(transform, 0.5s ease);
     top: 0;
     width: 27.5rem;
 }
@@ -20,25 +80,25 @@
     margin: 0.5rem 1rem;
     min-height: 4.8rem;
     position: relative;
-}
 
-.logo h1 {
-    font-size: 2rem;
-    line-height: 2.4rem;
-    margin: 0;
-}
+    h1 {
+        font-size: 2rem;
+        line-height: 2.4rem;
+        margin: 0;
+    }
 
-.logo p {
-    font-size: 1.4rem;
-    line-height: 1.8rem;
-    margin: 0.6rem 0 0 0;
-}
+    p {
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+        margin: 0.6rem 0 0 0;
+    }
 
-.logo img {
-    display: inline-block;
-    left: 0;
-    position: absolute;
-    top: 0;
+    img {
+        display: inline-block;
+        left: 0;
+        position: absolute;
+        top: 0;
+    }
 }
 
 .avatar img {
@@ -58,26 +118,29 @@
     color: variables.$main;
     font-size: 1.1em;
     padding: 8rem 0 10rem 0;
-}
 
-.footer div {
-    text-align: center;
-}
-
-.footer section {
-    margin: 0.8em 0;
-    @media (min-width: 568px) and (max-width: 1024px), (min-width: 1280px) {
-        display: inline-block;
+    div {
+        text-align: center;
     }
-}
+    
+    section {
+        margin: 0.8em 0;
+        @media (min-width: 1280px) {
+            display: inline-block;
+        }
+    }
 
-.footer a {
-    color: variables.$light_accent;
-    text-decoration: none;
-}
-
-.footer a[target=_blank]:after {
-    color: variables.$light_accent;
+    .icon {
+        display: none;
+    }
+    
+    a {
+        color: variables.$light_accent;
+        text-decoration: none;
+    }
+    a[target=_blank]:after {
+        color: variables.$light_accent;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -90,6 +153,7 @@
     }
 
     .header {
+        @include mixins.transform(translateX(0));
         width: 20%;
     }
 
@@ -97,7 +161,7 @@
         position: relative;
     }
 
-    #menuToggle {
+    .menuToggle {
         display: none;
     }
 
@@ -113,6 +177,10 @@
 
     .footer {
         margin-left: 30rem;
+
+        .icon {
+            display: inline-block;
+        }
     }
 
     .header {
@@ -125,10 +193,6 @@
 
     .logo img {
         position: absolute;
-    }
-
-    #social a:before {
-        font-size: 4.2rem;
     }
 
     .avatar img {
