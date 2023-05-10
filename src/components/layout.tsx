@@ -41,7 +41,7 @@ export default function Layout({ props, children }: LayoutProps) {
 		</Head>
 		<header className={styles.header}>
 			<Link href="/" className={`pure-menu-heading ${styles.logo}`}>
-				<span className={styles.avatar}><Image src={logo} alt="me" /></span>
+				<span className={`${styles.image} ${styles.avatar}`}><Image src={logo} alt="me" /></span>
 				<h1>{siteSettings["header.headline"] || "Portfolio"}</h1>
 				{siteSettings["header.sub_headline"] && <p>{siteSettings["header.sub_headline"]}</p>}
 			</Link>

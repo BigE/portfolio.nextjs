@@ -4,12 +4,11 @@ import Link from "next/link";
 import styles from "@/styles/button.module.scss";
 import Icon from "./icon";
 import { IButton, IPage } from "@/@types/generated/contentful";
-import { getFontAwesomeIcon } from "@/utils/icon";
 
 export interface ButtonProps {
 	className?: string | undefined;
 	document?: Asset | undefined;
-	external?: URL | undefined;
+	external?: string | undefined;
 	fragment?: string | undefined;
 	icon: string;
 	label: string;
@@ -29,8 +28,10 @@ export default function Button( props: ButtonProps ) {
 		props.label
 	];
 
-	if (props.external || props.document || props.type)
-		return <button className={className} onClick={() => `window.location.href=${href}`} type={props.type}>{children}</button>
+	if (props.external || props.document)
+		return <a className={className} href={href}>{children}</a>
+	else if (props.type)
+		return <button className={className} type={props.type}>{children}</button>
 
 	return <Link className={className} href={href} >{children}</Link>
 }
@@ -41,7 +42,7 @@ export function getButtonHref( button: ButtonProps ): string {
 	} else if (button.internal) {
 		return button.internal.fields.slug;
 	} else if (button.external) {
-		return button.external.toString();
+		return button.external;
 	} else if (button.document) {
 		return button.document.fields.file.url;
 	}
@@ -54,7 +55,7 @@ export function renderButton( button: IButton, className?: string | undefined ) 
 		key={button.sys.id}
 		className={className}
 		document={button.fields.document}
-		external={button.fields.externalUrl && new URL(button.fields.externalUrl) || undefined}
+		external={button.fields.externalUrl}
 		fragment={button.fields.pageFragment}
 		icon={button.fields.icon.fields.name}
 		internal={button.fields.internalPage as IPage | undefined}

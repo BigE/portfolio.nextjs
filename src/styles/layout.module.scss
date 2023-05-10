@@ -93,7 +93,7 @@ body.showNav {
         margin: 0.6rem 0 0 0;
     }
 
-    img {
+    .image {
         display: inline-block;
         left: 0;
         position: absolute;
@@ -157,7 +157,7 @@ body.showNav {
         width: 20%;
     }
 
-    .logo img {
+    .logo .image {
         position: relative;
     }
 
@@ -189,10 +189,10 @@ body.showNav {
 
     .logo {
         min-height: 6.4rem;
-    }
-
-    .logo img {
-        position: absolute;
+        
+        .image {
+            position: absolute;
+        }
     }
 
     .avatar img {
