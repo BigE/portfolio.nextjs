@@ -1,13 +1,12 @@
 import { Document } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import React, { isValidElement } from "react";
+import React from "react";
 
 import styles from "@/styles/panel.module.scss";
 import { renderButton } from "./button";
 import Icon from "./icon";
 import { options } from "./richText";
 import { IPanel } from "@/@types/generated/contentful";
-import { getFontAwesomeIcon } from "@/utils/icon";
 
 interface PanelProps {
 	buttonAlignment: "Default" | "Centered";

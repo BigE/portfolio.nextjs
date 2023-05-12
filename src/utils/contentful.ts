@@ -1,9 +1,12 @@
-import { createClient, ContentfulClientApi, Entry, EntryCollection } from "contentful";
+import { createClient, ContentfulClientApi, Entry } from "contentful";
 
-import { IPage } from "@/@types/generated/contentful";
+import { IPage, ISiteSettings } from "@/@types/generated/contentful";
+import { it } from "node:test";
+import { ISiteSettingsFields } from "@/@types/generated/contentful";
+import { IPageFields } from "@/@types/generated/contentful";
 
-const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
-const spaceId = process.env.CONTENTFUL_SPACE_ID;
+const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN || "";
+const spaceId = process.env.CONTENTFUL_SPACE_ID || "";
 
 const client: ContentfulClientApi = createClient({
 	accessToken: accessToken,
@@ -44,8 +47,8 @@ export async function getSiteSettings(): Promise<{[key: string]: string}> {
 		content_type: 'siteSettings',
 		limit: 100
 	};
-	const { items } = await getClient().getEntries<TypeSiteSettingsSkeleton>(query);
-	var settings = {};
+	const { items } = await getClient().getEntries<ISiteSettingsFields>(query);
+	var settings: {[key: string]: string} = {};
 
 	items.forEach(item => {
 		settings[item.fields.key] = item.fields.value;
@@ -59,7 +62,7 @@ export async function getSlugs() {
 		content_type: 'page',
 		limit: 100
 	}
-	const { items } = await getClient().getEntries<TypePageSkeleton>(query);
+	const { items } = await getClient().getEntries<IPageFields>(query);
 	return items.map(item => {
 		return item.fields.slug
 	})

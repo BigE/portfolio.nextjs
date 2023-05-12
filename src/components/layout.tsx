@@ -10,7 +10,7 @@ import Icon from "./icon";
 import { IPage, IPageSection } from "@/@types/generated/contentful";
 
 type PageProps = {
-	page: IPage;
+	page?: IPage | undefined;
 	pages: IPage[];
 	siteSettings: {[key: string]: string};
 	socialIcons: any;
@@ -26,7 +26,7 @@ export default function Layout({ props, children }: LayoutProps) {
 	const externalPages = pages?.filter(page => page.fields.slug !== "home");
 	const navItems = {sections: page?.fields.content.filter(section => section.sys.contentType.sys.id === "pageSection"), pages: externalPages} as { sections: IPageSection[], pages: IPage[]};
 	const [navOpen, setNavOpen] = useState(false);
-	const siteTitle = (siteSettings["site.title"] || "My Portfolio") + (page.fields.title? ` | ${page.fields.title}` : '');
+	const siteTitle = (siteSettings["site.title"] || "My Portfolio") + (page?.fields.title? ` | ${page.fields.title}` : '');
 
 	function handleClick() {
 		document.body.classList.toggle(styles.showNav);

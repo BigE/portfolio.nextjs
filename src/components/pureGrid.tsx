@@ -1,7 +1,7 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import React from "react";
 
-import Panel, { renderPanel } from "./panel";
+import { renderPanel } from "./panel";
 import { options } from "./richText";
 import { IPureGrid, IPureGridPanel, IPureGridRichText } from "@/@types/generated/contentful";
 

@@ -24,6 +24,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
+    "sharp": "^0.32.1",
     "typescript": "5.0.4"
   },
   "packageManager": "yarn@3.5.0",
@@ -31,7 +32,6 @@
     "@next/env": "^13.4.1",
     "contentful-management": "^10.32.0",
     "contentful-typescript-codegen": "^3.4.0",
-    "prettier": "^2.8.8",
     "sass": "^1.62.1"
   }
 }

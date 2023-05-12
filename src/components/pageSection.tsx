@@ -7,7 +7,6 @@ import { renderPanel } from "./panel";
 import { renderPureGrid } from "./pureGrid";
 import { options } from "./richText";
 import { IForm, IPageSection,  IPanel, IPureGrid, IRichText } from "@/@types/generated/contentful";
-import { getFontAwesomeIcon } from "@/utils/icon";
 import React from 'react';
 
 type PageSectionProps = {
@@ -21,7 +20,6 @@ type PageSectionProps = {
 
 export default function PageSection( props: PageSectionProps ) {
 	const className = [styles.pageSection, props.dark? styles.dark : undefined, props.className].join(' ').trim();
-	const FontAwesomeIcon = getFontAwesomeIcon(props.icon);
 
 	return <section id={props.slug} className={className}>
 		<header>

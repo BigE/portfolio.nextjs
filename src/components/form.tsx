@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, FormEventHandler, useState } from "react";
 import axios from "axios";
 
 import styles from "@/styles/form.module.scss";
@@ -21,11 +21,11 @@ export default function Form(props: FormProps) {
 			message: "",
 		  });
 
-	function handleChange(e: Event) {
-		setState({ ...state, [e.target.name]: e.target.value });
+	function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+		setState({ ...state, [e.target?.name]: e.target?.value });
 	}
 
-	async function handleSubmit(e: Event) {
+	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
 		let formData = new FormData();
