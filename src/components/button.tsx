@@ -11,6 +11,7 @@ export interface ButtonProps {
 	external?: string | undefined;
 	fragment?: string | undefined;
 	icon: string;
+	iconClassName?: string;
 	label: string;
 	internal?: IPage | undefined;
 	type?: "submit" | "reset" | "button" | undefined;
@@ -24,7 +25,7 @@ export default function Button( props: ButtonProps ) {
 	const href = getButtonHref(props);
 
 	const children = [
-		<Icon key={`${props.icon}-key`} icon={props.icon} />,
+		<Icon key={`${props.icon}-key`} icon={props.icon} className={props.iconClassName} />,
 		props.label
 	];
 
@@ -50,7 +51,7 @@ export function getButtonHref( button: ButtonProps ): string {
 	return '';
 }
 
-export function renderButton( button: IButton, className?: string | undefined ) {
+export function renderButton( button: IButton, className?: string | undefined, iconClassName?: string | undefined ) {
 	return <Button
 		key={button.sys.id}
 		className={className}
@@ -58,6 +59,7 @@ export function renderButton( button: IButton, className?: string | undefined ) 
 		external={button.fields.externalUrl}
 		fragment={button.fields.pageFragment}
 		icon={button.fields.icon.fields.name}
+		iconClassName={iconClassName}
 		internal={button.fields.internalPage as IPage | undefined}
 		label={button.fields.label}
 	/>;

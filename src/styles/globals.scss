@@ -16,6 +16,7 @@ body {
     background-color: variables.$light_shade;
     color: variables.$dark_shade;
     font-size: 1.6rem;
+    line-height: 1.5;
     @media (min-width: 1024px) {
         font-size: 2rem;
     }
@@ -72,4 +73,8 @@ p {
 
 .success {
     color: variables.$success;
+}
+
+.pure-form legend {
+    color: variables.$light_shade;
 }

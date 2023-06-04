@@ -6,6 +6,7 @@ import { IPage, IPageSection } from "@/@types/generated/contentful";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 
 export type NavigationProps = {
+	ariaLabel?: string;
 	className?: string;
 	role?: string;
 	items: {sections: IPageSection[], pages: IPage[] };
@@ -40,7 +41,7 @@ export default function Navigation( props: NavigationProps ) {
 			}
 		}
 
-		menu_items.current = document.body.querySelectorAll('nav[role=main] .pure-menu-item');
+		menu_items.current = document.body.querySelectorAll('nav[id=main] .pure-menu-item');
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, [clicked]);
@@ -72,7 +73,7 @@ export default function Navigation( props: NavigationProps ) {
 		};
 	}
 
-	return <nav className={props.className} role={props.role}>
+	return <nav className={props.className} id="main" role="navigation" aria-label={props.ariaLabel || "Primary"}>
 		<ul className="pure-menu-list">
 			<li className="pure-menu-separator"></li>
 			{sections && sections.map(section => {
@@ -91,7 +92,12 @@ export default function Navigation( props: NavigationProps ) {
 				<li className="pure-menu-separator"></li>
 				{pages.map(page => {
 					return <li key={page.sys.id} className="pure-menu-item">
-						<Link className="pure-menu-link" href={page.fields.slug}>{page.fields.title}</Link>
+						<Link className={`pure-menu-link ${styles.link}`} href={page.fields.slug}>
+							<span className={styles.text}>
+								<Icon icon={page.fields.icon.fields.name} />
+								{page.fields.title}
+							</span>
+						</Link>
 					</li>;
 				})}
 			</>}

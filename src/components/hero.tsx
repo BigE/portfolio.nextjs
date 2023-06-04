@@ -32,7 +32,7 @@ export default function Hero( props: HeroProps ) {
 }
 
 export function renderHero( hero: IHero, className?: string | undefined ) {
-	const button = hero.fields.button? renderButton(hero.fields.button) : undefined;
+	const button = hero.fields.button? renderButton(hero.fields.button, styles.button, styles.icon) : undefined;
 
 	return <Hero key={hero.sys.id} {...hero.fields} background={hero.fields.background?.fields.file.url} button={button} className={className} backgroundProps={hero.fields.background?.fields.file.details.image} />;
 }

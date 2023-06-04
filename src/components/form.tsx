@@ -13,7 +13,7 @@ interface FormProps {
 };
 
 export default function Form(props: FormProps) {
-	const buttons = [<Button key="submit" className={panelStyles.button} type="submit" icon="FaEnvelope" label="Send" />],
+	const buttons = [<Button key="submit" className={panelStyles.button} type="submit" icon="FaEnvelope" iconClassName={panelStyles.icon} label="Send" />],
 	      [state, setState] = useState({
 			name: "",
 			email: "",
@@ -48,6 +48,7 @@ export default function Form(props: FormProps) {
 	return <form onSubmit={handleSubmit} className={`${styles.form} pure-form pure-form-aligned`}>
 		<Panel className={props.className} headline="Contact Me" icon="FaRegEnvelope" slug="contact" buttonAlignment="Default" buttons={buttons}>
 			<fieldset>
+				<legend className={styles.legend}>Fill out your information below</legend>
 				<div className={`${styles.container} pure-control-group`}>
 					<label htmlFor="name">Name</label>
 					<input id="name" name="name" type="text" onChange={handleChange} />
@@ -61,7 +62,7 @@ export default function Form(props: FormProps) {
 					<input id="subject" name="subject" type="text" onChange={handleChange} />
 				</div>
 				<div className={`${styles.container} pure-control-group`}>
-					<label htmlFor="email">Message</label>
+					<label htmlFor="message">Message</label>
 					<textarea id="message" name="message" onChange={handleChange}></textarea>
 				</div>
 			</fieldset>
