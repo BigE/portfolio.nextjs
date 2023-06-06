@@ -2,6 +2,7 @@
 
 .hero {
 	background-color: rgba(variables.$dark_shade,0.65);
+    box-shadow: -0.1rem 0.4rem 1rem 0.2rem variables.$dark_shade;
 	color: variables.$light_shade;
 	display: table-cell;
 	height: 75vh;

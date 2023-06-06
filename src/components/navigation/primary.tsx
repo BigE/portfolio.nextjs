@@ -1,76 +1,37 @@
 import Link from "next/link";
+import React, { useContext, useEffect, useRef } from "react";
 
 import styles from "@/styles/navigation/primary.module.scss";
 import Icon from "../icon";
+import { NavigationContext } from "@/context/navigation";
+import * as navigation from "@/utils/navigation";
 import { IPage, IPageSection } from "@/@types/generated/contentful";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
 
 export type NavigationProps = {
 	ariaLabel?: string;
 	className?: string;
-	role?: string;
 	items: {sections: IPageSection[], pages: IPage[] };
+	role?: string;
 };
 
 export default function Navigation( props: NavigationProps ) {
 	const { sections, pages } = props.items;
-	const menu_items: MutableRefObject<NodeListOf<Element> | undefined> = useRef();
-	const [ clicked, setClicked ] = useState(false);
-	var scrollEndTimer: NodeJS.Timeout | undefined;
+	const navigationContext = useContext(NavigationContext);
 
 	useEffect(() => {
 		function handleScroll(event: Event) {
-			console.log(clicked);
-			if (clicked) return;
-
-			const elem = (document.scrollingElement || document.documentElement),
-				top = elem.scrollTop,
-				elements = Array.prototype.slice.call(document.body.querySelectorAll("section.menu-block")).reverse();
-
-			clearActive();
-			for (var i = 0; i < elements.length; i++) {
-				if (top >= (elements[i].offsetTop - 200) && elem.scrollTop > 0) {
-					menu_items.current?.forEach(item => {
-						if (item.querySelector('.pure-menu-link')?.getAttribute('data-section') === elements[i].id) {
-							item.classList.add("pure-menu-active");
-							item.classList.add(styles.active);
-						}
-					});
-					break;
-				}
-			}
+			navigation.handleScroll(event, navigationContext.clicked, navigationContext.menuItems);
 		}
 
-		menu_items.current = document.body.querySelectorAll('nav[id=main] .pure-menu-item');
+		if (navigationContext.menuItems)
+			navigationContext.menuItems.current = document.body.querySelectorAll('nav[id=main] .pure-menu-item');
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
-	}, [clicked]);
-
-	function clearActive() {
-		menu_items.current?.forEach(element => {
-			element.classList.remove("pure-menu-active");
-			element.classList.remove(styles.active);
-		});
-	}
+	}, [navigationContext.menuItems, navigationContext.clicked]);
 
 	function handleClick(event: React.MouseEvent) {
-		const targetElement = (event.target as Element).closest('a');
-		if (!targetElement) return;
-
-		setClicked(true);
-		clearActive();
-
-		if (targetElement && targetElement.parentElement && targetElement.parentElement.classList.contains('pure-menu-item')) {
-			targetElement.parentElement.classList.add('pure-menu-active');
-			targetElement.parentElement.classList.add(styles.active);
-		}
-
-		document.onscroll = event => {
-			scrollEndTimer !== undefined && clearTimeout(scrollEndTimer);
-			scrollEndTimer = setTimeout(() => {
-				setClicked(false);
-			}, 100);
-		};
+		if (navigationContext.callback)
+			navigation.handleClick(event, navigationContext.menuItems, navigationContext.callback);
 	}
 
 	return <nav className={props.className} id="main" role="navigation" aria-label={props.ariaLabel || "Primary"}>

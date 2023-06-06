@@ -73,6 +73,7 @@ body.showNav {
     @include mixins.transition(transform, 0.5s ease);
     top: 0;
     width: 27.5rem;
+    z-index: 1001;
 }
 
 .logo {
@@ -115,7 +116,7 @@ body.showNav {
 
 .footer {
     background-color: variables.$dark_shade;
-    box-shadow: 0 -0.4rem 1rem -0.2rem variables.$dark_shade;
+    box-shadow: -0.1rem -0.4rem 1rem -0.2rem variables.$dark_shade;
     color: variables.$light_accent;
     font-size: 1.1em;
     padding: 8rem 0 10rem 0;

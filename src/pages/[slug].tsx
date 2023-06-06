@@ -5,6 +5,9 @@ import { renderHero } from "@/components/hero";
 import { renderPageSection } from "@/components/pageSection";
 import { getPage, getPages, getSiteSettings, getSlugs, getSocialIcons } from "@/utils/contentful";
 import { IHero, IPage, IPageSection } from "@/@types/generated/contentful";
+import { MenuItems } from "@/utils/navigation";
+import { useContext } from "react";
+import { NavigationContext } from "@/context/navigation";
 
 export async function getStaticPaths() {
 	const slugs = await getSlugs();
@@ -34,16 +37,17 @@ type PageProps = {
 };
 
 export default function Page({ page }: PageProps) {
+	const { callback, menuItems } = useContext(NavigationContext);
 	var sectionCounter = {
 		counter: 0,
 	};
 
-	return page.fields.content.map(section => renderSection(section, sectionCounter));
+	return page.fields.content.map(section => renderSection(section, sectionCounter, callback, menuItems));
 }
 
-export function renderSection( section:  IHero | IPageSection, sectionCounter: {[key: string]: number} ) {
+export function renderSection( section:  IHero | IPageSection, sectionCounter: {[key: string]: number}, callback: CallableFunction | undefined, menu_items: MenuItems ) {
 	if (section.sys.contentType.sys.id === 'hero')
-		return renderHero(section as IHero);
+		return renderHero(section as IHero, callback, menu_items);
 	else if (section.sys.contentType.sys.id === 'pageSection') {
 		return renderPageSection(section as  IPageSection, (sectionCounter.counter++ % 2 !== 0), 'menu-block');
 	}

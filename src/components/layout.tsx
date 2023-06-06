@@ -25,7 +25,7 @@ export default function Layout({ props, children }: LayoutProps) {
 	const { page, pages, siteSettings, socialIcons } = props;
 	const externalPages = pages?.filter(page => page.fields.slug !== "home");
 	const navItems = {sections: page?.fields.content.filter(section => section.sys.contentType.sys.id === "pageSection"), pages: externalPages} as { sections: IPageSection[], pages: IPage[]};
-	const [navOpen, setNavOpen] = useState(false);
+	const [ navOpen, setNavOpen ] = useState(false);
 	const siteTitle = (siteSettings["site.title"] || "My Portfolio") + (page?.fields.title? ` | ${page.fields.title}` : '');
 
 	function handleClick() {

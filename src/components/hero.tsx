@@ -1,10 +1,10 @@
-import { Asset } from "contentful";
+import React, { useRef } from "react";
+import Image from "next/image";
 
 import styles from "@/styles/hero.module.scss";
 import { renderButton } from "./button";
 import { IHero } from "@/@types/generated/contentful";
-import React from "react";
-import Image from "next/image";
+import * as navigation from "@/utils/navigation";
 
 export interface HeroProps {
 	background?: string | undefined;
@@ -31,8 +31,13 @@ export default function Hero( props: HeroProps ) {
 	);
 }
 
-export function renderHero( hero: IHero, className?: string | undefined ) {
-	const button = hero.fields.button? renderButton(hero.fields.button, styles.button, styles.icon) : undefined;
+export function renderHero( hero: IHero, callback: CallableFunction | undefined, menu_items: navigation.MenuItems, className?: string ) {
+	function handleClick(event: React.MouseEvent) {
+		if (callback)
+			navigation.handleClick(event, menu_items, callback);
+	}
+
+	const button = hero.fields.button? renderButton(hero.fields.button, styles.button, styles.icon, handleClick) : undefined;
 
 	return <Hero key={hero.sys.id} {...hero.fields} background={hero.fields.background?.fields.file.url} button={button} className={className} backgroundProps={hero.fields.background?.fields.file.details.image} />;
 }

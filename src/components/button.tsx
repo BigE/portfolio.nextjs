@@ -6,6 +6,7 @@ import Icon from "./icon";
 import { IButton, IPage } from "@/@types/generated/contentful";
 
 export interface ButtonProps {
+	callback: CallableFunction | undefined;
 	className?: string | undefined;
 	document?: Asset | undefined;
 	external?: string | undefined;
@@ -29,8 +30,14 @@ export default function Button( props: ButtonProps ) {
 		props.label
 	];
 
-	if (props.external || props.document)
-		return <a className={className} href={href}>{children}</a>
+	function handleClick(event: React.MouseEvent): void {
+		if (props.callback) {
+			props.callback(event);
+		}
+	}
+
+	if (props.external || props.document || props.callback)
+		return <a className={className} href={href} onClick={handleClick}>{children}</a>
 	else if (props.type)
 		return <button className={className} type={props.type}>{children}</button>
 
@@ -51,7 +58,7 @@ export function getButtonHref( button: ButtonProps ): string {
 	return '';
 }
 
-export function renderButton( button: IButton, className?: string | undefined, iconClassName?: string | undefined ) {
+export function renderButton( button: IButton, className?: string | undefined, iconClassName?: string | undefined, callback: CallableFunction | undefined = undefined ) {
 	return <Button
 		key={button.sys.id}
 		className={className}
@@ -62,5 +69,6 @@ export function renderButton( button: IButton, className?: string | undefined, i
 		iconClassName={iconClassName}
 		internal={button.fields.internalPage as IPage | undefined}
 		label={button.fields.label}
+		callback={callback}
 	/>;
 }

@@ -1,8 +1,9 @@
+@use 'sass:color';
 @use './variables';
 
 .panel {
-	background-color: variables.$main;
-	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+	background-color: variables.$dark_accent;
+	box-shadow: 0 0.4rem 1rem -0.4rem variables.$dark_shade;
 	border-radius: 2rem;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -19,6 +20,7 @@
 		-webkit-border-radius: 1rem;
 		-moz-border-radius: 1rem;
 		border-radius: 1rem;
+		box-shadow: 0 0.1rem 0.1rem 0.1rem color.adjust(variables.$dark_shade, $alpha: -0.4);
 		color: variables.$dark_shade;
 
 		.icon {
@@ -60,6 +62,7 @@
 .dark {
 	.button {
 		background-color: variables.$dark_shade;
+		box-shadow: 0 0.1rem 0.1rem 0.1rem color.adjust(variables.$light_accent, $alpha: -0.4);
 		color: variables.$light_shade;
 
 		.icon {
