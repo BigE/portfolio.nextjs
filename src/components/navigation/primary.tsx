@@ -6,6 +6,7 @@ import Icon from "../icon";
 import { NavigationContext } from "@/context/navigation";
 import * as navigation from "@/utils/navigation";
 import { IPage, IPageSection } from "@/@types/generated/contentful";
+import ScrollLink from "./scrollLink";
 
 export type NavigationProps = {
 	ariaLabel?: string;
@@ -50,12 +51,12 @@ export default function Navigation( props: NavigationProps ) {
 				const href = `#${section.fields.slug}`;
 
 				return <li key={section.sys.id} className="pure-menu-item">
-					<a className={`pure-menu-link ${styles.link}`} href={href} data-section={section.fields.slug} onClick={handleClick}>
+					<ScrollLink callback={handleClick} className={`pure-menu-link ${styles.link}`} href={href}>
 						<span className={styles.text}>
 							<Icon icon={section.fields.icon.fields.name} />
 							{section.fields.headline}
 						</span>
-					</a>
+					</ScrollLink>
 				</li>
 			})}
 			{pages.length > 0 && <>
