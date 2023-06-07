@@ -13,6 +13,7 @@ body.showNav {
     }
 
     .header {
+        border-right: 0.1rem solid variables.$light_accent;
         @include mixins.transform(translateX(0));
     }
 
@@ -33,6 +34,10 @@ body.showNav {
             z-index: 1000;
         }
     }
+
+    .backToTop {
+        display: none;
+    }
 }
 
 @keyframes fadeBackground {
@@ -47,22 +52,30 @@ body.showNav {
     position: fixed;
     top: 0.25rem;
     z-index: 1001;
+}
 
-    .toggle {
-        background-color: variables.$main;
-        border: 0.1rem solid variables.$dark_accent;
-        border-radius: 0.5rem;
-        color: variables.$light_shade;
-        display: block;
-        font-size: 2rem;
-        line-height: 4rem;
-        width: 5rem;
-        text-align: center;
-    }
+.backToTop {
+    bottom: 0.25rem;
+    color: variables.$main;
+    display: inline-block;
+    right: 0.25rem;
+    position: fixed;
+    z-index: 1000;
+}
+
+.toggle {
+    background-color: variables.$main;
+    border: 0.1rem solid variables.$dark_accent;
+    border-radius: 0.5rem;
+    color: variables.$light_shade;
+    display: block;
+    font-size: 2rem;
+    line-height: 1;
+    padding: 0.7rem 0.7rem 0.4rem 0.7rem;
+    text-align: center;
 }
 
 .header {
-    border-right: 0.1rem solid variables.$light_accent;
     background-color: variables.$main;
     color: variables.$light_shade;
     height: 100vh;
@@ -154,6 +167,7 @@ body.showNav {
     }
 
     .header {
+        border-right: 0.1rem solid variables.$light_accent;
         @include mixins.transform(translateX(0));
         width: 20%;
     }

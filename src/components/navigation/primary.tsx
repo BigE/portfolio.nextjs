@@ -19,12 +19,21 @@ export default function Navigation( props: NavigationProps ) {
 	const navigationContext = useContext(NavigationContext);
 
 	useEffect(() => {
+		const backToTop = document.getElementById('backToTop');
+
+		if (backToTop)
+			backToTop.style.opacity = "0";
+
 		function handleScroll(event: Event) {
+			if (backToTop)
+				backToTop.style.opacity = (window.scrollY > 100)? "1" : "0";
+
 			navigation.handleScroll(event, navigationContext.clicked, navigationContext.menuItems);
 		}
 
 		if (navigationContext.menuItems)
 			navigationContext.menuItems.current = document.body.querySelectorAll('nav[id=main] .pure-menu-item');
+
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, [navigationContext.menuItems, navigationContext.clicked]);

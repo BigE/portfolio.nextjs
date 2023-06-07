@@ -57,6 +57,7 @@ export default function Layout({ props, children }: LayoutProps) {
 				</section>
 			</div>
 		</footer>
-        <a id="menuToggle" className={styles.menuToggle} onClick={handleClick}><Icon className={styles.toggle} icon="FaBars" /></a>
+		<a id="menuToggle" className={styles.menuToggle} onClick={handleClick}><Icon className={styles.toggle} icon="FaBars" /></a>
+		<a id="backToTop" className={styles.backToTop} href="#top"><Icon className={styles.toggle} icon="FaArrowAltCircleUp" /></a>
 	</>
 }
