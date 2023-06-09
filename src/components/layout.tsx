@@ -6,13 +6,14 @@ import React, { useEffect } from "react";
 import logo from "@/assets/logo.png";
 import styles from "@/styles/layout.module.scss";
 import toggleStyles from "@/styles/navigation/toggle.module.scss";
-import { Navigation, SocialNavigation } from "./navigation";
+import { Navigation, NavigationProps, SocialNavigation } from "./navigation";
 import Icon from "./icon";
 import MenuToggle from "./navigation/toggle";
 import { IPage, IPageSection } from "@/@types/generated/contentful";
 import NavigationProvider from "@/context/navigation";
 
 type PageProps = {
+	home: IPage;
 	page?: IPage | undefined;
 	pages: IPage[];
 	siteSettings: {[key: string]: string};
@@ -25,9 +26,9 @@ type LayoutProps = {
 };
 
 export default function Layout({ props, children }: LayoutProps) {
-	const { page, pages, siteSettings, socialIcons } = props;
+	const { home, page, pages, siteSettings, socialIcons } = props;
 	const externalPages = pages?.filter(page => page.fields.slug !== "home");
-	const navItems = {sections: page?.fields.content.filter(section => section.sys.contentType.sys.id === "pageSection"), pages: externalPages} as { sections: IPageSection[], pages: IPage[]};
+	const navItems = {home: home, pages: externalPages};
 	const siteTitle = (siteSettings["site.title"] || "My Portfolio") + (page?.fields.title? ` | ${page.fields.title}` : '');
 
 	useEffect(() => {

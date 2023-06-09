@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 import { renderHero } from "@/components/hero";
 import { renderPageSection } from "@/components/pageSection";
 import { getPage, getPages, getSiteSettings, getSlugs, getSocialIcons } from "@/utils/contentful";
-import { IHero, IPage, IPageSection } from "@/@types/generated/contentful";
+import { IHero, IPage, IPageSection, IResume } from "@/@types/generated/contentful";
 import { MenuItems } from "@/utils/navigation";
 import { useContext } from "react";
 import { NavigationContext } from "@/context/navigation";
@@ -21,15 +21,17 @@ export async function getStaticPaths() {
 export const getStaticProps: GetStaticProps = async ( context ) => {
 	const { params } = context;
 	const slug = params?.slug || "home"; // assume home since we're top level
+	const home = await getPage('home');
 	const page = await getPage(String(slug));
 	const pages = await getPages();
 	const siteSettings = await getSiteSettings();
 	const socialIcons = await getSocialIcons();
 
-	return { props: { page, pages, siteSettings, socialIcons } }
+	return { props: { home, page, pages, siteSettings, socialIcons } }
 }
 
-type PageProps = {
+export type PageProps = {
+	home: IPage;
 	page: IPage;
 	pages: Entry<IPage>[];
 	siteSettings: {[key: string]: string};
@@ -38,6 +40,7 @@ type PageProps = {
 
 export default function Page({ page }: PageProps) {
 	const menuItems = useContext(NavigationContext);
+
 	var sectionCounter = {
 		counter: 0,
 	};
@@ -45,7 +48,7 @@ export default function Page({ page }: PageProps) {
 	return page.fields.content.map(section => renderSection(section, sectionCounter, menuItems));
 }
 
-export function renderSection( section:  IHero | IPageSection, sectionCounter: {[key: string]: number}, menu_items: MenuItems ) {
+export function renderSection( section:  IHero | IPageSection | IResume, sectionCounter: {[key: string]: number}, menu_items: MenuItems ) {
 	if (section.sys.contentType.sys.id === 'hero')
 		return renderHero(section as IHero, menu_items);
 	else if (section.sys.contentType.sys.id === 'pageSection') {

@@ -32,6 +32,7 @@
     "@next/env": "^13.4.1",
     "contentful-management": "^10.32.0",
     "contentful-typescript-codegen": "^3.4.0",
+    "prettier": "^2.8.8",
     "sass": "^1.62.1"
   }
 }

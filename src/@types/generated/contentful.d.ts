@@ -69,6 +69,9 @@ export interface IFontAwesomeIcon extends Entry<IFontAwesomeIconFields> {
 export interface IFormFields {
   /** URL */
   url: string;
+
+  /** Submission Response */
+  submissionResponse?: Document | undefined;
 }
 
 /** Form integration */
@@ -134,7 +137,7 @@ export interface IPageFields {
   icon: IFontAwesomeIcon;
 
   /** Content */
-  content: (IPageSection | IHero)[];
+  content: (IPageSection | IHero | IResume)[];
 }
 
 /** All page objects on the site */
@@ -452,6 +455,40 @@ export interface IPureGridRichText extends Entry<IPureGridRichTextFields> {
   };
 }
 
+export interface IResumeFields {
+  /** Title */
+  title: string;
+
+  /** Objective */
+  objective: string;
+
+  /** Skills */
+  skills: Document;
+
+  /** Professional Experience */
+  professionalExperience?: IProfessionalExperience[] | undefined;
+
+  /** Personal Experience */
+  personalExperience?: IPersonalExperience[] | undefined;
+}
+
+export interface IResume extends Entry<IResumeFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "resume";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
 export interface IRichTextFields {
   /** Title */
   title: string;
@@ -544,6 +581,7 @@ export type CONTENT_TYPE =
   | "pureGridClassName"
   | "pureGridPanel"
   | "pureGridRichText"
+  | "resume"
   | "richText"
   | "siteSettings"
   | "socialIcons";
@@ -563,6 +601,7 @@ export type IEntry =
   | IPureGridClassName
   | IPureGridPanel
   | IPureGridRichText
+  | IResume
   | IRichText
   | ISiteSettings
   | ISocialIcons;

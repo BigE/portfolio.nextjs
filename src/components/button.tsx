@@ -6,7 +6,7 @@ import Icon from "./icon";
 import { IButton, IPage } from "@/@types/generated/contentful";
 
 export interface ButtonProps {
-	callback: CallableFunction | undefined;
+	callback?: CallableFunction;
 	className?: string | undefined;
 	document?: Asset | undefined;
 	external?: string | undefined;
