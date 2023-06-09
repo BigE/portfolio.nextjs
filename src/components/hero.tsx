@@ -31,10 +31,9 @@ export default function Hero( props: HeroProps ) {
 	);
 }
 
-export function renderHero( hero: IHero, callback: CallableFunction | undefined, menu_items: navigation.MenuItems, className?: string ) {
+export function renderHero( hero: IHero, menu_items: navigation.MenuItems, className?: string ) {
 	function handleClick(event: React.MouseEvent) {
-		if (callback)
-			navigation.handleClick(event, menu_items, callback);
+		navigation.handleClick(event, menu_items);
 	}
 
 	const button = hero.fields.button? renderButton(hero.fields.button, styles.button, styles.icon, handleClick) : undefined;

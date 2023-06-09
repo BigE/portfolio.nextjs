@@ -1,9 +1,9 @@
-import { MutableRefObject, useRef } from "react";
+import { MutableRefObject } from "react";
 
 import styles from "@/styles/navigation/primary.module.scss";
-import toggleStyles from "@/styles/navigation/toggle.module.scss";
+import stylesToggle from "@/styles/navigation/toggle.module.scss";
+import { toggleStyles } from "@/components/navigation/toggle";
 
-var scrollEndTimer: NodeJS.Timer | undefined;
 export type MenuItems = MutableRefObject<NodeListOf<Element> | undefined> | undefined;
 
 export function clearActive(menu_items: MenuItems) {
@@ -24,14 +24,12 @@ export function handleClick(event: React.MouseEvent, menu_items: MenuItems) {
 	if (targetElement && targetElement.parentElement && targetElement.parentElement.classList.contains('pure-menu-item')) {
 		targetElement.parentElement.classList.add('pure-menu-active');
 		targetElement.parentElement.classList.add(styles.active);
-		if (document.body.classList.contains(toggleStyles.showNav))
-			handleToggle();
+		if (document.body.classList.contains(stylesToggle.showNav))
+			toggleStyles();
 	}
 }
 
-export function handleScroll(event: Event, clicked: boolean, menu_items: MenuItems) {
-	if (clicked) return;
-
+export function handleScroll(menu_items: MenuItems) {
 	const elem = (document.scrollingElement || document.documentElement),
 		top = elem.scrollTop,
 		elements = Array.prototype.slice.call(document.body.querySelectorAll("section.menu-block")).reverse();
@@ -49,9 +47,4 @@ export function handleScroll(event: Event, clicked: boolean, menu_items: MenuIte
 			break;
 		}
 	}
-}
-
-export function handleToggle() {
-	document.body.classList.toggle(toggleStyles.showNav);
-	document.getElementsByTagName("html")[0].style.overflowY = document.body.classList.contains(toggleStyles.showNav)? "hidden" : "scroll";
 }

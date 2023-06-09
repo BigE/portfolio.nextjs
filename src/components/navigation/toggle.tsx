@@ -1,16 +1,19 @@
+import { useState } from "react";
+
 import styles from "@/styles/navigation/toggle.module.scss";
 import Icon from "../icon";
-import { useState } from "react";
-import { handleToggle } from "@/utils/navigation";
 
 export type MenuToggleType = {
-	bodyStyles: string;
+	className?: string;
 };
 
-export default function MenuToggle(props: MenuToggleType) {
-	const [ navOpen, setNavOpen ] = useState(false);
+export function toggleStyles() {
+	document.body.classList.toggle(styles.showNav);
+	document.getElementsByTagName("html")[0].style.overflowY = document.body.classList.contains(styles.showNav)? "hidden" : "scroll";
+}
 
-	return <a id="menuToggle" className={styles.menuToggle} onClick={() => { handleToggle(); setNavOpen((prev: boolean) => !prev); }}>
+export default function MenuToggle(props: MenuToggleType) {
+	return <a id="menuToggle" className={Array(styles.menuToggle, props.className).join(' ')} onClick={toggleStyles}>
 		<Icon className={styles.toggle} icon="FaBars" />
 	</a>;
 }

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 import logo from "@/assets/logo.png";
 import styles from "@/styles/layout.module.scss";
@@ -10,6 +10,7 @@ import { Navigation, SocialNavigation } from "./navigation";
 import Icon from "./icon";
 import MenuToggle from "./navigation/toggle";
 import { IPage, IPageSection } from "@/@types/generated/contentful";
+import NavigationProvider from "@/context/navigation";
 
 type PageProps = {
 	page?: IPage | undefined;
@@ -29,7 +30,30 @@ export default function Layout({ props, children }: LayoutProps) {
 	const navItems = {sections: page?.fields.content.filter(section => section.sys.contentType.sys.id === "pageSection"), pages: externalPages} as { sections: IPageSection[], pages: IPage[]};
 	const siteTitle = (siteSettings["site.title"] || "My Portfolio") + (page?.fields.title? ` | ${page.fields.title}` : '');
 
-	return <>
+	useEffect(() => {
+		function handleScroll() {
+			if ((document.scrollingElement || document.documentElement).scrollTop > 200) {
+				document.getElementById('backToTop')?.classList.add(styles.visible);
+			} else {
+				document.getElementById('backToTop')?.classList.remove(styles.visible);
+			}
+		}
+
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	});
+
+	function handleClick(event: React.MouseEvent) {
+		event.preventDefault();
+
+		window.history.pushState({}, '', window.location.href.replace(/(#.*)?$/, ''));
+		window.scrollTo({
+			behavior: "smooth",
+			top: 0,
+		});
+	}
+
+	return <NavigationProvider>
 		<Head>
 			<title>{siteTitle}</title>
 		</Head>
@@ -52,7 +76,7 @@ export default function Layout({ props, children }: LayoutProps) {
 				</section>
 			</div>
 		</footer>
-		<MenuToggle bodyStyles={styles.showNav} />
-		<a id="backToTop" className={styles.backToTop} href="#top"><Icon className={toggleStyles.toggle} icon="FaArrowAltCircleUp" /></a>
-	</>
+		<MenuToggle />
+		<a id="backToTop" className={styles.backToTop} href="#top" onClick={handleClick}><Icon className={toggleStyles.toggle} icon="FaArrowAltCircleUp" /></a>
+	</NavigationProvider>
 }

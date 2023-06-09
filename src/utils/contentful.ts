@@ -1,7 +1,6 @@
 import { createClient, ContentfulClientApi, Entry } from "contentful";
 
 import { IPage, ISiteSettings } from "@/@types/generated/contentful";
-import { it } from "node:test";
 import { ISiteSettingsFields } from "@/@types/generated/contentful";
 import { IPageFields } from "@/@types/generated/contentful";
 

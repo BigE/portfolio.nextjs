@@ -12,7 +12,12 @@
     display: inline-block;
     right: 0.25rem;
     position: fixed;
+    visibility: hidden;
     z-index: 1000;
+
+    &.visible {
+        visibility: visible;
+    }
 }
 
 .header {

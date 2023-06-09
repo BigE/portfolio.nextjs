@@ -37,17 +37,17 @@ type PageProps = {
 };
 
 export default function Page({ page }: PageProps) {
-	const { callback, menuItems } = useContext(NavigationContext);
+	const menuItems = useContext(NavigationContext);
 	var sectionCounter = {
 		counter: 0,
 	};
 
-	return page.fields.content.map(section => renderSection(section, sectionCounter, callback, menuItems));
+	return page.fields.content.map(section => renderSection(section, sectionCounter, menuItems));
 }
 
-export function renderSection( section:  IHero | IPageSection, sectionCounter: {[key: string]: number}, callback: CallableFunction | undefined, menu_items: MenuItems ) {
+export function renderSection( section:  IHero | IPageSection, sectionCounter: {[key: string]: number}, menu_items: MenuItems ) {
 	if (section.sys.contentType.sys.id === 'hero')
-		return renderHero(section as IHero, callback, menu_items);
+		return renderHero(section as IHero, menu_items);
 	else if (section.sys.contentType.sys.id === 'pageSection') {
 		return renderPageSection(section as  IPageSection, (sectionCounter.counter++ % 2 !== 0), 'menu-block');
 	}
