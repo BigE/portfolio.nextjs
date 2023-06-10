@@ -59,6 +59,8 @@ export function getButtonHref( button: ButtonProps ): string {
 }
 
 export function renderButton( button: IButton, className?: string | undefined, iconClassName?: string | undefined, callback: CallableFunction | undefined = undefined ) {
+	if (!button.fields) return;
+
 	return <Button
 		key={button.sys.id}
 		className={className}
