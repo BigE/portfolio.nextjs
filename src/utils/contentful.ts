@@ -1,14 +1,16 @@
 import { createClient, ContentfulClientApi, Entry } from "contentful";
 
-import { IPage, ISiteSettings } from "@/@types/generated/contentful";
+import { IPage } from "@/@types/generated/contentful";
 import { ISiteSettingsFields } from "@/@types/generated/contentful";
 import { IPageFields } from "@/@types/generated/contentful";
 
 const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN || "";
+const host = process.env.CONTENTFUL_HOST || "cdn.contentful.com";
 const spaceId = process.env.CONTENTFUL_SPACE_ID || "";
 
 const client: ContentfulClientApi = createClient({
 	accessToken: accessToken,
+	host: host,
 	space: spaceId,
 });
 

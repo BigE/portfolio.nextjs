@@ -1,0 +1,19 @@
+.resume {
+	margin: 1em;
+
+	.section {
+		.content {
+			margin: 1em;
+		}
+	}
+}
+
+.skills {
+	.content > :not(h3, ul) {
+		margin: 0 1em;
+	}
+
+	.content > :not(h3, h4, ul) {
+		margin: 0 2em;
+	}
+}

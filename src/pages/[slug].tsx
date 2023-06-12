@@ -8,6 +8,7 @@ import { IHero, IPage, IPageSection, IResume } from "@/@types/generated/contentf
 import { MenuItems } from "@/utils/navigation";
 import { useContext } from "react";
 import { NavigationContext } from "@/context/navigation";
+import { renderResume } from "@/components/resume";
 
 export async function getStaticPaths() {
 	const slugs = await getSlugs();
@@ -53,6 +54,8 @@ export function renderSection( section:  IHero | IPageSection | IResume, section
 		return renderHero(section as IHero, menu_items);
 	else if (section.sys.contentType.sys.id === 'pageSection') {
 		return renderPageSection(section as  IPageSection, (sectionCounter.counter++ % 2 !== 0), 'menu-block');
+	} else if (section.sys.contentType.sys.id === 'resume') {
+		return renderResume(section as IResume);
 	}
 
 	return <section key={section.sys.id} id={section.sys.id}></section>
