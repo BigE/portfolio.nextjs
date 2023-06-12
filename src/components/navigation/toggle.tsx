@@ -13,7 +13,7 @@ export function toggleStyles() {
 }
 
 export default function MenuToggle(props: MenuToggleType) {
-	return <a id="menuToggle" className={Array(styles.menuToggle, props.className).join(' ')} onClick={toggleStyles}>
-		<Icon className={styles.toggle} icon="FaBars" />
-	</a>;
+	return <button id="menuToggle" className={Array(styles.toggle, styles.menuToggle, props.className).join(' ')} onClick={toggleStyles} aria-controls="menu" aria-expanded="false" aria-label="Toggle Menu">
+		<Icon icon="FaBars" aria-hidden="true" />
+	</button>;
 }

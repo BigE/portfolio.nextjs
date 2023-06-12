@@ -12,7 +12,6 @@ export type NavigationProps = {
 	ariaLabel?: string;
 	className?: string;
 	items: {home: IPage, pages: IPage[] };
-	role?: string;
 };
 
 export default function Navigation( props: NavigationProps ) {

@@ -57,14 +57,15 @@ export default function Layout({ props, children }: LayoutProps) {
 	return <NavigationProvider>
 		<Head>
 			<title>{siteTitle}</title>
+			<meta name="description" content={siteSettings["site.description"]} />
 		</Head>
-		<header className={`${toggleStyles.header} ${styles.header}`}>
+		<header id="main" className={`${toggleStyles.header} ${styles.header}`}>
 			<Link href="/" className={`pure-menu-heading ${styles.logo}`}>
 				<span className={`${styles.image} ${styles.avatar}`}><Image src={logo} alt="me" /></span>
 				<h1>{siteSettings["header.headline"] || "Portfolio"}</h1>
 				{siteSettings["header.sub_headline"] && <p>{siteSettings["header.sub_headline"]}</p>}
 			</Link>
-			<Navigation role="main" items={navItems} />
+			<Navigation items={navItems} />
 			{socialIcons && <SocialNavigation items={socialIcons} />}
 		</header>
 		<main className={`${toggleStyles.content} ${styles.content}`}>{children}</main>
@@ -78,6 +79,6 @@ export default function Layout({ props, children }: LayoutProps) {
 			</div>
 		</footer>
 		<MenuToggle />
-		<a id="backToTop" className={styles.backToTop} href="#top" onClick={handleClick}><Icon className={toggleStyles.toggle} icon="FaArrowAltCircleUp" /></a>
+		<a id="backToTop" className={`${toggleStyles.toggle} ${styles.backToTop}`} href="#top" onClick={handleClick}><Icon icon="FaArrowAltCircleUp" /></a>
 	</NavigationProvider>
 }

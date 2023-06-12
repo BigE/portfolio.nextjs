@@ -4,15 +4,15 @@ import React from "react";
 import styles from "@/styles/icon.module.scss";
 
 export interface IconProps {
-	className?: string;
 	link?: boolean;
 	icon: string;
 }
 
-export default function Icon(props: IconProps) {
-	const FontAwesomeIcon = getFontAwesomeIcon(props.icon);
+export default function Icon({link, icon, ...props}: IconProps & JSX.IntrinsicElements["span"]) {
+	const FontAwesomeIcon = getFontAwesomeIcon(icon);
+	props.className = [styles.icon, link? styles.link : '', props.className].join(' ').trim();
 
-	return <span className={[styles.icon, props.link === true? styles.link : '', props.className].join(' ').trim()}>
+	return <span {...props}>
 		<FontAwesomeIcon />
 	</span>
 }
