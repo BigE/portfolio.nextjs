@@ -21,7 +21,7 @@ interface PanelProps {
 }
 
 export default function Panel( props: PanelProps ) {
-	const className = [styles.panel, props.className, props.dark? styles.dark : undefined].join(' ').trim();
+	const className = [styles.panel, props.dark? styles.dark : undefined, props.className].join(' ').trim();
 
 	return <div id={props.slug} className={className}>
 		<header className={styles.header}>
@@ -40,7 +40,6 @@ export default function Panel( props: PanelProps ) {
 
 export function renderPanel( panel: IPanel, dark?: boolean | false, className?: string | undefined ) {
 	const buttons = panel.fields.buttons?.map(button => renderButton(button, [styles.button, className].join(' ').trim(), styles.icon));
-	className = [styles.panel, className].join(' ').trim();
 
 	return <Panel key={panel.sys.id} className={className} dark={dark} {...panel.fields} buttons={buttons} icon={panel.fields.fontAwesomeIcon.fields.name}>
 		{documentToReactComponents(panel.fields.richText, options)}

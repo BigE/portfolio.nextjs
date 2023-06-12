@@ -60,6 +60,9 @@
 }
 
 .dark {
+	background-color: variables.$light_shade;
+	color: variables.$dark_shade;
+
 	.button {
 		background-color: variables.$dark_shade;
 		box-shadow: 0 0.1rem 0.1rem 0.1rem color.adjust(variables.$light_accent, $alpha: -0.4);

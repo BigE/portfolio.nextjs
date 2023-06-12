@@ -34,7 +34,7 @@ export default function PageSection( props: PageSectionProps ) {
 
 export function renderPageSection( section: IPageSection, dark: boolean = false, className?: string | undefined ) {
 	return <PageSection key={section.sys.id} {...section.fields} className={className} dark={dark} icon={section.fields.icon.fields.name}>
-		{section.fields.content.map(item => renderPageSectionContent(item, dark, className))}
+		{section.fields.content.map(item => renderPageSectionContent(item, dark, className?.replace('menu-block', '')))}
 	</PageSection>
 }
 
@@ -44,7 +44,7 @@ export function renderPageSectionContent( item: IPanel | IForm | IPureGrid | IRi
 			return renderForm(item as IForm, className);
 
 		case 'panel':
-			return renderPanel(item as IPanel, dark, [styles.panel, className].join(' ').trim());
+			return renderPanel(item as IPanel, dark, className);
 
 		case 'pureGrid':
 			return renderPureGrid(item as IPureGrid, className);
