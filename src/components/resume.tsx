@@ -1,10 +1,11 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-import { IResume } from "@/@types/generated/contentful";
+import { TypeResume } from "@/@types/contentful/TypeResume";
+
 import styles from "@/styles/resume.module.scss";
 
 export type ResumeProps = {
-	resume: IResume;
+	resume: TypeResume<"WITHOUT_UNRESOLVABLE_LINKS", string>;
 };
 
 export default function Resume(props: ResumeProps) {
@@ -20,6 +21,8 @@ export default function Resume(props: ResumeProps) {
 		<section className={styles.section}>
 			<h2>Professional Experience</h2>
 			{props.resume.fields.professionalExperience?.map(experience => {
+				if (!experience) return <></>;
+
 				console.log(experience);
 
 				return <section key={experience.sys.id} className={styles.content}>
@@ -34,6 +37,8 @@ export default function Resume(props: ResumeProps) {
 	</div>
 }
 
-export function renderResume(resume: IResume) {
+export function renderResume(resume: TypeResume<"WITHOUT_UNRESOLVABLE_LINKS", string>) {
+	if (!resume) return <></>;
+
 	return <Resume key={resume.sys.id} resume={resume}></Resume>
 }

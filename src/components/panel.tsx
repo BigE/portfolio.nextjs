@@ -1,12 +1,11 @@
-import { Document } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import React from "react";
+
+import { TypePanel } from "@/@types/contentful/TypePanel";
 
 import styles from "@/styles/panel.module.scss";
 import { renderButton } from "./button";
 import Icon from "./icon";
 import { options } from "./richText";
-import { IPanel } from "@/@types/generated/contentful";
 
 interface PanelProps {
 	buttonAlignment: "Default" | "Centered";
@@ -15,8 +14,7 @@ interface PanelProps {
 	children?: React.ReactNode;
 	dark?: boolean;
 	headline: string;
-	icon: string;
-	richText?: Document | undefined;
+	icon: string | undefined;
 	slug: string;
 }
 
@@ -38,10 +36,12 @@ export default function Panel( props: PanelProps ) {
 	</div>
 }
 
-export function renderPanel( panel: IPanel, dark?: boolean | false, className?: string | undefined ) {
-	const buttons = panel.fields.buttons?.map(button => renderButton(button, [styles.button, className].join(' ').trim(), styles.icon));
+export function renderPanel( panel: TypePanel<"WITHOUT_UNRESOLVABLE_LINKS", string>, dark?: boolean | false, className?: string | undefined ) {
+	const buttons = panel.fields.buttons?.map(button => (button)? renderButton(button, [styles.button, className].join(' ').trim(), styles.icon) : <></>);
 
-	return <Panel key={panel.sys.id} className={className} dark={dark} {...panel.fields} buttons={buttons} icon={panel.fields.fontAwesomeIcon.fields.name}>
+	if (!panel.fields.headline) throw Error("Headline is required");
+
+	return <Panel key={panel.sys.id} className={className} dark={dark} {...panel.fields} buttons={buttons} icon={panel.fields.fontAwesomeIcon?.fields.name}>
 		{documentToReactComponents(panel.fields.richText, options)}
 	</Panel>;
 }

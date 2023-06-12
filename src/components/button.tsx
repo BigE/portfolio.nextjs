@@ -1,21 +1,23 @@
-import { Asset } from "contentful";
+import { Asset, Entry, EntrySkeletonType } from "contentful";
 import Link from "next/link";
+
+import { isTypePage } from "@/@types/contentful/TypePage";
 
 import styles from "@/styles/button.module.scss";
 import Icon from "./icon";
-import { IButton, IPage } from "@/@types/generated/contentful";
+import { TypeButton } from "@/@types/contentful/TypeButton";
 
 export interface ButtonProps {
 	callback?: CallableFunction;
-	className?: string | undefined;
-	document?: Asset | undefined;
-	external?: string | undefined;
-	fragment?: string | undefined;
-	icon: string;
+	className?: string;
+	document?: Asset;
+	external?: string;
+	fragment?: string;
+	icon?: string;
 	iconClassName?: string;
 	label: string;
-	internal?: IPage | undefined;
-	type?: "submit" | "reset" | "button" | undefined;
+	internal?: Entry<EntrySkeletonType, "WITHOUT_UNRESOLVABLE_LINKS", string>;
+	type?: "submit" | "reset" | "button";
 };
 
 /**
@@ -47,18 +49,18 @@ export default function Button( props: ButtonProps ) {
 export function getButtonHref( button: ButtonProps ): string {
 	if (button.fragment) {
 		return `#${button.fragment}`
-	} else if (button.internal) {
+	} else if (button.internal && isTypePage(button.internal)) {
 		return button.internal.fields.slug;
 	} else if (button.external) {
 		return button.external;
-	} else if (button.document) {
-		return button.document.fields.file.url;
+	} else if (button.document && typeof button.document.fields.file?.url === 'string') {
+		return button.document.fields.file?.url;
 	}
 
 	return '';
 }
 
-export function renderButton( button: IButton, className?: string | undefined, iconClassName?: string | undefined, callback: CallableFunction | undefined = undefined ) {
+export function renderButton( button: TypeButton<"WITHOUT_UNRESOLVABLE_LINKS", string>, className?: string, iconClassName?: string, callback?: CallableFunction ) {
 	if (!button.fields) return;
 
 	return <Button
@@ -67,9 +69,9 @@ export function renderButton( button: IButton, className?: string | undefined, i
 		document={button.fields.document}
 		external={button.fields.externalUrl}
 		fragment={button.fields.pageFragment}
-		icon={button.fields.icon.fields.name}
+		icon={button.fields.icon?.fields.name}
 		iconClassName={iconClassName}
-		internal={button.fields.internalPage as IPage | undefined}
+		internal={button.fields.internalPage}
 		label={button.fields.label}
 		callback={callback}
 	/>;

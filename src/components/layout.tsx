@@ -3,22 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect } from "react";
 
+import NavigationProvider from "@/context/navigation";
+
 import logo from "@/assets/logo.png";
 import styles from "@/styles/layout.module.scss";
 import toggleStyles from "@/styles/navigation/toggle.module.scss";
-import { Navigation, NavigationProps, SocialNavigation } from "./navigation";
+import { Navigation, SocialNavigation } from "./navigation";
 import Icon from "./icon";
 import MenuToggle from "./navigation/toggle";
-import { IPage, IPageSection } from "@/@types/generated/contentful";
-import NavigationProvider from "@/context/navigation";
-
-type PageProps = {
-	home: IPage;
-	page?: IPage | undefined;
-	pages: IPage[];
-	siteSettings: {[key: string]: string};
-	socialIcons: any;
-};
+import { PageProps } from "@/pages/[slug]";
 
 type LayoutProps = {
 	props: PageProps;

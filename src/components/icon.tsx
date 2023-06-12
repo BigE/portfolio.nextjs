@@ -5,7 +5,7 @@ import styles from "@/styles/icon.module.scss";
 
 export interface IconProps {
 	link?: boolean;
-	icon: string;
+	icon?: string;
 }
 
 export default function Icon({link, icon, ...props}: IconProps & JSX.IntrinsicElements["span"]) {
@@ -17,7 +17,7 @@ export default function Icon({link, icon, ...props}: IconProps & JSX.IntrinsicEl
 	</span>
 }
 
-export function getFontAwesomeIcon(icon: string) {
+export function getFontAwesomeIcon(icon?: string) {
 	if (!icon) icon = "FaRegQuestionCircle";
 	return dynamic((): any => import("react-icons/fa").then(icons => icons[icon as keyof typeof icons]));
 }

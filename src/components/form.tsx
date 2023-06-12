@@ -1,8 +1,9 @@
 import { ChangeEvent, FormEvent, FormEventHandler, useState } from "react";
 import axios from "axios";
 
+import { TypeForm } from "@/@types/contentful/TypeForm";
+
 import styles from "@/styles/form.module.scss";
-import { IForm } from "@/@types/generated/contentful";
 import Panel from "./panel";
 import panelStyles from "@/styles/panel.module.scss";
 import Button from "./button";
@@ -70,6 +71,6 @@ export default function Form(props: FormProps) {
 	</form>;
 }
 
-export function renderForm( form: IForm, className?: string | undefined ) {
+export function renderForm( form: TypeForm<"WITHOUT_UNRESOLVABLE_LINKS", string>, className?: string | undefined ) {
 	return <Form key={form.sys.id} className={className} endpoint={new URL(form.fields.url)}></Form>
 }

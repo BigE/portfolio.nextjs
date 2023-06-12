@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
 import Image from "next/image";
+
+import { TypeHero } from "@/@types/contentful/TypeHero";
+import * as navigation from "@/utils/navigation";
 
 import styles from "@/styles/hero.module.scss";
 import { renderButton } from "./button";
-import { IHero } from "@/@types/generated/contentful";
-import * as navigation from "@/utils/navigation";
 
 export interface HeroProps {
 	background?: string | undefined;
@@ -31,12 +31,12 @@ export default function Hero( props: HeroProps ) {
 	);
 }
 
-export function renderHero( hero: IHero, menu_items: navigation.MenuItems, className?: string ) {
+export function renderHero( hero: TypeHero<"WITHOUT_UNRESOLVABLE_LINKS", string>, menu_items: navigation.MenuItems, className?: string ) {
 	function handleClick(event: React.MouseEvent) {
 		navigation.handleClick(event, menu_items);
 	}
 
 	const button = hero.fields.button? renderButton(hero.fields.button, styles.button, styles.icon, handleClick) : undefined;
 
-	return <Hero key={hero.sys.id} {...hero.fields} background={hero.fields.background?.fields.file.url} button={button} className={className} backgroundProps={hero.fields.background?.fields.file.details.image} />;
+	return <Hero key={hero.sys.id} {...hero.fields} background={hero.fields.background?.fields.file?.url} button={button} className={className} backgroundProps={hero.fields.background?.fields.file?.details.image} />;
 }

@@ -1,14 +1,20 @@
-import { Entry } from "contentful";
+import { Entry } from "contentful/dist/types/types/entry";
+import { useContext } from "react";
 import { GetStaticProps } from "next";
+
+import { TypeSocialIcons } from "@/@types/contentful/TypeSocialIcons";
+import { TypePageSectionSkeleton, isTypePageSection } from "@/@types/contentful/TypePageSection";
+import { TypeHeroSkeleton, isTypeHero } from "@/@types/contentful/TypeHero";
+import { TypeResumeSkeleton, isTypeResume } from "@/@types/contentful/TypeResume";
+import { TypePage } from "@/@types/contentful/TypePage";
+
+import { getPage, getPages, getSiteSettings, getSlugs, getSocialIcons } from "@/utils/contentful";
+import { MenuItems } from "@/utils/navigation";
 
 import { renderHero } from "@/components/hero";
 import { renderPageSection } from "@/components/pageSection";
-import { getPage, getPages, getSiteSettings, getSlugs, getSocialIcons } from "@/utils/contentful";
-import { IHero, IPage, IPageSection, IResume } from "@/@types/generated/contentful";
-import { MenuItems } from "@/utils/navigation";
-import { useContext } from "react";
-import { NavigationContext } from "@/context/navigation";
 import { renderResume } from "@/components/resume";
+import { NavigationContext } from "@/context/navigation";
 
 export async function getStaticPaths() {
 	const slugs = await getSlugs();
@@ -22,6 +28,7 @@ export async function getStaticPaths() {
 export const getStaticProps: GetStaticProps = async ( context ) => {
 	const { params } = context;
 	const slug = params?.slug || "home"; // assume home since we're top level
+
 	const home = await getPage('home');
 	const page = await getPage(String(slug));
 	const pages = await getPages();
@@ -32,11 +39,11 @@ export const getStaticProps: GetStaticProps = async ( context ) => {
 }
 
 export type PageProps = {
-	home: IPage;
-	page: IPage;
-	pages: Entry<IPage>[];
+	home: TypePage<"WITHOUT_UNRESOLVABLE_LINKS", string>;
+	page: TypePage<"WITHOUT_UNRESOLVABLE_LINKS", string>;
+	pages: TypePage<"WITHOUT_UNRESOLVABLE_LINKS", string>[];
 	siteSettings: {[key: string]: string};
-	socialIcons: any;
+	socialIcons: TypeSocialIcons<undefined, string>;
 };
 
 export default function Page({ page }: PageProps) {
@@ -49,14 +56,19 @@ export default function Page({ page }: PageProps) {
 	return page.fields.content.map(section => renderSection(section, sectionCounter, menuItems));
 }
 
-export function renderSection( section:  IHero | IPageSection | IResume, sectionCounter: {[key: string]: number}, menu_items: MenuItems ) {
-	if (section.sys.contentType.sys.id === 'hero')
-		return renderHero(section as IHero, menu_items);
-	else if (section.sys.contentType.sys.id === 'pageSection') {
-		return renderPageSection(section as  IPageSection, (sectionCounter.counter++ % 2 !== 0), 'menu-block');
-	} else if (section.sys.contentType.sys.id === 'resume') {
-		return renderResume(section as IResume);
-	}
+export function renderSection(
+	section: Entry<TypeHeroSkeleton | TypePageSectionSkeleton | TypeResumeSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string> | undefined,
+	sectionCounter: {[key: string]: number},
+	menu_items: MenuItems,
+) {
+	if (!section) return;
+
+	if (isTypeHero(section))
+		return renderHero(section, menu_items);
+	else if (isTypePageSection(section))
+		return renderPageSection(section, (sectionCounter.counter++ % 2 !== 0), 'menu-block');
+	else if (isTypeResume(section))
+		return renderResume(section);
 
 	return <section key={section.sys.id} id={section.sys.id}></section>
 }

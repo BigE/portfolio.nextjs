@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import styles from "@/styles/navigation/toggle.module.scss";
 import Icon from "../icon";
 
