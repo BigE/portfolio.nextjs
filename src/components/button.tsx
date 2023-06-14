@@ -61,8 +61,6 @@ export function getButtonHref( button: ButtonProps ): string {
 }
 
 export function renderButton( button: TypeButton<"WITHOUT_UNRESOLVABLE_LINKS", string>, className?: string, iconClassName?: string, callback?: CallableFunction ) {
-	if (!button.fields) return;
-
 	return <Button
 		key={button.sys.id}
 		className={className}

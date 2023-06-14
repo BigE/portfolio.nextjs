@@ -10,25 +10,29 @@ export interface HeroProps {
 	background?: string | undefined;
 	backgroundProps?: {height: number, width: number}
 	button?: React.ReactNode;
-	className?: string;
 	description?: string;
 	title: string;
 };
 
-export default function Hero( props: HeroProps ) {
-	const className = [styles.hero, props.className].join(' ').trim();
-	const background = props.background?.startsWith("//")? `https:${props.background}` : props.background;
+export default function Hero( {
+	background,
+	backgroundProps,
+	button,
+	description,
+	title,
+	...props
+}: HeroProps & JSX.IntrinsicElements["section"] ) {
+	props.className = [styles.hero, props.className].join(' ').trim();
+	background = background?.startsWith("//")? `https:${background}` : background;
 
-	return(
-		<section className={className}>
-			<div>
-				<h1>{props.title}</h1>
-				{props.description && <p>{props.description}</p>}
-				{props.button}
-			</div>
-			{background && <Image className={styles.background} src={background} alt={background} fill priority />}
-		</section>
-	);
+	return <section {...props}>
+		<div>
+			<h1>{title}</h1>
+			{description && <p>{description}</p>}
+			{button}
+		</div>
+		{background && <Image className={styles.background} src={background} alt={background} fill priority />}
+	</section>;
 }
 
 export function renderHero( hero: TypeHero<"WITHOUT_UNRESOLVABLE_LINKS", string>, menu_items: navigation.MenuItems, className?: string ) {
@@ -36,7 +40,12 @@ export function renderHero( hero: TypeHero<"WITHOUT_UNRESOLVABLE_LINKS", string>
 		navigation.handleClick(event, menu_items);
 	}
 
-	const button = hero.fields.button? renderButton(hero.fields.button, styles.button, styles.icon, handleClick) : undefined;
-
-	return <Hero key={hero.sys.id} {...hero.fields} background={hero.fields.background?.fields.file?.url} button={button} className={className} backgroundProps={hero.fields.background?.fields.file?.details.image} />;
+	return <Hero
+		key={hero.sys.id}
+		title={hero.fields.title}
+		background={hero.fields.background?.fields.file?.url}
+		button={hero.fields.button && renderButton(hero.fields.button, styles.button, styles.icon, handleClick)}
+		className={className}
+		backgroundProps={hero.fields.background?.fields.file?.details.image}
+	/>;
 }

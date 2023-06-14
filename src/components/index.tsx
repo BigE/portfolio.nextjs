@@ -6,4 +6,4 @@ export { default as Layout } from "./layout";
 export { default as PageSection } from "./pageSection";
 export { default as Panel } from "./panel";
 export { default as PureGrid } from "./pureGrid";
-export { options as RichTextOptions } from "./richText";
+export { RichTextOptions } from "./richText";

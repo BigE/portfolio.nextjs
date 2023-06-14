@@ -3,21 +3,19 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 
 import { isTypePageSection } from "@/@types/contentful/TypePageSection";
-
-import styles from "@/styles/navigation/primary.module.scss";
-import Icon from "../icon";
-import { NavigationContext } from "@/context/navigation";
-import * as navigation from "@/utils/navigation";
 import { TypePage } from "@/@types/contentful/TypePage";
 
+import styles from "@/styles/navigation/primary.module.scss";
+import { NavigationContext } from "@/context/navigation";
+import * as navigation from "@/utils/navigation";
+import Icon from "../icon";
+
 export type NavigationProps = {
-	ariaLabel?: string;
-	className?: string;
 	items: {home: TypePage<"WITHOUT_UNRESOLVABLE_LINKS", string>, pages: TypePage<"WITHOUT_UNRESOLVABLE_LINKS", string>[] };
 };
 
-export default function Navigation( props: NavigationProps ) {
-	const { home, pages } = props.items;
+export default function Navigation( {items, ...props}: NavigationProps & JSX.IntrinsicElements["nav"] ) {
+	const { home, pages } = items;
 	const router = useRouter();
 	const [ shouldScroll, setShouldScroll ] = useState(true);
 	const menuItems = useContext(NavigationContext);
@@ -46,7 +44,7 @@ export default function Navigation( props: NavigationProps ) {
 		navigation.handleClick(event, menuItems);
 	}
 
-	return <nav className={props.className} id="main" role="navigation" aria-label={props.ariaLabel || "Primary"}>
+	return <nav id="main" role="navigation" aria-label="Primary" {...props}>
 		<ul className="pure-menu-list">
 			<li className="pure-menu-separator"></li>
 			{home.fields.content.map(section => {

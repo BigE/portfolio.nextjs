@@ -44,14 +44,12 @@ export default function Resume({
 }
 
 export function renderResume(resume: TypeResume<"WITHOUT_UNRESOLVABLE_LINKS", string>) {
-	if (!resume) return <></>;
-
 	return <Resume
 		key={resume.sys.id}
 		objective={resume.fields.objective}
 		skills={resume.fields.skills}
-		professionalExperience={resume.fields.professionalExperience?.map(experience => renderProfessionalExperience(experience))}
-		personalExperience={resume.fields.personalExperience?.map(experience => renderPersonalExperience(experience))}
+		professionalExperience={resume.fields.professionalExperience?.map(experience => experience && renderProfessionalExperience(experience))}
+		personalExperience={resume.fields.personalExperience?.map(experience => experience && renderPersonalExperience(experience))}
 	/>
 }
 

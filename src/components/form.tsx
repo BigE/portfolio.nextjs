@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, FormEventHandler, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import axios from "axios";
 
 import { TypeForm } from "@/@types/contentful/TypeForm";
@@ -9,18 +9,22 @@ import panelStyles from "@/styles/panel.module.scss";
 import Button from "./button";
 
 interface FormProps {
-	className?: string | undefined;
 	endpoint: URL;
+	panelClass?: string;
 };
 
-export default function Form(props: FormProps) {
-	const buttons = [<Button key="submit" className={panelStyles.button} type="submit" icon="FaEnvelope" iconClassName={panelStyles.icon} label="Send" />],
-	      [state, setState] = useState({
-			name: "",
-			email: "",
-			subject: "",
-			message: "",
-		  });
+export default function Form({
+	endpoint,
+	panelClass,
+	...props
+}: FormProps & JSX.IntrinsicElements["form"]) {
+	const buttons = [<Button key="submit" className={panelStyles.button} type="submit" icon="FaEnvelope" iconClassName={panelStyles.icon} label="Send" />];
+	const [state, setState] = useState({
+		name: "",
+		email: "",
+		subject: "",
+		message: "",
+		});
 
 	function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
 		setState({ ...state, [e.target?.name]: e.target?.value });
@@ -36,7 +40,7 @@ export default function Form(props: FormProps) {
 		}
 
 		await axios
-			.post(props.endpoint.toString(), formData)
+			.post(endpoint.toString(), formData)
 			.then(({ data }) => {
 				const { redirect } = data;
 				window.location.href = redirect;
@@ -45,9 +49,12 @@ export default function Form(props: FormProps) {
 				window.location.href = e.response.data.redirect;
 			});
 	}
+	
+	props.className = [styles.form, "pure-form pure-form-aligned", props.className].join(' ').trim();
+	props.onSubmit = props.onSubmit || handleSubmit;
 
-	return <form onSubmit={handleSubmit} className={`${styles.form} pure-form pure-form-aligned`}>
-		<Panel className={props.className} headline="Contact Me" icon="FaRegEnvelope" slug="contact" buttonAlignment="Default" buttons={buttons}>
+	return <form {...props}>
+		<Panel className={panelClass} headline="Contact Me" icon="FaRegEnvelope" slug="contact" buttonAlignment="Default" buttons={buttons}>
 			<fieldset>
 				<legend className={styles.legend}>Fill out your information below</legend>
 				<div className={`${styles.container} pure-control-group`}>
@@ -71,6 +78,10 @@ export default function Form(props: FormProps) {
 	</form>;
 }
 
-export function renderForm( form: TypeForm<"WITHOUT_UNRESOLVABLE_LINKS", string>, className?: string | undefined ) {
-	return <Form key={form.sys.id} className={className} endpoint={new URL(form.fields.url)}></Form>
+export function renderForm( form: TypeForm<"WITHOUT_UNRESOLVABLE_LINKS", string>, className?: string ) {
+	return <Form
+		key={form.sys.id}
+		panelClass={className}
+		endpoint={new URL(form.fields.url)}
+	/>;
 }

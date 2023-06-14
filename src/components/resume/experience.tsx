@@ -32,9 +32,7 @@ export default function Experience({
 	</section>;
 }
 
-export function renderPersonalExperience(experience?: TypePersonalExperience<"WITHOUT_UNRESOLVABLE_LINKS", string>, className?: string) {
-	if (!experience) return;
-
+export function renderPersonalExperience(experience: TypePersonalExperience<"WITHOUT_UNRESOLVABLE_LINKS", string>, className?: string) {
 	const props = {
 		name: experience.fields.projectName,
 		positions: experience.fields.positionsHeld,
@@ -47,9 +45,7 @@ export function renderPersonalExperience(experience?: TypePersonalExperience<"WI
 	return <Experience key={experience.sys.id} {...props} className={className} />;
 }
 
-export function renderProfessionalExperience(experience?: TypeProfessionalExperience<"WITHOUT_UNRESOLVABLE_LINKS", string>, className?: string) {
-	if (!experience) return;
-
+export function renderProfessionalExperience(experience: TypeProfessionalExperience<"WITHOUT_UNRESOLVABLE_LINKS", string>, className?: string) {
 	const props = {
 		name: experience.fields.companyName,
 		positions: experience.fields.positionHeld,

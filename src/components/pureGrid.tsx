@@ -6,21 +6,16 @@ import { TypePureGridPanel, TypePureGridPanelSkeleton, isTypePureGridPanel } fro
 import { TypePureGridRichText, TypePureGridRichTextSkeleton, isTypePureGridRichText } from "@/@types/contentful/TypePureGridRichText";
 
 import { renderPanel } from "./panel";
-import { options } from "./richText";
+import { RichTextOptions } from "./richText";
 
-type Props = {
-	className?: string;
-	children?: React.ReactNode;
-};
+export default function PureGrid( {...props}: JSX.IntrinsicElements["div"] ) {
+	props.className = ["pure-g", props.className].join(' ').trim();
 
-export default function PureGrid( props: Props ) {
-	const className = ["pure-g", props.className].join(' ').trim();
-
-	return <div className={className}>{props.children}</div>
+	return <div {...props}>{props.children}</div>
 }
 
 export function renderPureGrid( item: TypePureGrid<"WITHOUT_UNRESOLVABLE_LINKS", string>, className?: string | undefined ) {
-	return <PureGrid key={item.sys.id} {...item.fields} className={className}>
+	return <PureGrid key={item.sys.id} className={className}>
 		{item.fields.content.map(section => renderPureGridSection(section))}
 	</PureGrid>;
 }
@@ -48,6 +43,6 @@ export function renderPureGridRichText( section: TypePureGridRichText<"WITHOUT_U
 	if (!section.fields.richText) return;
 
 	return <div key={section.sys.id} className={[section.fields.className?.fields.className, className].join(' ').trim()}>
-		{documentToReactComponents(section.fields.richText.fields.richText, options)}
+		{documentToReactComponents(section.fields.richText.fields.richText, RichTextOptions)}
 	</div>;
 }

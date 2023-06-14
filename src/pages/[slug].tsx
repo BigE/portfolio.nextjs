@@ -43,7 +43,7 @@ export type PageProps = {
 	page: TypePage<"WITHOUT_UNRESOLVABLE_LINKS", string>;
 	pages: TypePage<"WITHOUT_UNRESOLVABLE_LINKS", string>[];
 	siteSettings: {[key: string]: string};
-	socialIcons: TypeSocialIcons<undefined, string>;
+	socialIcons: TypeSocialIcons<"WITHOUT_UNRESOLVABLE_LINKS", string>;
 };
 
 export default function Page({ page }: PageProps) {
@@ -53,16 +53,14 @@ export default function Page({ page }: PageProps) {
 		counter: 0,
 	};
 
-	return page.fields.content.map(section => renderSection(section, sectionCounter, menuItems));
+	return page.fields.content.map(section => section && renderSection(section, sectionCounter, menuItems));
 }
 
 export function renderSection(
-	section: Entry<TypeHeroSkeleton | TypePageSectionSkeleton | TypeResumeSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string> | undefined,
+	section: Entry<TypeHeroSkeleton | TypePageSectionSkeleton | TypeResumeSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>,
 	sectionCounter: {[key: string]: number},
 	menu_items: MenuItems,
 ) {
-	if (!section) return;
-
 	if (isTypeHero(section))
 		return renderHero(section, menu_items);
 	else if (isTypePageSection(section))
