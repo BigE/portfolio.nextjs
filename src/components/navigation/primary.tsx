@@ -50,8 +50,8 @@ export default function Navigation( props: NavigationProps ) {
 		<ul className="pure-menu-list">
 			<li className="pure-menu-separator"></li>
 			{home.fields.content.map(section => {
-				if (!section) return <></>;
-				else if (!isTypePageSection(section)) return <></>;
+				if (!section) return;
+				else if (!isTypePageSection(section)) return;
 
 				return <li key={section.sys.id} className="pure-menu-item">
 					<a onClick={handleClick} className={`pure-menu-link ${styles.link}`} href={`/#${section.fields.slug}`}>
