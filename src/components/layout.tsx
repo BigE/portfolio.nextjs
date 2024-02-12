@@ -51,6 +51,7 @@ export default function Layout({ props, children }: LayoutProps) {
 		<Head>
 			<title>{siteTitle}</title>
 			<meta name="description" content={siteSettings["site.description"]} />
+			<link rel="canonical" href="https://ericgach.me" />
 		</Head>
 		<header id="main" className={`${toggleStyles.header} ${styles.header}`}>
 			<Link href="/" className={`pure-menu-heading ${styles.logo}`}>
