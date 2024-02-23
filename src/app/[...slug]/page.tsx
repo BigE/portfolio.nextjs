@@ -1,6 +1,7 @@
 "use server";
 
 import { Metadata, ResolvingMetadata } from "next";
+import { notFound } from "next/navigation";
 
 import { getPage } from "@/utils/contentful";
 import { isTypeHero, isTypePageSection, isTypeResume } from "@/@types/contentful";
@@ -15,13 +16,20 @@ type SlugPageType = {
 };
 
 export async function generateMetadata({ params }: SlugPageType, parent: ResolvingMetadata): Promise<Metadata> {
+	const page = await getPage(params.slug);
+
+	if (!page) notFound();
+
 	return {
-		title: (await getPage(params.slug?? 'home')).fields.title,
+		title: page.fields.title,
 	};
 }
 
 export default async function SlugPage({ params }: SlugPageType) {
 	const page = await getPage(params.slug);
+
+	if (!page) notFound();
+
 	let children: React.ReactNode[] = [];
 
 	for (let i = 0; i < page.fields.content.length; i++) {
