@@ -32,10 +32,8 @@
 .header {
 	margin: 0 0 1rem 0;
 
-	@each $header in variables.$headings {
-		#{$header} {
-			margin: 0 0 1rem 0;
-		}
+	.headline {
+		margin: 0 0 1rem 0;
 	}
 
 	.icon {
@@ -52,6 +50,10 @@
 }
 
 .footer {
+	&.centered {
+		text-align: center !important;
+	}
+
 	text-align: right;
 
 	.button {

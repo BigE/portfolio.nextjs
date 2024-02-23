@@ -1,53 +1,29 @@
-import { Entry } from "contentful/dist/types/types/entry";
+"use server";
+
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-import { TypePureGrid } from "@/@types/contentful/TypePureGrid";
-import { TypePureGridPanel, TypePureGridPanelSkeleton, isTypePureGridPanel } from "@/@types/contentful/TypePureGridPanel";
-import { TypePureGridRichText, TypePureGridRichTextSkeleton, isTypePureGridRichText } from "@/@types/contentful/TypePureGridRichText";
+import { TypePureGrid, isTypePureGridPanel, isTypePureGridRichText } from "@/@types/contentful";
+import panelStyles from "@/styles/panel.module.scss";
+import Button from "./client/button";
+import PureGrid from "./client/pureGrid";
+import Panel from "./client/panel";
+import { options } from "./client/richtext";
+import renderPanel from "./panel";
 
-import { renderPanel } from "./panel";
-import { options } from "./richText";
+export default async function renderPureGrid(pureGrid: TypePureGrid<"WITHOUT_UNRESOLVABLE_LINKS", string>, dark: boolean = false) {
+	let children: React.ReactNode[] = [];
 
-type Props = {
-	className?: string;
-	children?: React.ReactNode;
-};
+	for (const content of pureGrid.fields.content) {
+		let child: React.ReactNode;
 
-export default function PureGrid( props: Props ) {
-	const className = ["pure-g", props.className].join(' ').trim();
+		if (!content) continue;
+		else if (isTypePureGridPanel(content) && content.fields.panel)
+			child = await renderPanel(content.fields.panel, dark);
+		else if (isTypePureGridRichText(content) && content.fields.richText)
+			child = documentToReactComponents(content.fields.richText.fields.richText, options);
 
-	return <div className={className}>{props.children}</div>
-}
+		children.push(<section key={content.sys.id} className={content.fields.className?.fields.className}>{child}</section>);
+	}
 
-export function renderPureGrid( item: TypePureGrid<"WITHOUT_UNRESOLVABLE_LINKS", string>, className?: string | undefined ) {
-	return <PureGrid key={item.sys.id} {...item.fields} className={className}>
-		{item.fields.content.map(section => renderPureGridSection(section))}
-	</PureGrid>;
-}
-
-export function renderPureGridSection( section: Entry<TypePureGridPanelSkeleton | TypePureGridRichTextSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string> | undefined, className?: string | undefined ) {
-	if (!section) return;
-
-	if (isTypePureGridPanel(section))
-		return renderPureGridPanel(section, className);
-	else if (isTypePureGridRichText(section))
-		return renderPureGridRichText(section, className);
-
-	return <div key={section.sys.id} id={section.sys.id}></div>;
-}
-
-export function renderPureGridPanel( section: TypePureGridPanel<"WITHOUT_UNRESOLVABLE_LINKS", string>, className?: string | undefined ) {
-	if (!section.fields.panel) return;
-
-	return <div key={section.sys.id} className={[section.fields.className?.fields.className, className].join(' ').trim()}>
-		{renderPanel(section.fields.panel, undefined, className)}
-	</div>;
-}
-
-export function renderPureGridRichText( section: TypePureGridRichText<"WITHOUT_UNRESOLVABLE_LINKS", string>, className?: string | undefined ) {
-	if (!section.fields.richText) return;
-
-	return <div key={section.sys.id} className={[section.fields.className?.fields.className, className].join(' ').trim()}>
-		{documentToReactComponents(section.fields.richText.fields.richText, options)}
-	</div>;
+	return <PureGrid key={pureGrid.sys.id} id={pureGrid.sys.id}>{children}</PureGrid>;
 }

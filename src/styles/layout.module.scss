@@ -6,15 +6,22 @@
     to { background-color: rgba(0, 0, 0, 0.85); }
 }
 
-.backToTop {
-    bottom: 0.25rem;
-    right: 0.25rem;
-    position: fixed;
-    visibility: hidden;
-    z-index: 1000;
+.body,.html {
+    overflow-x: hidden;
+}
 
-    &.visible {
-        visibility: visible;
+.body {
+    background-color: variables.$light_shade;
+    color: variables.$dark_shade;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    @media (min-width: 1024px) {
+        font-size: 2rem;
+    }
+
+    p {
+        margin-block-start: 0;
+        margin-block-end: 1em;
     }
 }
 
@@ -30,6 +37,11 @@
     top: 0;
     width: 27.5rem;
     z-index: 1001;
+}
+
+.html {
+    font-size: 10px;
+    scroll-behavior: smooth;
 }
 
 .logo {
@@ -80,7 +92,7 @@
     div {
         text-align: center;
     }
-    
+
     section {
         margin: 0.8em 0;
         @media (min-width: 1280px) {
@@ -91,7 +103,7 @@
     .icon {
         display: none;
     }
-    
+
     a {
         color: variables.$light_accent;
     }
@@ -147,7 +159,7 @@
 
     .logo {
         min-height: 6.4rem;
-        
+
         .image {
             position: absolute;
         }
