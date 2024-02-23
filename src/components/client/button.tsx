@@ -19,7 +19,7 @@ export type ButtonProps = {
 	type?: "submit" | "reset" | "button";
 };
 
-export default function Button( props : ButtonProps ) {
+export default function Button( { ...props } : ButtonProps ) {
 	const href = getButtonHref(props);
 
 	const children = [
@@ -38,7 +38,7 @@ export default function Button( props : ButtonProps ) {
 	return <Link className={props.className} href={href}>{children}</Link>
 }
 
-export function getButtonHref( props: ButtonProps ): string {
+export function getButtonHref( { ...props }: ButtonProps ): string {
 	if (props.fragment)
 		return `#${props.fragment}`;
 	else if (props.internal && isTypePage(props.internal))
