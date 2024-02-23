@@ -54,11 +54,11 @@ export default function Form( { endpoint, panelClassName, ...props }: FormProps 
 				<legend className={styles.legend}>Fill out your information below</legend>
 				<div className={`${styles.container} pure-control-group`}>
 					<label htmlFor="name">Name</label>
-					<input id="name" name="name" type="text" autoComplete="name" onChange={handleChange} />
+					<input id="name" name="name" type="text" autoComplete="name" onChange={handleChange} required />
 				</div>
 				<div className={`${styles.container} pure-control-group`}>
 					<label htmlFor="email">Email</label>
-					<input id="email" name="email" type="text" autoComplete="email" onChange={handleChange} />
+					<input id="email" name="email" type="text" autoComplete="email" onChange={handleChange} required />
 				</div>
 				<div className={`${styles.container} pure-control-group`}>
 					<label htmlFor="subject">Subject</label>
@@ -66,7 +66,7 @@ export default function Form( { endpoint, panelClassName, ...props }: FormProps 
 				</div>
 				<div className={`${styles.container} pure-control-group`}>
 					<label htmlFor="message">Message</label>
-					<textarea id="message" name="message" autoComplete="off" onChange={handleChange}></textarea>
+					<textarea id="message" name="message" autoComplete="off" onChange={handleChange} required></textarea>
 				</div>
 			</fieldset>
 		</Panel>
