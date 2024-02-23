@@ -6,6 +6,7 @@ export default function NotFound() {
 	return (
 		<PageLayout params={{ slug: "" }}>
 			<section id="not-found" style={{
+				margin: "1em",
 				textAlign: "center",
 			}}>
 				<h2>404 - Page Not Found</h2>

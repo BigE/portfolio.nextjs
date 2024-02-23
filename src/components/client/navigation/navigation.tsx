@@ -18,7 +18,7 @@ export type NavigationProps = {
 };
 
 export default function Navigation( { items, slug, ...props }: NavigationProps & JSX.IntrinsicElements["nav"] ) {
-	const [shouldScroll, setShouldScroll]: [boolean | undefined, Dispatch<SetStateAction<boolean | undefined>>] = useState();
+	const [shouldScroll, setShouldScroll]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(true);
 	//const menuItems = useContext(NavigationContext);
 
 	useEffect(() => {
