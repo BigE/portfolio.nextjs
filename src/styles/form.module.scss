@@ -1,5 +1,9 @@
 @use "./variables";
 
+legend.legend {
+	color: variables.$light_shade;
+}
+
 .form {
 	& input, textarea {
 		width: 100%;

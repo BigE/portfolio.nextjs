@@ -2,7 +2,7 @@ import { MutableRefObject } from "react";
 
 import styles from "@/styles/navigation/primary.module.scss";
 import stylesToggle from "@/styles/navigation/toggle.module.scss";
-import { toggleStyles } from "@/components/navigation/toggle";
+import { toggleStyles } from "@/components/client/navigation/toggle";
 
 export type MenuItems = MutableRefObject<NodeListOf<Element> | undefined> | undefined;
 

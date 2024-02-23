@@ -1,27 +1,3 @@
-/*
-	This comment is because this framework sucks!
- */
-@use './variables';
-
-html,body {
-    overflow-x: hidden;
-}
-
-html {
-    font-size: 10px;
-    scroll-behavior: smooth;
-}
-
-body {
-    background-color: variables.$light_shade;
-    color: variables.$dark_shade;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    @media (min-width: 1024px) {
-        font-size: 2rem;
-    }
-}
-
 a {
     &, a:visited {
         color: blue;
@@ -54,10 +30,6 @@ p {
     margin: 0 0 0 11em;
 }
 
-.error {
-    color: variables.$error;
-}
-
 .link-text:before {
     font-family: FontAwesome;
     padding: 0 0.6rem 0 1rem;
@@ -69,12 +41,4 @@ p {
 
 .right {
     text-align: right;
-}
-
-.success {
-    color: variables.$success;
-}
-
-.pure-form legend {
-    color: variables.$light_shade;
 }

@@ -4,7 +4,7 @@ import { INLINES } from "@contentful/rich-text-types";
 import Icon from "./icon";
 import React from "react";
 
-export const RichTextOptions: Options = {
+export const options: Options = {
 	renderNode: {
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (/^(https?:)?\/\//.test(node.data.uri))
