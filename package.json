@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "contentful-typescript-codegen": "contentful-typescript-codegen --output src/@types/generated/contentful.d.ts",
+    "generate-types": "cf-content-types-generator -s $CONTENTFUL_SPACE_ID -t $CONTENTFUL_MANAGEMENT_API_ACCESS_TOKEN -o src/@types/contentful/ -X -r -g",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start"
@@ -32,7 +32,6 @@
     "@next/env": "^14.0.0",
     "cf-content-types-generator": "^2.12.2",
     "contentful-management": "^10.32.0",
-    "contentful-typescript-codegen": "^3.4.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "prettier": "^3.2.5",
     "sass": "^1.62.1"
