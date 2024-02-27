@@ -1,0 +1,36 @@
+body,html {
+    overflow-x: hidden;
+}
+
+body {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    @media (min-width: 1024px) {
+        font-size: 2rem;
+    }
+}
+
+html {
+    font-size: 10px;
+    scroll-behavior: smooth;
+}
+
+.centered {
+    text-align: center !important;
+}
+
+.clear {
+	clear: both;
+}
+
+.error-list {
+    margin: 0 0 0 11em;
+}
+
+.profile-success {
+    padding: 0 0 1.8rem 0;
+}
+
+.right {
+    text-align: right;
+}

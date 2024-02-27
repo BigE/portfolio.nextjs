@@ -4,6 +4,7 @@ import { Open_Sans } from "next/font/google";
 import "purecss/build/pure.css";
 import "purecss/build/grids-responsive.css";
 
+import "@/styles/global.css";
 import styles from "@/styles/layout.module.scss";
 import { getSiteSettings } from "@/utils/contentful";
 import NavigationProvider from "@/context/navigation";
@@ -35,7 +36,7 @@ export default async function RootLayout({
 	const siteSettings = await getSiteSettings();
 
 	return(
-		<html lang="en" className={`${open_sans.className} ${styles.html}`}>
+		<html lang="en" className={open_sans.className}>
 			<body className={styles.body}>
 				<NavigationProvider>{children}</NavigationProvider>
 			</body>
