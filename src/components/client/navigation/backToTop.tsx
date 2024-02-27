@@ -28,5 +28,11 @@ export default function BackToTop() {
 		});
 	}
 
-	return <a id="backToTop" className={`${toggleStyles.toggle} ${styles.backToTop}`} href="#top" onClick={handleClick}><Icon icon="FaArrowAltCircleUp" /></a>
+	return <a id="backToTop"
+		aria-label="Back to top"
+		className={`${toggleStyles.toggle} ${styles.backToTop}`}
+		href="#top"
+		onClick={handleClick}
+		title="Back to top"
+	><Icon icon="FaArrowAltCircleUp" /></a>
 }

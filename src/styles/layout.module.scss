@@ -6,23 +6,9 @@
     to { background-color: rgba(0, 0, 0, 0.85); }
 }
 
-.body,.html {
-    overflow-x: hidden;
-}
-
 .body {
     background-color: variables.$light_shade;
     color: variables.$dark_shade;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    @media (min-width: 1024px) {
-        font-size: 2rem;
-    }
-
-    p {
-        margin-block-start: 0;
-        margin-block-end: 1em;
-    }
 }
 
 .header {
@@ -37,11 +23,6 @@
     top: 0;
     width: 27.5rem;
     z-index: 1001;
-}
-
-.html {
-    font-size: 10px;
-    scroll-behavior: smooth;
 }
 
 .logo {
