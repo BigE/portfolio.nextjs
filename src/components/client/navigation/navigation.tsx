@@ -43,7 +43,7 @@ export default function Navigation( { items, slug, ...props }: NavigationProps &
 	});
 
 	props["aria-label"] ??= "Primary";
-	props.id = "main";
+	props.id = "menu";
 	props.role ??= "navigation";
 
 	return <nav {...props}>
