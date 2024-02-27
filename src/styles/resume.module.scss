@@ -1,19 +1,44 @@
 .resume {
+	p {
+		margin: 0;
+	}
+
 	margin: 1em;
 
+	a, a:visited {
+		color: blue;
+	}
+
+	.header {
+		border-bottom: 0.1rem solid black;
+
+		.left {
+			float: left;
+		}
+
+		.right {
+			float: right;
+		}
+	}
+
 	.section {
+		.header, &.skills > h2 {
+			border-bottom: 0.1rem solid black;
+			border-top: 0.1rem solid black;
+		}
+
 		.content {
 			margin: 1em;
 		}
 	}
-}
 
-.skills {
-	.content > :not(h3, ul) {
-		margin: 0 1em;
-	}
+	.skills {
+		h3 {
+			margin: 0 1em;
 
-	.content > :not(h3, h4, ul) {
-		margin: 0 2em;
+			& + p {
+				margin: 0 2em;
+			}
+		}
 	}
 }
