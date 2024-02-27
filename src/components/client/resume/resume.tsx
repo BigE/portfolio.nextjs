@@ -1,8 +1,9 @@
+"use client";
+
 import styles from "@/styles/resume.module.scss";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
 
-import { options } from "../richtext";
+import RichText from "../richtext";
 
 export type ResumeProps = {
 	title: string;
@@ -20,15 +21,15 @@ export default function Resume( { title, headerLeft, headerRight, objective, ski
 	return <section {...props}>
 		<header className={styles.header}>
 			<h2 className="centered">{title}</h2>
-			{headerLeft && <div className={styles.left}>{documentToReactComponents(headerLeft, options)}</div>}
-			{headerRight && <div className={`${styles.right} right`}>{documentToReactComponents(headerRight, options)}</div>}
+			{headerLeft && <div className={styles.left}><RichText document={headerLeft} /></div>}
+			{headerRight && <div className={`${styles.right} right`}><RichText document={headerRight} /></div>}
 			<div className="clear"></div>
 		</header>
 		<section id="objective" className={`${styles.section} ${styles.objective}`}>
 			<div className={styles.content}>{objective}</div>
 		</section>
 		<section id="skills" className={`${styles.section} ${styles.skills}`}>
-			{documentToReactComponents(skills, options)}
+			<RichText document={skills} />
 		</section>
 		{professionalExperience &&
 			<section className={styles.section}>

@@ -1,8 +1,8 @@
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
 
 import styles from "@/styles/resume/experience.module.scss";
 import Icon from "../icon";
+import RichText from "../richtext";
 
 export type ExperienceProps = {
 	name: string;
@@ -27,6 +27,6 @@ export default function Experience( {name, positions, start, end, url, descripti
 			<h6 className={styles.employment}>{startDate.getFullYear()} to {endDate? endDate.getFullYear() : 'current' }</h6>
 			<div className="clear"></div>
 		</header>
-		<div className={styles.body}>{documentToReactComponents(description)}</div>
+		<div className={styles.body}><RichText document={description} /></div>
 	</section>;
 }

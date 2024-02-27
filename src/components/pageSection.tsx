@@ -5,8 +5,7 @@ import PageSection from "./client/pageSection";
 import renderForm from "./form";
 import renderPanel from "./panel";
 import renderPureGrid from "./pureGrid";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { options } from "./client/richtext";
+import RichText from "./client/richtext";
 
 export default async function renderPageSection(section: TypePageSection<"WITHOUT_UNRESOLVABLE_LINKS", string>, dark: boolean = false) {
 	let children: React.ReactNode[] = [];
@@ -20,7 +19,7 @@ export default async function renderPageSection(section: TypePageSection<"WITHOU
 		else if (isTypePureGrid(content))
 			children.push(await renderPureGrid(content, dark));
 		else if (isTypeRichText(content))
-			children.push(<div key={content.sys.id}>{documentToReactComponents(content.fields.richText, options)}</div>);
+			children.push(<div key={content.sys.id}><RichText document={content.fields.richText} /></div>);
 		else
 			children.push(<section key={content.sys.id} id={content.sys.id}></section>);
 	}
