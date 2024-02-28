@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import logo from "@/assets/logo.png";
 import Icon from "@/components/client/icon";
+import print from "@/styles/print.module.scss";
 import styles from "@/styles/layout.module.scss";
 import toggleStyles from "@/styles/navigation/toggle.module.scss";
 import { getPage, getPages, getSiteSettings, getSocialIcons } from "@/utils/contentful";
@@ -23,7 +24,7 @@ export default async function PageLayout({
 	const siteSettings = await getSiteSettings();
 
 	return <>
-		<header className={`${toggleStyles.header} ${styles.header}`}>
+		<header className={`${toggleStyles.header} ${styles.header} ${print.noPrint}`}>
 			<Link href="/" className={`pure-menu-heading ${styles.logo}`}>
 				<span className={`${styles.image} ${styles.avatar}`}><Image src={logo} alt="me" /></span>
 				<h1>{siteSettings["header.headline"] || "Portfolio"}</h1>
@@ -33,7 +34,7 @@ export default async function PageLayout({
 			<SocialNavigation items={socialIcons} />
 		</header>
 		<main className={`${toggleStyles.content} ${styles.content}`}>{children}</main>
-		<footer className={`${toggleStyles.footer} ${styles.footer}`}>
+		<footer className={`${toggleStyles.footer} ${styles.footer} ${print.noPrint}`}>
 			<div>
 				<span><Icon icon="FaRegCopyright" /> Eric Gach All Rights Reserved.</span>
 				<Icon className={styles.icon} icon="FaEllipsisV" />
@@ -42,7 +43,7 @@ export default async function PageLayout({
 				</span>
 			</div>
 		</footer>
-		<MenuToggle />
+		<MenuToggle className={print.noPrint} />
 		<BackToTop />
 	</>;
 }
