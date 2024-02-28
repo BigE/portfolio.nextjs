@@ -13,6 +13,7 @@ export type PanelProps = {
 };
 
 export default function Panel( { buttonAlignment = "Default", buttons, dark, headline, icon, slug, ...props }: PanelProps & JSX.IntrinsicElements["section"] ) {
+	const buttonAlignmentClassName = styles[buttonAlignment.toLocaleLowerCase()] || '';
 	props.className = [styles.panel, dark && styles.dark, props.className].join(' ').trim();
 	props.id ??= slug;
 
@@ -24,6 +25,6 @@ export default function Panel( { buttonAlignment = "Default", buttons, dark, hea
 			</h4>
 		</header>
 		{props.children}
-		{buttons && <footer className={`${styles.footer} ${styles[buttonAlignment.toLowerCase()]}`}>{buttons}</footer>}
+		{buttons && <footer className={`${styles.footer} ${buttonAlignmentClassName}`}>{buttons}</footer>}
 	</section>;
 }

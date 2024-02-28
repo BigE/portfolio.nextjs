@@ -17,7 +17,15 @@ export default async function renderPanel(panel: TypePanel<"WITHOUT_UNRESOLVABLE
 		}
 	}
 
-	return <Panel key={panel.sys.id} buttons={buttons} dark={dark} headline={panel.fields.headline} icon={panel.fields.fontAwesomeIcon?.fields.name} slug={panel.fields.slug}>
+	return <Panel
+		key={panel.sys.id}
+		buttonAlignment={panel.fields.buttonAlignment}
+		buttons={buttons}
+		dark={dark}
+		headline={panel.fields.headline}
+		icon={panel.fields.fontAwesomeIcon?.fields.name}
+		slug={panel.fields.slug}
+	>
 		<RichText document={panel.fields.richText} />
 	</Panel>;
 }
