@@ -20,7 +20,7 @@ export default function Resume( { title, headerLeft, headerRight, objective, ski
 
 	return <section {...props}>
 		<header className={styles.header}>
-			<h2 className="centered">{title}</h2>
+			<h2 className="text-centered">{title}</h2>
 			{headerLeft && <div className={styles.left}><RichText document={headerLeft} /></div>}
 			{headerRight && <div className={`${styles.right} right`}><RichText document={headerRight} /></div>}
 			<div className="clear"></div>

@@ -21,10 +21,10 @@ export default function Experience( {name, positions, start, end, url, descripti
 
 	return <section {...props}>
 		<header className={styles.header}>
-			<h3 className={styles.company}>{name}</h3>
-			{url && <a href={url}><h4 className={styles.location}>{url} <Icon icon="FaExternalLinkAlt" /></h4></a>}
-			<h5 className={`${styles.position} clear`}>{positions.join(', ')}</h5>
-			<h6 className={styles.employment}>{startDate.getFullYear()} to {endDate? endDate.getFullYear() : 'current' }</h6>
+			<h3 className={`${styles.company} float-left`}>{name}</h3>
+			<h4 className={`${styles.position} float-right`}>{positions.join(', ')}</h4>
+			{url && <a href={url}><h5 className={`${styles.location} float-left clear`}>{url} <Icon icon="FaExternalLinkAlt" /></h5></a>}
+			<h6 className={`${styles.employment} float-right`}>{startDate.getFullYear()} to {endDate? endDate.getFullYear() : 'current' }</h6>
 			<div className="clear"></div>
 		</header>
 		<div className={styles.body}><RichText document={description} /></div>

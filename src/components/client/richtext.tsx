@@ -18,7 +18,7 @@ export const Options: OptionsType = {
 				return <a href={node.data.uri}>{children}<Icon icon="FaExternalLinkAlt" link /></a>;
 			return <a href={node.data.uri}>{children}</a>},
 	},
-	renderText: text => text.split("\n").flatMap((text, i) => [i > 0 && <br />, text]),
+	renderText: text => text.split("\n").flatMap((text, i) => [i > 0 && <br key={i} />, text]),
 };
 
 export default function RichText( { document, options = Options }: RichTextProps ) {
