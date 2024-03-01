@@ -7,7 +7,6 @@ import styles from "@/styles/navigation/primary.module.scss";
 import { TypePage, isTypePageSection } from "@/@types/contentful";
 import Icon from "../icon";
 import * as navigation from "@/utils/navigation";
-import { NavigationContext } from "@/context/navigation";
 
 export type NavigationProps = {
 	items: {
@@ -33,7 +32,7 @@ export default function Navigation( { items, slug, ...props }: NavigationProps &
 			}
 
 			if (window.location.pathname === "/" && shouldScroll) {
-				const menuItems = {current: document.body.querySelectorAll('nav[id=main] .pure-menu-item')};
+				const menuItems = {current: document.body.querySelectorAll('nav[id=menu] .pure-menu-item')};
 				navigation.handleScroll(menuItems);
 			}
 		};
