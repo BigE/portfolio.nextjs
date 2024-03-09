@@ -24,7 +24,7 @@ export default function Experience( {name, positions, start, end, url, descripti
 		<header className={styles.header}>
 			<h3 className={`${styles.company} float-left`}>{name}</h3>
 			<h4 className={`${styles.position} float-right`}>{positions.join(', ')}</h4>
-			{url && <a href={url}><h5 className={`${styles.location} float-left clear`}>{url} <Icon className={print.noPrint} icon="FaExternalLinkAlt" /></h5></a>}
+			{url && <a href={url}><h5 className={`${styles.location} float-left clear`}>{url} <Icon className={print.noPrint} icon="FaExternalLinkAlt" /></h5></a> || <div className={`${styles.location} float-left clear`}></div>}
 			<h6 className={`${styles.employment} float-right`}>{startDate.getFullYear()} to {endDate? endDate.getFullYear() : 'current' }</h6>
 			<div className="clear"></div>
 		</header>
