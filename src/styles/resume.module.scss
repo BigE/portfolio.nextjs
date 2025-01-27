@@ -22,6 +22,10 @@
 	}
 
 	.section {
+		@media print {
+			page-break-inside: avoid;
+		}
+
 		.header, &.skills > h2 {
 			border-bottom: 0.1rem solid black;
 			border-top: 0.1rem solid black;
