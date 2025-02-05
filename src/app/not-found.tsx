@@ -10,7 +10,7 @@ export default function NotFound() {
 				textAlign: "center",
 			}}>
 				<h2>404 - Page Not Found</h2>
-				<p>I blame the gremlins <Icon icon="FaRegSurprise" /></p>
+				<p>I blame the gremlins <Icon icon="FaRegFaceSurprise" /></p>
 				<Link href="/">Return Home</Link>
 			</section>
 		</PageLayout>

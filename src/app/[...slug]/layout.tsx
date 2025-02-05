@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import logo from "@/assets/logo.png";
-import Icon from "@/components/client/icon";
+import Icon, { ExternalLinkIcon } from "@/components/client/icon";
 import print from "@/styles/print.module.scss";
 import styles from "@/styles/layout.module.scss";
 import toggleStyles from "@/styles/navigation/toggle.module.scss";
@@ -37,9 +37,9 @@ export default async function PageLayout({
 		<footer className={`${toggleStyles.footer} ${styles.footer} ${print.noPrint}`}>
 			<div>
 				<span><Icon icon="FaRegCopyright" /> Eric Gach All Rights Reserved.</span>
-				<Icon className={styles.icon} icon="FaEllipsisV" />
+				<Icon className={styles.icon} icon="FaEllipsisVertical" />
 				<span>
-					<a href="https://github.com/BigE/portfolio" target="_blank">Portfolio<Icon icon="FaExternalLinkAlt" link /></a>	is built using the <a href="https://nextjs.org" target="_blank">NextJS<Icon icon="FaExternalLinkAlt" link /></a> framework and <a href="https://contentful.com" target="_blank">Contentful CMS<Icon icon="FaExternalLinkAlt" link /></a>
+					<a href="https://github.com/BigE/portfolio" target="_blank">Portfolio<ExternalLinkIcon link /></a>	is built using the <a href="https://nextjs.org" target="_blank">NextJS<ExternalLinkIcon link /></a> framework and <a href="https://contentful.com" target="_blank">Contentful CMS<ExternalLinkIcon link /></a>
 				</span>
 			</div>
 		</footer>

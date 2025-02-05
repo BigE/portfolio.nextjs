@@ -34,5 +34,5 @@ export default function BackToTop() {
 		href="#top"
 		onClick={handleClick}
 		title="Back to top"
-	><Icon icon="FaArrowAltCircleUp" /></a>
+	><Icon icon="FaRegCircleUp" /></a>
 }

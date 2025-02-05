@@ -4,7 +4,7 @@ import { Options as OptionsType, documentToReactComponents } from "@contentful/r
 import { Document, INLINES } from "@contentful/rich-text-types";
 
 import print from "@/styles/print.module.scss";
-import Icon from "./icon";
+import { ExternalLinkIcon } from "./icon";
 
 export type RichTextProps = {
 	document: Document;
@@ -15,7 +15,7 @@ export const Options: OptionsType = {
 	renderNode: {
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (/^(https?:)?\/\//.test(node.data.uri))
-				return <a href={node.data.uri}>{children}<Icon className={print.noPrint} icon="FaExternalLinkAlt" link /></a>;
+				return <a href={node.data.uri}>{children}<ExternalLinkIcon className={print.noPrint} link /></a>;
 			return <a href={node.data.uri}>{children}</a>},
 	},
 	renderText: text => text.split("\n").flatMap((text, i) => [i > 0 && <br key={i} />, text]),
