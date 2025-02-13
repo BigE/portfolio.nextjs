@@ -1,7 +1,9 @@
+const { PHASE_DEVELOPMENT_SERVER } = require('next/dist/shared/lib/constants');
 const path = require('path');
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = (phase, { defaultConfig }) => ({
+  ...defaultConfig,
   images: {
     remotePatterns: [
       {
@@ -11,9 +13,15 @@ const nextConfig = {
     ],
   },
   reactStrictMode: true,
+  redirects: () => {
+    const isDev = phase === PHASE_DEVELOPMENT_SERVER;
+    return isDev? [] : [{
+      source: '/preview',
+      destination: '/',
+      permanent: false,
+    }];
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   }
-};
-
-module.exports = nextConfig;
+});
