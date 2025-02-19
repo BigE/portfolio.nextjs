@@ -2,11 +2,12 @@
 
 import { renderButton, renderExperience, renderHero, renderResume } from "@/components";
 import { getButton, getExperience, getHero, getResume } from "@/utils/contentful";
+import { ExperienceType } from "@/utils/contentful/resume/experience";
 import { notFound } from "next/navigation";
 
 type PreviewPageType = {
 	params: {
-		component: 'button' | 'hero' | 'personalExperience' | 'professionalExperience' | 'resume';
+		component: 'button' | 'hero' | 'resume' | ExperienceType;
 		id: string;
 	}
 };
