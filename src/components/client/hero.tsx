@@ -3,6 +3,7 @@
 import Image from "next/image";
 
 import styles from "@/styles/hero.module.scss";
+import Icon from "./icon";
 
 export type HeroBackgroundProps = {
 	alt: string;
@@ -15,10 +16,11 @@ export type HeroProps = {
 	background?: HeroBackgroundProps;
 	button?: React.ReactNode;
 	description?: string;
+	icon?: string;
 	title: string;
 };
 
-export default function Hero( { background, button, description, title, ...props}: HeroProps & JSX.IntrinsicElements["section"] ) {
+export default function Hero( { background, button, description, icon, title, ...props}: HeroProps & JSX.IntrinsicElements["section"] ) {
 	if (background && background.url.startsWith("//"))
 		background.url = `https:${background.url}`;
 
@@ -26,7 +28,7 @@ export default function Hero( { background, button, description, title, ...props
 
 	return <section {...props}>
 		<div>
-			<h2 className={styles.headline}>{title}</h2>
+			<h2 className={styles.headline}>{icon && <Icon icon={icon} /> } {title}</h2>
 			{description && <p>{description}</p>}
 			{button}
 		</div>
