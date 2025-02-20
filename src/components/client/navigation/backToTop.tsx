@@ -5,7 +5,11 @@ import toggleStyles from "@/styles/navigation/toggle.module.scss";
 import Icon from "../icon";
 import React, { useEffect } from "react";
 
-export default function BackToTop() {
+type BackToTopProps = {
+	className?: string;
+}
+
+export default function BackToTop({ className }: BackToTopProps) {
 	useEffect(() => {
 		const handleScroll = async () => {
 			if ((document.scrollingElement || document.documentElement).scrollTop > 200)
@@ -30,7 +34,7 @@ export default function BackToTop() {
 
 	return <a id="backToTop"
 		aria-label="Back to top"
-		className={`${toggleStyles.toggle} ${styles.backToTop}`}
+		className={`${toggleStyles.toggle} ${styles.backToTop} ${className}`}
 		href="#top"
 		onClick={handleClick}
 		title="Back to top"

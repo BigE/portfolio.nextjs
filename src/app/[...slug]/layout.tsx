@@ -44,6 +44,6 @@ export default async function PageLayout({
 			</div>
 		</footer>
 		<MenuToggle className={print.noPrint} />
-		<BackToTop />
+		<BackToTop className={print.noPrint} />
 	</>;
 }
