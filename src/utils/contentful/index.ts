@@ -1,4 +1,3 @@
-import { TypeSiteSettingsSkeleton, TypeSocialIconsSkeleton } from "@/@types/contentful";
 import { createClient } from "contentful";
 export { getExperience, getResume } from "./resume";
 export { getButton } from "./button";
@@ -17,6 +16,6 @@ const client = createClient({
 	space: spaceId,
 });
 
-export function getClient( isPreview: boolean = false ) {
+export function getClient() {
 	return client;
 }

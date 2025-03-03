@@ -6,6 +6,7 @@ export interface TypePersonalExperienceFields {
     positionsHeld: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
     startDate: EntryFieldTypes.Date;
     endDate?: EntryFieldTypes.Date;
+    shortDescription: EntryFieldTypes.Symbol;
     description: EntryFieldTypes.RichText;
 }
 

@@ -11,23 +11,76 @@ export type ExperienceProps = {
 	start: string;
 	end?: string;
 	url?: string;
+	shortDescription?: string;
 	description: Document;
 };
 
-export default function Experience( {name, positions, start, end, url, description, ...props}: ExperienceProps & JSX.IntrinsicElements["section"]) {
+export type PersonalExperienceProps = ExperienceProps;
+
+export type ProfessionalExperienceProps = Omit<ExperienceProps, "name"> & {
+	company: string;
+};
+
+export default function Experience({
+	name,
+	positions,
+	start,
+	end,
+	url,
+	shortDescription,
+	description,
+	...props
+}: ExperienceProps & React.JSX.IntrinsicElements["section"]) {
 	const startDate = new Date(start);
-	const endDate = end? new Date(end) : undefined;
+	const endDate = end ? new Date(end) : undefined;
 
-	props.className = [styles.experience, props.className].join(' ').trim();
+	props.className = [styles.experience, props.className].join(" ").trim();
 
-	return <section {...props}>
-		<header className={styles.header}>
-			<h3 className={`${styles.company} float-left`}>{name}</h3>
-			<h4 className={`${styles.position} float-right`}>{positions.join(', ')}</h4>
-			{url && <a href={url}><h5 className={`${styles.location} float-left clear`}>{url} <ExternalLinkIcon className={print.noPrint} /></h5></a> || <div className={`${styles.location} float-left clear`}></div>}
-			<h6 className={`${styles.employment} float-right`}>{startDate.getFullYear()} to {endDate? endDate.getFullYear() : 'current' }</h6>
-			<div className="clear"></div>
-		</header>
-		<div className={styles.body}><RichText document={description} /></div>
-	</section>;
+	return (
+		<section {...props}>
+			<header className={styles.header}>
+				<h3 className={`${styles.company} float-left`}>{name}</h3>
+				<h4 className={`${styles.position} float-right`}>
+					{positions.join(", ")}
+				</h4>
+				{(url && (
+					<a href={url}>
+						<h5 className={`${styles.location} float-left clear`}>
+							{url} <ExternalLinkIcon className={print.noPrint} />
+						</h5>
+					</a>
+				)) || (
+					<div
+						className={`${styles.location} float-left clear`}
+					></div>
+				)}
+				<h6 className={`${styles.employment} float-right`}>
+					{startDate.getFullYear()} to{" "}
+					{endDate ? endDate.getFullYear() : "current"}
+				</h6>
+				<div className="clear"></div>
+			</header>
+			{shortDescription && (
+				<div
+					className={[styles.body, styles.shortDescription].join(" ")}
+				>
+					{shortDescription}
+				</div>
+			)}
+			<div className={styles.body}>
+				<RichText document={description} />
+			</div>
+		</section>
+	);
+}
+
+export function PersonalExperience(props: PersonalExperienceProps) {
+	return <Experience className={styles.personal} {...props} />;
+}
+
+export function ProfessionalExperience({
+	company,
+	...props
+}: ProfessionalExperienceProps) {
+	return <Experience name={company} {...props} />;
 }

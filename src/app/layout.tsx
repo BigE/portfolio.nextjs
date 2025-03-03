@@ -1,4 +1,4 @@
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 
 import "purecss/build/pure.css";
@@ -9,11 +9,11 @@ import styles from "@/styles/layout.module.scss";
 import { getSiteSettings } from "@/utils/contentful";
 import NavigationProvider from "@/context/navigation";
 
-const open_sans = Open_Sans({ subsets: ['latin'] });
+const open_sans = Open_Sans({ subsets: ["latin"] });
 
-export async function generateMetadata( params: any, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
 	const siteSettings = await getSiteSettings(),
-	      title = siteSettings["site.title"]?? "My Portfolio";
+		title = siteSettings["site.title"] ?? "My Portfolio";
 
 	return {
 		title: {
@@ -29,13 +29,11 @@ export async function generateMetadata( params: any, parent: ResolvingMetadata):
 }
 
 export default async function RootLayout({
-	children
+	children,
 }: {
-	children: React.ReactNode
+	children: React.ReactNode;
 }) {
-	const siteSettings = await getSiteSettings();
-
-	return(
+	return (
 		<html lang="en" className={open_sans.className}>
 			<body className={styles.body}>
 				<NavigationProvider>{children}</NavigationProvider>
@@ -43,4 +41,3 @@ export default async function RootLayout({
 		</html>
 	);
 }
-

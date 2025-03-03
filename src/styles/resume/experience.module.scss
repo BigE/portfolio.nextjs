@@ -19,4 +19,26 @@
 	}
 
 	margin: 1em;
+
+	.shortDescription {
+		display: none;
+
+		@media print {
+			display: block;
+
+			~ .body {
+				display: none;
+			}
+		}
+	}
+
+	@media print {
+		&.personal {
+			.header {
+				.position, .employment {
+					display: none;
+				}
+			}
+		}
+	}
 }
