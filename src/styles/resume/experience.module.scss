@@ -1,0 +1,44 @@
+.experience {
+	.header {
+		.company,.employment,.location,.position {
+			font-size: 1em;
+			margin: 0;
+		}
+
+		.company {
+			font-size: 1.2em;
+		}
+	}
+
+	.body {
+		margin: 0.5em 1em 1em 1em;
+
+		& > p {
+			margin: 1em 0;
+		}
+	}
+
+	margin: 1em;
+
+	.shortDescription {
+		display: none;
+
+		@media print {
+			display: block;
+
+			~ .body {
+				display: none;
+			}
+		}
+	}
+
+	@media print {
+		&.personal {
+			.header {
+				.position, .employment {
+					display: none;
+				}
+			}
+		}
+	}
+}

@@ -1,19 +1,53 @@
 .resume {
-	margin: 1em;
+	p {
+		margin: 0;
+	}
+
+	margin: 2em;
+
+	a, a:visited {
+		color: blue;
+
+		@media print {
+			color: black;
+			text-decoration: none;
+		}
+	}
+
+	.header {
+		border-bottom: 0.1rem solid black;
+
+		.left {
+			float: left;
+		}
+
+		.right {
+			float: right;
+		}
+	}
 
 	.section {
+		@media print {
+			page-break-inside: avoid;
+		}
+
+		.header, &.skills > h2 {
+			border-bottom: 0.1rem solid black;
+			border-top: 0.1rem solid black;
+		}
+
 		.content {
 			margin: 1em;
 		}
 	}
-}
 
-.skills {
-	.content > :not(h3, ul) {
-		margin: 0 1em;
-	}
+	.skills {
+		h3 {
+			margin: 0 1em;
 
-	.content > :not(h3, h4, ul) {
-		margin: 0 2em;
+			& + p {
+				margin: 0 2em;
+			}
+		}
 	}
 }
