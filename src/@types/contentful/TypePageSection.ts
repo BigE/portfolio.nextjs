@@ -13,7 +13,7 @@ export interface TypePageSectionFields {
 }
 
 export type TypePageSectionSkeleton = EntrySkeletonType<TypePageSectionFields, "pageSection">;
-export type TypePageSection<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypePageSectionSkeleton, Modifiers, Locales>;
+export type TypePageSection<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypePageSectionSkeleton, Modifiers, Locales>;
 
 export function isTypePageSection<Modifiers extends ChainModifiers, Locales extends LocaleCode>(entry: Entry<EntrySkeletonType, Modifiers, Locales>): entry is TypePageSection<Modifiers, Locales> {
     return entry.sys.contentType.sys.id === 'pageSection'

@@ -5,7 +5,7 @@ export interface TypePureGridClassNameFields {
 }
 
 export type TypePureGridClassNameSkeleton = EntrySkeletonType<TypePureGridClassNameFields, "pureGridClassName">;
-export type TypePureGridClassName<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypePureGridClassNameSkeleton, Modifiers, Locales>;
+export type TypePureGridClassName<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypePureGridClassNameSkeleton, Modifiers, Locales>;
 
 export function isTypePureGridClassName<Modifiers extends ChainModifiers, Locales extends LocaleCode>(entry: Entry<EntrySkeletonType, Modifiers, Locales>): entry is TypePureGridClassName<Modifiers, Locales> {
     return entry.sys.contentType.sys.id === 'pureGridClassName'

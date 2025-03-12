@@ -11,7 +11,7 @@ export interface TypePersonalExperienceFields {
 }
 
 export type TypePersonalExperienceSkeleton = EntrySkeletonType<TypePersonalExperienceFields, "personalExperience">;
-export type TypePersonalExperience<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypePersonalExperienceSkeleton, Modifiers, Locales>;
+export type TypePersonalExperience<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypePersonalExperienceSkeleton, Modifiers, Locales>;
 
 export function isTypePersonalExperience<Modifiers extends ChainModifiers, Locales extends LocaleCode>(entry: Entry<EntrySkeletonType, Modifiers, Locales>): entry is TypePersonalExperience<Modifiers, Locales> {
     return entry.sys.contentType.sys.id === 'personalExperience'

@@ -6,7 +6,7 @@ export interface TypeFormFields {
 }
 
 export type TypeFormSkeleton = EntrySkeletonType<TypeFormFields, "form">;
-export type TypeForm<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeFormSkeleton, Modifiers, Locales>;
+export type TypeForm<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypeFormSkeleton, Modifiers, Locales>;
 
 export function isTypeForm<Modifiers extends ChainModifiers, Locales extends LocaleCode>(entry: Entry<EntrySkeletonType, Modifiers, Locales>): entry is TypeForm<Modifiers, Locales> {
     return entry.sys.contentType.sys.id === 'form'

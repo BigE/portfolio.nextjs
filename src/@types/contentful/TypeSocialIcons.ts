@@ -7,7 +7,7 @@ export interface TypeSocialIconsFields {
 }
 
 export type TypeSocialIconsSkeleton = EntrySkeletonType<TypeSocialIconsFields, "socialIcons">;
-export type TypeSocialIcons<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeSocialIconsSkeleton, Modifiers, Locales>;
+export type TypeSocialIcons<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypeSocialIconsSkeleton, Modifiers, Locales>;
 
 export function isTypeSocialIcons<Modifiers extends ChainModifiers, Locales extends LocaleCode>(entry: Entry<EntrySkeletonType, Modifiers, Locales>): entry is TypeSocialIcons<Modifiers, Locales> {
     return entry.sys.contentType.sys.id === 'socialIcons'
