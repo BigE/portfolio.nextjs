@@ -9,7 +9,7 @@ export interface TypePureGridRichTextFields {
 }
 
 export type TypePureGridRichTextSkeleton = EntrySkeletonType<TypePureGridRichTextFields, "pureGridRichText">;
-export type TypePureGridRichText<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypePureGridRichTextSkeleton, Modifiers, Locales>;
+export type TypePureGridRichText<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypePureGridRichTextSkeleton, Modifiers, Locales>;
 
 export function isTypePureGridRichText<Modifiers extends ChainModifiers, Locales extends LocaleCode>(entry: Entry<EntrySkeletonType, Modifiers, Locales>): entry is TypePureGridRichText<Modifiers, Locales> {
     return entry.sys.contentType.sys.id === 'pureGridRichText'

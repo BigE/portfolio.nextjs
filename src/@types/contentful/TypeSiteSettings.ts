@@ -6,7 +6,7 @@ export interface TypeSiteSettingsFields {
 }
 
 export type TypeSiteSettingsSkeleton = EntrySkeletonType<TypeSiteSettingsFields, "siteSettings">;
-export type TypeSiteSettings<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeSiteSettingsSkeleton, Modifiers, Locales>;
+export type TypeSiteSettings<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypeSiteSettingsSkeleton, Modifiers, Locales>;
 
 export function isTypeSiteSettings<Modifiers extends ChainModifiers, Locales extends LocaleCode>(entry: Entry<EntrySkeletonType, Modifiers, Locales>): entry is TypeSiteSettings<Modifiers, Locales> {
     return entry.sys.contentType.sys.id === 'siteSettings'
