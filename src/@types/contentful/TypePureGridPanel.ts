@@ -9,7 +9,7 @@ export interface TypePureGridPanelFields {
 }
 
 export type TypePureGridPanelSkeleton = EntrySkeletonType<TypePureGridPanelFields, "pureGridPanel">;
-export type TypePureGridPanel<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypePureGridPanelSkeleton, Modifiers, Locales>;
+export type TypePureGridPanel<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypePureGridPanelSkeleton, Modifiers, Locales>;
 
 export function isTypePureGridPanel<Modifiers extends ChainModifiers, Locales extends LocaleCode>(entry: Entry<EntrySkeletonType, Modifiers, Locales>): entry is TypePureGridPanel<Modifiers, Locales> {
     return entry.sys.contentType.sys.id === 'pureGridPanel'

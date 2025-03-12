@@ -1,6 +1,6 @@
 {
   "name": "portfolio-nextjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "build": "next build",
@@ -30,7 +30,7 @@
     "@next/env": "^14.0.0",
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
-    "cf-content-types-generator": "^2.12.2",
+    "cf-content-types-generator": "^2.15.5",
     "contentful-management": "^10.32.0",
     "eslint": "8.57.1",
     "eslint-config-next": "^15.2.0",

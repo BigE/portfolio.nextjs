@@ -12,7 +12,7 @@ export interface TypePanelFields {
 }
 
 export type TypePanelSkeleton = EntrySkeletonType<TypePanelFields, "panel">;
-export type TypePanel<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypePanelSkeleton, Modifiers, Locales>;
+export type TypePanel<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypePanelSkeleton, Modifiers, Locales>;
 
 export function isTypePanel<Modifiers extends ChainModifiers, Locales extends LocaleCode>(entry: Entry<EntrySkeletonType, Modifiers, Locales>): entry is TypePanel<Modifiers, Locales> {
     return entry.sys.contentType.sys.id === 'panel'

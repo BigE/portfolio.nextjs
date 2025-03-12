@@ -1,5 +1,3 @@
-"use server";
-
 export { default as renderButton } from "./button";
 export { default as renderForm } from "./form";
 export { default as renderHero } from "./hero";

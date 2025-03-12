@@ -13,7 +13,7 @@ export interface TypeResumeFields {
 }
 
 export type TypeResumeSkeleton = EntrySkeletonType<TypeResumeFields, "resume">;
-export type TypeResume<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeResumeSkeleton, Modifiers, Locales>;
+export type TypeResume<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypeResumeSkeleton, Modifiers, Locales>;
 
 export function isTypeResume<Modifiers extends ChainModifiers, Locales extends LocaleCode>(entry: Entry<EntrySkeletonType, Modifiers, Locales>): entry is TypeResume<Modifiers, Locales> {
     return entry.sys.contentType.sys.id === 'resume'

@@ -5,7 +5,7 @@ export interface TypeFontAwesomeIconFields {
 }
 
 export type TypeFontAwesomeIconSkeleton = EntrySkeletonType<TypeFontAwesomeIconFields, "fontAwesomeIcon">;
-export type TypeFontAwesomeIcon<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeFontAwesomeIconSkeleton, Modifiers, Locales>;
+export type TypeFontAwesomeIcon<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypeFontAwesomeIconSkeleton, Modifiers, Locales>;
 
 export function isTypeFontAwesomeIcon<Modifiers extends ChainModifiers, Locales extends LocaleCode>(entry: Entry<EntrySkeletonType, Modifiers, Locales>): entry is TypeFontAwesomeIcon<Modifiers, Locales> {
     return entry.sys.contentType.sys.id === 'fontAwesomeIcon'
