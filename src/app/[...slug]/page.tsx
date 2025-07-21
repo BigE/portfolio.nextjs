@@ -13,16 +13,17 @@ import renderHero from "@/components/hero";
 import renderPageSection from "@/components/pageSection";
 import renderResume from "@/components/resume";
 
-type SlugPageType = {
-	params: {
-		slug: string;
-	};
-};
+type SlugPageType = Promise<{
+	slug: string;
+}>;
 
 export async function generateMetadata({
 	params,
-}: SlugPageType): Promise<Metadata> {
-	const page = await getPage(params.slug);
+}: {
+	params: SlugPageType;
+}): Promise<Metadata> {
+	const { slug } = await params;
+	const page = await getPage(slug);
 
 	if (!page) notFound();
 
@@ -31,8 +32,9 @@ export async function generateMetadata({
 	};
 }
 
-export default async function SlugPage({ params }: SlugPageType) {
-	const page = await getPage(params.slug);
+export default async function SlugPage({ params }: { params: SlugPageType }) {
+	const { slug } = await params;
+	const page = await getPage(slug);
 
 	if (!page) notFound();
 

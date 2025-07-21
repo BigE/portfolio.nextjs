@@ -1,4 +1,4 @@
-"use server;";
+"use server";
 
 import {
 	renderButton,
@@ -15,15 +15,17 @@ import {
 import { ExperienceType } from "@/utils/contentful/resume/experience";
 import { notFound } from "next/navigation";
 
-type PreviewPageType = {
-	params: {
-		component: "button" | "hero" | "resume" | ExperienceType;
-		id: string;
-	};
-};
+type PreviewPageType = Promise<{
+	component: "button" | "hero" | "resume" | ExperienceType;
+	id: string;
+}>;
 
-export default async function PreviewPage({ params }: PreviewPageType) {
-	const { component, id } = params;
+export default async function PreviewPage({
+	params,
+}: {
+	params: PreviewPageType;
+}) {
+	const { component, id } = await params;
 
 	switch (component) {
 		case "button":
