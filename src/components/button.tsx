@@ -10,6 +10,7 @@ export default async function renderButton(
 ) {
 	return (
 		<Button
+			key={button.sys.id}
 			className={className}
 			document={button.fields.document}
 			external={button.fields.externalUrl}
