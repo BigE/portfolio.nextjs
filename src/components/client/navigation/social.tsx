@@ -29,9 +29,9 @@ export default function SocialNavigation({
 
 	return (
 		<Navigation
-			className={styles.social}
-			listClassName="pure-menu-horizontal"
+			listClassName={`pure-menu-horizontal ${styles.list}`}
 			items={children}
+			{...props}
 		/>
 	);
 }

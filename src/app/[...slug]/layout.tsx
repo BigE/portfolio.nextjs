@@ -13,7 +13,7 @@ import {
 } from "@/utils/contentful";
 import PrimaryNavigation from "@/components/client/navigation/primary";
 import SocialNavigation from "@/components/client/navigation/social";
-import MenuToggle from "@/components/client/navigation/toggle";
+import MenuToggle from "@/components/client/navigation/menuToggle";
 import BackToTop from "@/components/client/navigation/backToTop";
 
 type PageLayoutProps = Promise<{
@@ -53,8 +53,16 @@ export default async function PageLayout({
 						)}
 					</span>
 				</Link>
-				<PrimaryNavigation items={items} slug={slug} />
-				<SocialNavigation items={socialIcons} />
+				<PrimaryNavigation
+					id="menu"
+					className={styles.primary}
+					items={items}
+					slug={slug}
+				/>
+				<SocialNavigation
+					className={styles.social}
+					items={socialIcons}
+				/>
 			</header>
 			<main id={styles.content}>{children}</main>
 			<footer className={print.noPrint} id={styles.footer}>

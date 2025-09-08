@@ -1,35 +1,22 @@
 "use client";
 
-import styles from "@/styles/navigation/toggle.module.scss";
+import styles from "@BigE/portfolio.css/scss/navigation/toggle.module.scss";
 import Icon from "../icon";
 
-export type MenuToggleType = {
+export type ToggleType = {
 	icon?: string;
 };
 
-export default function MenuToggle({
+export default function Toggle({
 	icon,
 	...props
-}: MenuToggleType & JSX.IntrinsicElements["button"]) {
+}: ToggleType & JSX.IntrinsicElements["button"]) {
 	icon ??= "FaBars";
-	props.id = "menuToggle";
-	props.className = [styles.toggle, styles.menuToggle, props.className]
-		.join(" ")
-		.trim();
-	props.onClick = toggleStyles;
-	props["aria-controls"] ??= "menu";
-	props["aria-expanded"] ??= "false";
-	props["aria-label"] ??= "Toggle Menu";
+	props.className = [styles.toggle, props.className || ""].join(" ").trim();
 
 	return (
 		<button {...props}>
 			<Icon icon={icon} aria-hidden="true" />
 		</button>
 	);
-}
-
-export function toggleStyles() {
-	document.body.classList.toggle(styles.showNav);
-	document.getElementsByTagName("html")[0].style.overflowY =
-		document.body.classList.contains(styles.showNav) ? "hidden" : "scroll";
 }

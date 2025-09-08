@@ -1,11 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import styles from "@BigE/portfolio.css/scss/navigation/primary.module.scss";
 import { TypePage, isTypePageSection } from "@/@types/contentful";
-import Icon from "../icon";
 import * as navigation from "@/utils/navigation";
 import Navigation, { NavigationItemType } from "./navigation";
 
@@ -57,7 +55,6 @@ export default function PrimaryNavigation({
 
 	props["aria-label"] ??= "Primary";
 	props.className = [props.className || "", styles.primary].join(" ").trim();
-	props.id = "menu";
 	props.role ??= "navigation";
 
 	for (const section of items.home.fields.content) {
@@ -65,6 +62,7 @@ export default function PrimaryNavigation({
 
 		children.push({
 			key: section.sys.id,
+			className: styles.item,
 			linkClassName: styles.link,
 			href: `/#${section.fields.slug}`,
 			icon: section.fields.icon?.fields.name,
@@ -74,11 +72,16 @@ export default function PrimaryNavigation({
 	}
 
 	if (children.length)
-		children.push({ key: Math.random().toString(36), separator: true });
+		children.push({
+			key: Math.random().toString(36),
+			className: styles.item,
+			separator: true,
+		});
 
 	for (const page of items.pages) {
 		children.push({
 			key: page.sys.id,
+			className: styles.item,
 			linkClassName: [
 				styles.link,
 				slug == page.fields.slug
@@ -95,64 +98,17 @@ export default function PrimaryNavigation({
 	}
 
 	if (items.pages.length)
-		children.push({ key: Math.random().toString(36), separator: true });
+		children.push({
+			key: Math.random().toString(36),
+			className: styles.item,
+			separator: true,
+		});
 
 	return (
 		<Navigation
-			className={styles.primary}
 			listClassName="pure-menu-horizontal"
 			items={children}
+			{...props}
 		></Navigation>
-	);
-
-	return (
-		<nav {...props}>
-			<ul className="pure-menu-list pure-menu-horizontal">
-				{items.home.fields.content.map(
-					(section) =>
-						section &&
-						isTypePageSection(section) && (
-							<li key={section.sys.id} className="pure-menu-item">
-								<a
-									className={`pure-menu-link ${styles.link}`}
-									href={`/#${section.fields.slug}`}
-								>
-									<span className={styles.text}>
-										<Icon
-											icon={
-												section.fields.icon?.fields.name
-											}
-										/>
-										{section.fields.headline}
-									</span>
-								</a>
-							</li>
-						)
-				)}
-				{items.pages.length > 0 && (
-					<>
-						<li className="pure-menu-separator"></li>
-						{items.pages.map((page) => (
-							<li
-								key={page.sys.id}
-								className={`pure-menu-item ${slug == page.fields.slug ? `pure-menu-active ${styles.active}` : ""}`}
-							>
-								<Link
-									className={`pure-menu-link ${styles.link}`}
-									href={page.fields.slug}
-								>
-									<span className={styles.text}>
-										<Icon
-											icon={page.fields.icon?.fields.name}
-										/>
-										{page.fields.title}
-									</span>
-								</Link>
-							</li>
-						))}
-					</>
-				)}
-			</ul>
-		</nav>
 	);
 }

@@ -40,7 +40,11 @@ export default function Navigation({
 		if (!item) return;
 
 		if (item.separator) {
-			const className = ["pure-menu-separator", item.className || ""]
+			const className = [
+				"pure-menu-separator",
+				styles.item,
+				item.className || "",
+			]
 				.join(" ")
 				.trim();
 			children.push(
@@ -49,7 +53,7 @@ export default function Navigation({
 			return;
 		}
 
-		const className = ["pure-menu-item", item.className || ""]
+		const className = ["pure-menu-item", styles.item, item.className || ""]
 			.join(" ")
 			.trim();
 		const icon = !item.icon ? undefined : (
