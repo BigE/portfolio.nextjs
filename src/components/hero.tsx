@@ -1,7 +1,7 @@
 "use server";
 
 import { TypeHero } from "@/@types/contentful";
-import styles from "@/styles/hero.module.scss";
+import styles from "@BigE/portfolio.css/scss/components/hero.module.scss";
 import renderButton from "./button";
 import Hero, { HeroBackgroundProps } from "./client/hero";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "@/styles/panel.module.scss";
+import styles from "@BigE/portfolio.css/scss/components/panel.module.scss";
 import Icon from "./icon";
 
 export type PanelProps = {
@@ -23,7 +23,11 @@ export default function Panel({
 }: PanelProps & JSX.IntrinsicElements["section"]) {
 	const buttonAlignmentClassName =
 		styles[buttonAlignment.toLocaleLowerCase()] || "";
-	props.className = [styles.panel, dark && styles.dark, props.className]
+	props.className = [
+		styles.panel,
+		(dark && styles.dark) || "",
+		props.className,
+	]
 		.join(" ")
 		.trim();
 	props.id ??= slug;

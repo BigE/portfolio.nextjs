@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import styles from "@/styles/hero.module.scss";
+import styles from "@BigE/portfolio.css/scss/components/hero.module.scss";
 import Icon from "./icon";
 
 export type HeroBackgroundProps = {
@@ -35,7 +35,7 @@ export default function Hero({
 
 	return (
 		<section {...props}>
-			<div>
+			<div className={styles.content}>
 				<h2 className={styles.headline}>
 					{icon && <Icon icon={icon} />} {title}
 				</h2>

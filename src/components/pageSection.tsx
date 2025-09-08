@@ -21,11 +21,12 @@ export default async function renderPageSection(
 
 	for (const content of section.fields.content) {
 		if (!content) continue;
-		else if (isTypeForm(content)) children.push(await renderForm(content));
+		else if (isTypeForm(content))
+			children.push(await renderForm(content, !dark));
 		else if (isTypePanel(content))
-			children.push(await renderPanel(content, dark));
+			children.push(await renderPanel(content, !dark));
 		else if (isTypePureGrid(content))
-			children.push(await renderPureGrid(content, dark));
+			children.push(await renderPureGrid(content, !dark));
 		else if (isTypeRichText(content))
 			children.push(
 				<div key={content.sys.id}>

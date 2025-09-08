@@ -9,11 +9,13 @@ import axios from "axios";
 import Button from "./button";
 
 export type FormProps = {
+	dark: boolean;
 	endpoint: string;
 	panelClassName?: string;
 };
 
 export default function Form({
+	dark,
 	endpoint,
 	panelClassName,
 	...props
@@ -68,6 +70,7 @@ export default function Form({
 		<form {...props}>
 			<Panel
 				className={panelClassName}
+				dark={dark}
 				headline="Contact Me"
 				icon="FaRegEnvelope"
 				slug="contact"
