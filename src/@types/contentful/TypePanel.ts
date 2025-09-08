@@ -5,6 +5,7 @@ import type { TypeFontAwesomeIconSkeleton } from "./TypeFontAwesomeIcon";
 export interface TypePanelFields {
     headline: EntryFieldTypes.Symbol;
     slug: EntryFieldTypes.Symbol;
+    panelColor?: EntryFieldTypes.Symbol<"Accent" | "Brand">;
     fontAwesomeIcon: EntryFieldTypes.EntryLink<TypeFontAwesomeIconSkeleton>;
     richText: EntryFieldTypes.RichText;
     buttonAlignment: EntryFieldTypes.Symbol<"Centered" | "Default">;
