@@ -4,15 +4,14 @@ import Link from "next/link";
 import logo from "@/assets/logo.png";
 import Icon, { ExternalLinkIcon } from "@/components/client/icon";
 import print from "@/styles/print.module.scss";
-import styles from "@/styles/layout.module.scss";
-import toggleStyles from "@/styles/navigation/toggle.module.scss";
+import styles from "@BigE/portfolio.css/scss/layout.module.scss";
 import {
 	getPage,
 	getPages,
 	getSiteSettings,
 	getSocialIcons,
 } from "@/utils/contentful";
-import Navigation from "@/components/client/navigation/navigation";
+import PrimaryNavigation from "@/components/client/navigation/primary";
 import SocialNavigation from "@/components/client/navigation/social";
 import MenuToggle from "@/components/client/navigation/toggle";
 import BackToTop from "@/components/client/navigation/backToTop";
@@ -38,28 +37,28 @@ export default async function PageLayout({
 
 	return (
 		<>
-			<header
-				className={`${toggleStyles.header} ${styles.header} ${print.noPrint}`}
-			>
+			<header className={print.noPrint} id={styles.header}>
 				<Link href="/" className={`pure-menu-heading ${styles.logo}`}>
-					<span className={`${styles.image} ${styles.avatar}`}>
-						<Image src={logo} alt="me" />
+					<span className={styles.image}>
+						<Image src={logo} alt="me" className={styles.avatar} />
 					</span>
-					<h1>{siteSettings["header.headline"] || "Portfolio"}</h1>
-					{siteSettings["header.sub_headline"] && (
-						<p>{siteSettings["header.sub_headline"]}</p>
-					)}
+					<span className={styles.title}>
+						<h1 className={styles.headline}>
+							{siteSettings["header.headline"] || "Portfolio"}
+						</h1>
+						{siteSettings["header.sub_headline"] && (
+							<p className={styles["sub-headline"]}>
+								{siteSettings["header.sub_headline"]}
+							</p>
+						)}
+					</span>
 				</Link>
-				<Navigation items={items} slug={slug} />
+				<PrimaryNavigation items={items} slug={slug} />
 				<SocialNavigation items={socialIcons} />
 			</header>
-			<main className={`${toggleStyles.content} ${styles.content}`}>
-				{children}
-			</main>
-			<footer
-				className={`${toggleStyles.footer} ${styles.footer} ${print.noPrint}`}
-			>
-				<div>
+			<main id={styles.content}>{children}</main>
+			<footer className={print.noPrint} id={styles.footer}>
+				<div className={styles.content}>
 					<span>
 						<Icon icon="FaRegCopyright" /> Eric Gach All Rights
 						Reserved.
