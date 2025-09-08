@@ -2,24 +2,25 @@
 
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import styles from "@/styles/form.module.scss";
-import Panel from "./panel";
-import panelStyles from "@/styles/panel.module.scss";
+import styles from "@BigE/portfolio.css/scss/components/form.module.scss";
+import Panel, { PanelExtraProps } from "./panel";
+import panelStyles from "@BigE/portfolio.css/scss/components/panel.module.scss";
 import axios from "axios";
 import Button from "./button";
 
 export type FormProps = {
-	dark: boolean;
 	endpoint: string;
 	panelClassName?: string;
 };
 
 export default function Form({
-	dark,
+	dark = false,
 	endpoint,
+	headlineClassName,
+	iconClassName,
 	panelClassName,
 	...props
-}: FormProps & JSX.IntrinsicElements["form"]) {
+}: FormProps & PanelExtraProps & JSX.IntrinsicElements["form"]) {
 	const buttons: React.ReactNode[] = [
 		<Button
 			key="submit"
@@ -63,7 +64,15 @@ export default function Form({
 			});
 	};
 
-	props.className ??= `${styles.form} pure-form pure-form-aligned`;
+	props.className = [
+		"pure-form",
+		"pure-form-aligned",
+		styles.form,
+		dark ? styles.dark : "",
+		props.className || "",
+	]
+		.join(" ")
+		.trim();
 	props.onSubmit ??= handleSubmit;
 
 	return (
@@ -72,7 +81,9 @@ export default function Form({
 				className={panelClassName}
 				dark={dark}
 				headline="Contact Me"
+				headlineClassName={headlineClassName}
 				icon="FaRegEnvelope"
+				iconClassName={iconClassName}
 				slug="contact"
 				buttons={buttons}
 			>
@@ -83,6 +94,7 @@ export default function Form({
 					<div className={`${styles.container} pure-control-group`}>
 						<label htmlFor="name">Name</label>
 						<input
+							className={styles.input}
 							id="name"
 							name="name"
 							type="text"
@@ -94,6 +106,7 @@ export default function Form({
 					<div className={`${styles.container} pure-control-group`}>
 						<label htmlFor="email">Email</label>
 						<input
+							className={styles.input}
 							id="email"
 							name="email"
 							type="text"
@@ -105,6 +118,7 @@ export default function Form({
 					<div className={`${styles.container} pure-control-group`}>
 						<label htmlFor="subject">Subject</label>
 						<input
+							className={styles.input}
 							id="subject"
 							name="subject"
 							type="text"
@@ -115,6 +129,7 @@ export default function Form({
 					<div className={`${styles.container} pure-control-group`}>
 						<label htmlFor="message">Message</label>
 						<textarea
+							className={styles.textarea}
 							id="message"
 							name="message"
 							autoComplete="off"

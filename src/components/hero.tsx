@@ -5,13 +5,22 @@ import styles from "@BigE/portfolio.css/scss/components/hero.module.scss";
 import renderButton from "./button";
 import Hero, { HeroBackgroundProps } from "./client/hero";
 
-export default async function renderHero(
-	hero: TypeHero<"WITHOUT_UNRESOLVABLE_LINKS", string>,
-	className?: string
-) {
+export type RenderHeroExtraProps = {
+	className?: string;
+};
+
+export type RenderHeroProps = {
+	hero: TypeHero<"WITHOUT_UNRESOLVABLE_LINKS", string>;
+} & RenderHeroExtraProps;
+
+export default async function renderHero({ hero, className }: RenderHeroProps) {
 	const button =
 		hero.fields.button &&
-		(await renderButton(hero.fields.button, styles.button, styles.icon));
+		(await renderButton({
+			button: hero.fields.button,
+			className: styles.button,
+			iconClassName: styles.icon,
+		}));
 	let background: HeroBackgroundProps | undefined = undefined;
 
 	if (hero.fields.background && hero.fields.background.fields.file)

@@ -29,12 +29,12 @@ export default async function PreviewPage({
 
 	switch (component) {
 		case "button":
-			return await renderButton(await getButton(id));
+			return await renderButton({ button: await getButton(id) });
 		case "personalExperience":
 		case "professionalExperience":
 			return await renderExperience(await getExperience(id, component));
 		case "hero":
-			return await renderHero(await getHero(id));
+			return await renderHero({ hero: await getHero(id) });
 		case "resume":
 			return await renderResume(await getResume(id));
 		default:

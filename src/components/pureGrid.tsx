@@ -20,7 +20,10 @@ export default async function renderPureGrid(
 
 		if (!content) continue;
 		else if (isTypePureGridPanel(content) && content.fields.panel)
-			child = await renderPanel(content.fields.panel, dark);
+			child = await renderPanel({
+				panel: content.fields.panel,
+				dark: dark,
+			});
 		else if (isTypePureGridRichText(content) && content.fields.richText)
 			child = (
 				<RichText document={content.fields.richText.fields.richText} />

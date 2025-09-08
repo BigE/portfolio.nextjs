@@ -3,10 +3,15 @@
 import styles from "@BigE/portfolio.css/scss/components/panel.module.scss";
 import Icon from "./icon";
 
+export type PanelExtraProps = {
+	dark?: boolean;
+	headlineClassName?: string;
+	iconClassName?: string;
+};
+
 export type PanelProps = {
 	buttonAlignment?: "Default" | "Centered";
 	buttons?: React.ReactNode[];
-	dark?: boolean;
 	headline: string;
 	icon?: string;
 	slug: string;
@@ -17,10 +22,12 @@ export default function Panel({
 	buttons,
 	dark,
 	headline,
+	headlineClassName,
 	icon,
+	iconClassName,
 	slug,
 	...props
-}: PanelProps & JSX.IntrinsicElements["section"]) {
+}: PanelProps & PanelExtraProps & JSX.IntrinsicElements["section"]) {
 	const buttonAlignmentClassName =
 		styles[buttonAlignment.toLocaleLowerCase()] || "";
 	props.className = [
@@ -32,11 +39,16 @@ export default function Panel({
 		.trim();
 	props.id ??= slug;
 
+	headlineClassName = [styles.headline, headlineClassName || ""]
+		.join(" ")
+		.trim();
+	iconClassName = [styles.icon, iconClassName || ""].join(" ").trim();
+
 	return (
 		<section {...props}>
 			<header className={styles.header}>
-				<h4 className={styles.headline}>
-					<Icon className={styles.icon} icon={icon} />
+				<h4 className={headlineClassName}>
+					<Icon className={iconClassName} icon={icon} />
 					{headline}
 				</h4>
 			</header>

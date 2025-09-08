@@ -2,14 +2,20 @@
 
 import { TypePanel } from "@/@types/contentful";
 import styles from "@BigE/portfolio.css/scss/components/panel.module.scss";
-import Panel from "./client/panel";
+import Panel, { PanelExtraProps } from "./client/panel";
 import RichText from "./client/richtext";
 import renderButton from "./button";
 
-export default async function renderPanel(
-	panel: TypePanel<"WITHOUT_UNRESOLVABLE_LINKS", string>,
-	dark: boolean = false
-) {
+export type RenderPanelProps = {
+	panel: TypePanel<"WITHOUT_UNRESOLVABLE_LINKS", string>;
+};
+
+export default async function renderPanel({
+	dark = false,
+	headlineClassName,
+	iconClassName,
+	panel,
+}: RenderPanelProps & PanelExtraProps) {
 	const buttons: React.ReactNode[] = [];
 	const panelClassName = [];
 
@@ -18,7 +24,11 @@ export default async function renderPanel(
 			if (!button) continue;
 
 			buttons.push(
-				await renderButton(button, styles.button, styles.icon)
+				await renderButton({
+					button: button,
+					className: styles.button,
+					iconClassName: styles.icon,
+				})
 			);
 		}
 	}
@@ -36,7 +46,9 @@ export default async function renderPanel(
 			buttons={buttons}
 			dark={dark}
 			headline={panel.fields.headline}
+			headlineClassName={headlineClassName}
 			icon={panel.fields.fontAwesomeIcon?.fields.name}
+			iconClassName={iconClassName}
 			slug={panel.fields.slug}
 		>
 			<RichText document={panel.fields.richText} />

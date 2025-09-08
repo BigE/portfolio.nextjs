@@ -44,9 +44,12 @@ export default async function SlugPage({ params }: { params: SlugPageType }) {
 		const section = page.fields.content[i];
 
 		if (!section) continue;
-		else if (isTypeHero(section)) children.push(await renderHero(section));
+		else if (isTypeHero(section))
+			children.push(await renderHero({ hero: section }));
 		else if (isTypePageSection(section))
-			children.push(await renderPageSection(section, i % 2 === 0));
+			children.push(
+				await renderPageSection({ section: section, dark: i % 2 === 0 })
+			);
 		else if (isTypeResume(section))
 			children.push(await renderResume(section));
 	}
