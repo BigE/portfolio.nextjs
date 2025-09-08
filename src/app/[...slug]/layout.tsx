@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import logo from "@/assets/logo.png";
+import logo from "@BigE/portfolio.css/images/logo.png";
 import Icon, { ExternalLinkIcon } from "@/components/client/icon";
 import print from "@/styles/print.module.scss";
 import styles from "@BigE/portfolio.css/scss/layout.module.scss";
