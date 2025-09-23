@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "@/styles/resume.module.scss";
+import styles from "@BigE/portfolio.css/scss/components/resume.module.scss";
 import { Document } from "@contentful/rich-text-types";
 
 import RichText from "../richtext";
@@ -30,15 +30,21 @@ export default function Resume({
 	return (
 		<section {...props}>
 			<header className={styles.header}>
-				<h2 className="text-centered">{title}</h2>
+				<h2 className={styles.title}>{title}</h2>
 				{headerLeft && (
 					<div className={styles.left}>
-						<RichText document={headerLeft} />
+						<RichText
+							className={styles.richtext}
+							document={headerLeft}
+						/>
 					</div>
 				)}
 				{headerRight && (
 					<div className={`${styles.right} right`}>
-						<RichText document={headerRight} />
+						<RichText
+							className={styles.richtext}
+							document={headerRight}
+						/>
 					</div>
 				)}
 				<div className="clear"></div>
@@ -53,7 +59,7 @@ export default function Resume({
 				id="skills"
 				className={`${styles.section} ${styles.skills}`}
 			>
-				<RichText document={skills} />
+				<RichText className={styles.richtext} document={skills} />
 			</section>
 			{professionalExperience && (
 				<section className={styles.section}>

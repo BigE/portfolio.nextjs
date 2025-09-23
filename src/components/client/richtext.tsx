@@ -45,6 +45,11 @@ export const Options: OptionsType = {
 export default function RichText({
 	document,
 	options = Options,
-}: RichTextProps) {
-	return <>{documentToReactComponents(document, options)}</>;
+	...props
+}: RichTextProps & JSX.IntrinsicElements["span"]) {
+	props.className = [styles.richtext, props.className || ""].join(" ").trim();
+
+	return (
+		<span {...props}>{documentToReactComponents(document, options)}</span>
+	);
 }
