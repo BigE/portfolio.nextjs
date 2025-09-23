@@ -13,16 +13,17 @@ import renderHero from "@/components/hero";
 import renderPageSection from "@/components/pageSection";
 import renderResume from "@/components/resume";
 
-type SlugPageType = {
-	params: {
-		slug: string;
-	};
-};
+type SlugPageType = Promise<{
+	slug: string;
+}>;
 
 export async function generateMetadata({
 	params,
-}: SlugPageType): Promise<Metadata> {
-	const page = await getPage(params.slug);
+}: {
+	params: SlugPageType;
+}): Promise<Metadata> {
+	const { slug } = await params;
+	const page = await getPage(slug);
 
 	if (!page) notFound();
 
@@ -31,8 +32,9 @@ export async function generateMetadata({
 	};
 }
 
-export default async function SlugPage({ params }: SlugPageType) {
-	const page = await getPage(params.slug);
+export default async function SlugPage({ params }: { params: SlugPageType }) {
+	const { slug } = await params;
+	const page = await getPage(slug);
 
 	if (!page) notFound();
 
@@ -42,9 +44,12 @@ export default async function SlugPage({ params }: SlugPageType) {
 		const section = page.fields.content[i];
 
 		if (!section) continue;
-		else if (isTypeHero(section)) children.push(await renderHero(section));
+		else if (isTypeHero(section))
+			children.push(await renderHero({ hero: section }));
 		else if (isTypePageSection(section))
-			children.push(await renderPageSection(section, i % 2 === 0));
+			children.push(
+				await renderPageSection({ section: section, dark: i % 2 === 0 })
+			);
 		else if (isTypeResume(section))
 			children.push(await renderResume(section));
 	}

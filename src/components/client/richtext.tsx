@@ -7,6 +7,7 @@ import {
 import { Document, INLINES } from "@contentful/rich-text-types";
 
 import print from "@/styles/print.module.scss";
+import styles from "@BigE/portfolio.css/scss/components/richtext.module.scss";
 import { ExternalLinkIcon } from "./icon";
 
 export type RichTextProps = {
@@ -19,12 +20,22 @@ export const Options: OptionsType = {
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (/^(https?:)?\/\//.test(node.data.uri))
 				return (
-					<a href={node.data.uri}>
+					<a
+						className={`${styles.link} ${styles.richtext}`}
+						href={node.data.uri}
+					>
 						{children}
-						<ExternalLinkIcon className={print.noPrint} link />
+						<ExternalLinkIcon
+							className={`${styles.icon} ${print.noPrint}`}
+							link
+						/>
 					</a>
 				);
-			return <a href={node.data.uri}>{children}</a>;
+			return (
+				<a className={styles.link} href={node.data.uri}>
+					{children}
+				</a>
+			);
 		},
 	},
 	renderText: (text) =>
@@ -34,6 +45,11 @@ export const Options: OptionsType = {
 export default function RichText({
 	document,
 	options = Options,
-}: RichTextProps) {
-	return <>{documentToReactComponents(document, options)}</>;
+	...props
+}: RichTextProps & JSX.IntrinsicElements["span"]) {
+	props.className = [styles.richtext, props.className || ""].join(" ").trim();
+
+	return (
+		<span {...props}>{documentToReactComponents(document, options)}</span>
+	);
 }

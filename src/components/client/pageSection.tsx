@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "@/styles/pageSection.module.scss";
+import styles from "@BigE/portfolio.css/scss/components/section.module.scss";
 import Icon from "./icon";
 
 export type PageSectionType = {
@@ -15,11 +15,7 @@ export default function PageSection({
 	icon,
 	...props
 }: PageSectionType & JSX.IntrinsicElements["section"]) {
-	props.className = [
-		styles.pageSection,
-		dark ? styles.dark : "",
-		props.className,
-	]
+	props.className = [styles.section, dark ? styles.dark : "", props.className]
 		.join(" ")
 		.trim();
 

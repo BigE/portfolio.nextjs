@@ -7,25 +7,49 @@ import {
 	isTypePureGrid,
 	isTypeRichText,
 } from "@/@types/contentful";
+import styles from "@BigE/portfolio.css/scss/components/section.module.scss";
 import PageSection from "./client/pageSection";
 import renderForm from "./form";
 import renderPanel from "./panel";
 import renderPureGrid from "./pureGrid";
 import RichText from "./client/richtext";
 
-export default async function renderPageSection(
-	section: TypePageSection<"WITHOUT_UNRESOLVABLE_LINKS", string>,
-	dark: boolean = false
-) {
+export type RenderPageSectionExtraProps = {
+	dark?: boolean;
+};
+
+export type RenderPageSectionProps = {
+	section: TypePageSection<"WITHOUT_UNRESOLVABLE_LINKS", string>;
+} & RenderPageSectionExtraProps;
+
+export default async function renderPageSection({
+	dark,
+	section,
+}: RenderPageSectionProps) {
 	const children: React.ReactNode[] = [];
 
 	for (const content of section.fields.content) {
 		if (!content) continue;
-		else if (isTypeForm(content)) children.push(await renderForm(content));
+		else if (isTypeForm(content))
+			children.push(
+				await renderForm({
+					form: content,
+					dark: !dark,
+					headlineClassName: styles.headline,
+					iconClassName: styles.icon,
+				})
+			);
 		else if (isTypePanel(content))
-			children.push(await renderPanel(content, dark));
+			children.push(
+				await renderPanel({
+					panel: content,
+					dark: !dark,
+					headlineClassName: styles.headline,
+					iconClassName: styles.icon,
+				})
+			);
 		else if (isTypePureGrid(content))
-			children.push(await renderPureGrid(content, dark));
+			children.push(await renderPureGrid(content, !dark));
 		else if (isTypeRichText(content))
 			children.push(
 				<div key={content.sys.id}>

@@ -1,6 +1,6 @@
 import { TypeSocialIcons } from "@/@types/contentful";
-import styles from "@/styles/navigation/social.module.scss";
-import Icon from "../icon";
+import styles from "@BigE/portfolio.css/scss/navigation/social.module.scss";
+import Navigation, { NavigationItemType } from "./navigation";
 
 export type SocialNavigationProps = {
 	items: TypeSocialIcons<"WITHOUT_UNRESOLVABLE_LINKS", string>[];
@@ -10,7 +10,7 @@ export default function SocialNavigation({
 	items,
 	...props
 }: SocialNavigationProps & JSX.IntrinsicElements["nav"]) {
-	const children: React.ReactNode[] = [];
+	const children: NavigationItemType[] = [];
 
 	props.role ??= "navigation";
 	props["aria-label"] ??= "Social";
@@ -19,25 +19,19 @@ export default function SocialNavigation({
 	for (const item of items) {
 		if (!item) continue;
 
-		children.push(
-			<li key={item.sys.id} className="pure-menu-item">
-				<a
-					href={item.fields.url}
-					className={`pure-menu-link link ${styles.link}`}
-					title={item.fields.url}
-				>
-					<Icon
-						className={styles.text}
-						icon={item.fields.icon?.fields.name}
-					/>
-				</a>
-			</li>
-		);
+		children.push({
+			key: item.sys.id,
+			href: item.fields.url,
+			icon: item.fields.icon?.fields.name,
+			linkClassName: styles.link,
+		});
 	}
 
 	return (
-		<nav {...props}>
-			<ul className="pure-menu-list pure-menu-horizontal">{children}</ul>
-		</nav>
+		<Navigation
+			listClassName={`pure-menu-horizontal ${styles.list}`}
+			items={children}
+			{...props}
+		/>
 	);
 }

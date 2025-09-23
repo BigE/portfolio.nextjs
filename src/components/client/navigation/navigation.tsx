@@ -1,110 +1,96 @@
 "use client";
 
+import { TypePage } from "@/@types/contentful";
+import styles from "@BigE/portfolio.css/scss/navigation/navigation.module.scss";
 import Link from "next/link";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-
-import styles from "@/styles/navigation/primary.module.scss";
-import { TypePage, isTypePageSection } from "@/@types/contentful";
 import Icon from "../icon";
-import * as navigation from "@/utils/navigation";
+
+export type NavigationItemType = {
+	className?: string;
+	href?: string;
+	icon?: string;
+	iconClassName?: string;
+	key: string;
+	label?: string;
+	linkClassName?: string;
+	page?: TypePage<"WITHOUT_UNRESOLVABLE_LINKS", string>;
+	separator?: boolean;
+};
 
 export type NavigationProps = {
-	items: {
-		home: TypePage<"WITHOUT_UNRESOLVABLE_LINKS", string>;
-		pages: TypePage<"WITHOUT_UNRESOLVABLE_LINKS", string>[];
-	};
-	slug: string;
-};
+	items: NavigationItemType[];
+	listClassName?: string;
+} & Omit<JSX.IntrinsicElements["nav"], "children">;
 
 export default function Navigation({
 	items,
-	slug,
+	listClassName,
 	...props
-}: NavigationProps & JSX.IntrinsicElements["nav"]) {
-	const [shouldScroll, setShouldScroll]: [
-		boolean,
-		Dispatch<SetStateAction<boolean>>,
-	] = useState(true);
-	//const menuItems = useContext(NavigationContext);
+}: NavigationProps) {
+	const children: React.ReactNode[] = [];
 
-	useEffect(() => {
-		let timer: NodeJS.Timeout;
+	listClassName = ["pure-menu-list", styles.list, listClassName || ""]
+		.join(" ")
+		.trim();
+	props.className = [styles.navigation, props.className || ""]
+		.join(" ")
+		.trim();
 
-		const handleScroll = async () => {
-			if (timer) clearTimeout(timer);
-			if (!shouldScroll) {
-				timer = setTimeout(() => {
-					setShouldScroll(true);
-				}, 150);
-			}
+	items.map((item) => {
+		if (!item) return;
 
-			if (window.location.pathname === "/" && shouldScroll) {
-				const menuItems = {
-					current: document.body.querySelectorAll(
-						"nav[id=menu] .pure-menu-item"
-					),
-				};
-				navigation.handleScroll(menuItems);
-			}
-		};
+		if (item.separator) {
+			const className = [
+				"pure-menu-separator",
+				styles.item,
+				item.className || "",
+			]
+				.join(" ")
+				.trim();
+			children.push(
+				<li key={Math.random().toString(36)} className={className}></li>
+			);
+			return;
+		}
 
-		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
+		const className = ["pure-menu-item", styles.item, item.className || ""]
+			.join(" ")
+			.trim();
+		const icon = !item.icon ? undefined : (
+			<Icon className={item.iconClassName} icon={item.icon}></Icon>
+		);
+		const linkClassName = [
+			"pure-menu-link",
+			styles.link,
+			item.linkClassName,
+		]
+			.join(" ")
+			.trim();
+
+		children.push(
+			<li key={item.key} className={className}>
+				{item.href && (
+					<a className={linkClassName} href={item.href}>
+						{icon}
+						{item.label}
+					</a>
+				)}
+				{item.page && (
+					<Link
+						className={linkClassName}
+						href={item.page.fields.slug}
+					>
+						{icon}
+						{item.label}
+					</Link>
+				)}
+			</li>
+		);
 	});
-
-	props["aria-label"] ??= "Primary";
-	props.id = "menu";
-	props.role ??= "navigation";
 
 	return (
 		<nav {...props}>
-			<ul className="pure-menu-list">
-				<li className="pure-menu-separator"></li>
-				{items.home.fields.content.map(
-					(section) =>
-						section &&
-						isTypePageSection(section) && (
-							<li key={section.sys.id} className="pure-menu-item">
-								<a
-									className={`pure-menu-link ${styles.link}`}
-									href={`/#${section.fields.slug}`}
-								>
-									<span className={styles.text}>
-										<Icon
-											icon={
-												section.fields.icon?.fields.name
-											}
-										/>
-										{section.fields.headline}
-									</span>
-								</a>
-							</li>
-						)
-				)}
-			</ul>
-			{items.pages.length > 0 && (
-				<ul className="pure-menu-list">
-					<li className="pure-menu-separator"></li>
-					{items.pages.map((page) => (
-						<li
-							key={page.sys.id}
-							className={`pure-menu-item ${slug == page.fields.slug ? `pure-menu-active ${styles.active}` : ""}`}
-						>
-							<Link
-								className={`pure-menu-link ${styles.link}`}
-								href={page.fields.slug}
-							>
-								<span className={styles.text}>
-									<Icon
-										icon={page.fields.icon?.fields.name}
-									/>
-									{page.fields.title}
-								</span>
-							</Link>
-						</li>
-					))}
-				</ul>
-			)}
+			<ul className={listClassName}>{children}</ul>
 		</nav>
 	);
 }

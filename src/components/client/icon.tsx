@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { FaRegCircleQuestion } from "react-icons/fa6";
 
-import styles from "@/styles/icon.module.scss";
+import styles from "@BigE/portfolio.css/scss/components/icon.module.scss";
 
 type PartialIconProps = {
 	link?: boolean;

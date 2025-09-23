@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import styles from "@/styles/button.module.scss";
+import styles from "@BigE/portfolio.css/scss/components/button.module.scss";
 import Icon from "./icon";
 import { Asset, Entry, EntrySkeletonType } from "contentful";
 import { isTypePage } from "@/@types/contentful";
@@ -19,14 +19,16 @@ export type ButtonProps = {
 	type?: "submit" | "reset" | "button";
 };
 
-export default function Button({ ...props }: ButtonProps) {
+export default function Button({ iconClassName, ...props }: ButtonProps) {
 	const href = getButtonHref(props);
+
+	iconClassName = [styles.icon, iconClassName].join(" ").trim();
 
 	const children = [
 		<Icon
 			key={`${props.icon}-key`}
 			icon={props.icon}
-			className={props.iconClassName}
+			className={iconClassName}
 		/>,
 		props.label,
 	];

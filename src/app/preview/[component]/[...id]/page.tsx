@@ -1,4 +1,4 @@
-"use server;";
+"use server";
 
 import {
 	renderButton,
@@ -15,24 +15,26 @@ import {
 import { ExperienceType } from "@/utils/contentful/resume/experience";
 import { notFound } from "next/navigation";
 
-type PreviewPageType = {
-	params: {
-		component: "button" | "hero" | "resume" | ExperienceType;
-		id: string;
-	};
-};
+type PreviewPageType = Promise<{
+	component: "button" | "hero" | "resume" | ExperienceType;
+	id: string;
+}>;
 
-export default async function PreviewPage({ params }: PreviewPageType) {
-	const { component, id } = params;
+export default async function PreviewPage({
+	params,
+}: {
+	params: PreviewPageType;
+}) {
+	const { component, id } = await params;
 
 	switch (component) {
 		case "button":
-			return await renderButton(await getButton(id));
+			return await renderButton({ button: await getButton(id) });
 		case "personalExperience":
 		case "professionalExperience":
 			return await renderExperience(await getExperience(id, component));
 		case "hero":
-			return await renderHero(await getHero(id));
+			return await renderHero({ hero: await getHero(id) });
 		case "resume":
 			return await renderResume(await getResume(id));
 		default:
