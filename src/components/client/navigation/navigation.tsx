@@ -4,6 +4,7 @@ import { TypePage } from "@/@types/contentful";
 import styles from "@BigE/portfolio.css/scss/navigation/navigation.module.scss";
 import Link from "next/link";
 import Icon from "../icon";
+import { MouseEventHandler } from "react";
 
 export type NavigationItemType = {
 	className?: string;
@@ -13,6 +14,7 @@ export type NavigationItemType = {
 	key: string;
 	label?: string;
 	linkClassName?: string;
+	onClick?: MouseEventHandler<HTMLAnchorElement>;
 	page?: TypePage<"WITHOUT_UNRESOLVABLE_LINKS", string>;
 	separator?: boolean;
 };
@@ -70,7 +72,11 @@ export default function Navigation({
 		children.push(
 			<li key={item.key} className={className}>
 				{item.href && (
-					<a className={linkClassName} href={item.href}>
+					<a
+						className={linkClassName}
+						href={item.href}
+						onClick={item.onClick}
+					>
 						{icon}
 						{item.label}
 					</a>
