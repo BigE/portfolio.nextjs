@@ -6,6 +6,7 @@ import styles from "@BigE/portfolio.css/scss/navigation/primary.module.scss";
 import { TypePage, isTypePageSection } from "@/@types/contentful";
 import * as navigation from "@/utils/navigation";
 import Navigation, { NavigationItemType } from "./navigation";
+import { toggleStyles } from "./menuToggle";
 
 export type PrimaryNavigationProps = {
 	items: {
@@ -68,6 +69,7 @@ export default function PrimaryNavigation({
 			icon: section.fields.icon?.fields.name,
 			iconClassName: styles.icon,
 			label: section.fields.headline,
+			onClick: () => toggleStyles(),
 		});
 	}
 
