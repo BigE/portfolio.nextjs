@@ -5,14 +5,21 @@ import {
 	isTypePureGridPanel,
 	isTypePureGridRichText,
 } from "@/@types/contentful";
+import { PanelExtraProps } from "./client/panel";
 import PureGrid from "./client/pureGrid";
 import RichText from "./client/richtext";
 import renderPanel from "./panel";
 
-export default async function renderPureGrid(
-	pureGrid: TypePureGrid<"WITHOUT_UNRESOLVABLE_LINKS", string>,
-	dark: boolean = false
-) {
+export type RenderPureGridProps = {
+	pureGrid: TypePureGrid<"WITHOUT_UNRESOLVABLE_LINKS", string>;
+} & PanelExtraProps;
+
+export default async function renderPureGrid({
+	dark,
+	headlineClassName,
+	iconClassName,
+	pureGrid,
+}: RenderPureGridProps) {
 	const children: React.ReactNode[] = [];
 
 	for (const content of pureGrid.fields.content) {
@@ -21,8 +28,10 @@ export default async function renderPureGrid(
 		if (!content) continue;
 		else if (isTypePureGridPanel(content) && content.fields.panel)
 			child = await renderPanel({
-				panel: content.fields.panel,
 				dark: dark,
+				headlineClassName: headlineClassName,
+				iconClassName: iconClassName,
+				panel: content.fields.panel,
 			});
 		else if (isTypePureGridRichText(content) && content.fields.richText)
 			child = (
