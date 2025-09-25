@@ -1,7 +1,7 @@
 "use client";
 
-import styles from "@/styles/navigation/backToTop.module.scss";
-import toggleStyles from "@/styles/navigation/toggle.module.scss";
+import styles from "@BigE/portfolio.css/scss/navigation/backToTop.module.scss";
+import toggleStyles from "@BigE/portfolio.css/scss/navigation/toggle.module.scss";
 import Icon from "../icon";
 import React, { useEffect } from "react";
 
@@ -50,12 +50,12 @@ export default function BackToTop({ className, icon }: BackToTopProps) {
 		<a
 			id="backToTop"
 			aria-label="Back to top"
-			className={`${toggleStyles.toggle} ${styles.backToTop} ${className}`}
+			className={`${toggleStyles.toggle} ${styles.toggle} ${styles.backToTop} ${className}`}
 			href="#top"
 			onClick={handleClick}
 			title="Back to top"
 		>
-			<Icon icon={icon} />
+			<Icon icon={icon} aria-hidden="true" />
 		</a>
 	);
 }

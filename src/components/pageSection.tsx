@@ -49,7 +49,14 @@ export default async function renderPageSection({
 				})
 			);
 		else if (isTypePureGrid(content))
-			children.push(await renderPureGrid(content, !dark));
+			children.push(
+				await renderPureGrid({
+					dark: dark,
+					headlineClassName: styles.headline,
+					iconClassName: styles.icon,
+					pureGrid: content,
+				})
+			);
 		else if (isTypeRichText(content))
 			children.push(
 				<div key={content.sys.id}>

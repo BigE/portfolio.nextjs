@@ -8,14 +8,14 @@ import renderButton from "./button";
 
 export type RenderPanelProps = {
 	panel: TypePanel<"WITHOUT_UNRESOLVABLE_LINKS", string>;
-};
+} & PanelExtraProps;
 
 export default async function renderPanel({
 	dark = false,
 	headlineClassName,
 	iconClassName,
 	panel,
-}: RenderPanelProps & PanelExtraProps) {
+}: RenderPanelProps) {
 	const buttons: React.ReactNode[] = [];
 	const panelClassName = [];
 
