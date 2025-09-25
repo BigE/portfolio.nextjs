@@ -5,12 +5,12 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@BigE/portfolio.css@npm:^0.0.21":
-  version: 0.0.21
-  resolution: "@BigE/portfolio.css@npm:0.0.21::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40BigE%2Fportfolio.css%2F0.0.21%2F91a47282935486612a75bd63e4525f2b94cddde7"
+"@BigE/portfolio.css@npm:^0.0.31":
+  version: 0.0.31
+  resolution: "@BigE/portfolio.css@npm:0.0.31::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40BigE%2Fportfolio.css%2F0.0.31%2F755e5b4120f6258ad49cee5a488b6aa78a24660e"
   dependencies:
     purecss: "npm:^3.0.0"
-  checksum: 10c0/ffeb0d6a1ef7fbd1dbf117e32588739928d0210d099a2869592d35947c9cec607e7781be688cd7350e47beeee8b0187c235d0fd41217fcf4c96aa4049f0c6481
+  checksum: 10c0/2c41d9daf4f7616b4296fb29864daae8b6805a3506a8d1d305621d45db69d338100edde4f725c41fee4f16051b04e872b6dd33680f282f6d6a8b99999753d7cd
   languageName: node
   linkType: hard
 
@@ -5516,7 +5516,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "portfolio-nextjs@workspace:."
   dependencies:
-    "@BigE/portfolio.css": "npm:^0.0.21"
+    "@BigE/portfolio.css": "npm:^0.0.31"
     "@contentful/rich-text-react-renderer": "npm:^15.16.3"
     "@contentful/rich-text-types": "npm:^16.0.0"
     "@next/env": "npm:^15.3.3"
