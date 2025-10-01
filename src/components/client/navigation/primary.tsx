@@ -3,29 +3,29 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import styles from "@BigE/portfolio.css/scss/navigation/primary.module.scss";
+import navigationStyles from "@BigE/portfolio.css/scss/navigation/navigation.module.scss";
 import { TypePage, isTypePageSection } from "@/@types/contentful";
-import * as navigation from "@/utils/navigation";
 import Navigation, { NavigationItemType } from "./navigation";
-import { toggleStyles } from "./menuToggle";
+import {
+	highlightNavigationOnScroll,
+	toggleMenu,
+} from "@BigE/portfolio.css/js/main";
 
 export type PrimaryNavigationProps = {
 	items: {
 		home: TypePage<"WITHOUT_UNRESOLVABLE_LINKS", string>;
 		pages: TypePage<"WITHOUT_UNRESOLVABLE_LINKS", string>[];
 	};
-	slug: string;
 };
 
 export default function PrimaryNavigation({
 	items,
-	slug,
 	...props
 }: PrimaryNavigationProps & JSX.IntrinsicElements["nav"]) {
 	const [shouldScroll, setShouldScroll]: [
 		boolean,
 		Dispatch<SetStateAction<boolean>>,
 	] = useState(true);
-	//const menuItems = useContext(NavigationContext);
 
 	const children: NavigationItemType[] = [];
 
@@ -41,12 +41,14 @@ export default function PrimaryNavigation({
 			}
 
 			if (window.location.pathname === "/" && shouldScroll) {
-				const menuItems = {
-					current: document.body.querySelectorAll(
-						"nav[id=menu] .pure-menu-item"
-					),
-				};
-				navigation.handleScroll(menuItems);
+				const menuItems = document.body.querySelectorAll(
+					"nav[id=menu] .pure-menu-item"
+				);
+				//navigation.handleScroll(menuItems);
+				highlightNavigationOnScroll(
+					menuItems as unknown as HTMLLIElement[],
+					navigationStyles.active
+				);
 			}
 		};
 
@@ -56,6 +58,7 @@ export default function PrimaryNavigation({
 
 	props["aria-label"] ??= "Primary";
 	props.className = [props.className || "", styles.primary].join(" ").trim();
+	props.id ??= "primary";
 	props.role ??= "navigation";
 
 	for (const section of items.home.fields.content) {
@@ -69,7 +72,7 @@ export default function PrimaryNavigation({
 			icon: section.fields.icon?.fields.name,
 			iconClassName: styles.icon,
 			label: section.fields.headline,
-			onClick: () => toggleStyles(),
+			onClick: () => toggleMenu(styles["header-visible"], props.id!),
 		});
 	}
 
@@ -84,15 +87,8 @@ export default function PrimaryNavigation({
 		children.push({
 			key: page.sys.id,
 			className: styles.item,
-			linkClassName: [
-				styles.link,
-				slug == page.fields.slug
-					? `pure-menu-active ${styles.active}`
-					: undefined,
-			]
-				.join(" ")
-				.trim(),
-			href: page.fields.slug,
+			linkClassName: styles.link,
+			href: `/${page.fields.slug}`,
 			icon: page.fields.icon?.fields.name,
 			iconClassName: styles.icon,
 			label: page.fields.title,
