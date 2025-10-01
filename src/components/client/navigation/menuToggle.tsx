@@ -1,7 +1,10 @@
 "use client";
 
+import { toggleMenu } from "@BigE/portfolio.css/js/main";
+
 import styles from "@BigE/portfolio.css/scss/navigation/menuToggle.module.scss";
 import layoutStyles from "@BigE/portfolio.css/scss/layout.module.scss";
+
 import Toggle, { ToggleType } from "./toggle";
 
 export type MenuToggleType = ToggleType;
@@ -15,18 +18,14 @@ export default function MenuToggle({
 	props.className = [styles.toggle, styles["menu-toggle"], props.className]
 		.join(" ")
 		.trim();
-	props.onClick = toggleStyles;
 	props["aria-controls"] ??= "menu";
 	props["aria-expanded"] ??= "false";
 	props["aria-label"] ??= "Toggle Menu";
+	props.onClick = () => toggleStyles(props["aria-controls"]!);
 
 	return <Toggle icon={icon} {...props} />;
 }
 
-export function toggleStyles() {
-	document.body.classList.toggle(layoutStyles["header-visible"]);
-	document
-		.getElementById("menu")
-		?.querySelector("ul")
-		?.classList.toggle("pure-menu-horizontal");
+export function toggleStyles(menuId: string) {
+	toggleMenu(layoutStyles["header-visible"], menuId);
 }

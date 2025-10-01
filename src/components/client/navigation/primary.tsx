@@ -1,15 +1,14 @@
 "use client";
 
+import { highlightNavigationOnScroll } from "@BigE/portfolio.css/js/main";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { TypePage, isTypePageSection } from "@/@types/contentful";
 
 import styles from "@BigE/portfolio.css/scss/navigation/primary.module.scss";
 import navigationStyles from "@BigE/portfolio.css/scss/navigation/navigation.module.scss";
-import { TypePage, isTypePageSection } from "@/@types/contentful";
+
 import Navigation, { NavigationItemType } from "./navigation";
-import {
-	highlightNavigationOnScroll,
-	toggleMenu,
-} from "@BigE/portfolio.css/js/main";
+import { toggleStyles } from "./menuToggle";
 
 export type PrimaryNavigationProps = {
 	items: {
@@ -72,7 +71,7 @@ export default function PrimaryNavigation({
 			icon: section.fields.icon?.fields.name,
 			iconClassName: styles.icon,
 			label: section.fields.headline,
-			onClick: () => toggleMenu(styles["header-visible"], props.id!),
+			onClick: () => toggleStyles(),
 		});
 	}
 
