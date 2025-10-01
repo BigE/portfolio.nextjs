@@ -16,16 +16,10 @@ import SocialNavigation from "@/components/client/navigation/social";
 import MenuToggle from "@/components/client/navigation/menuToggle";
 import BackToTop from "@/components/client/navigation/backToTop";
 
-type PageLayoutProps = Promise<{
-	slug: string;
-}>;
-
 export default async function PageLayout({
 	children,
-	params,
 }: {
 	children: React.ReactNode;
-	params: PageLayoutProps;
 }) {
 	const items = {
 		home: await getPage("home"),
@@ -33,7 +27,6 @@ export default async function PageLayout({
 	};
 	const socialIcons = await getSocialIcons();
 	const siteSettings = await getSiteSettings();
-	const { slug } = await params;
 
 	return (
 		<>
@@ -57,7 +50,6 @@ export default async function PageLayout({
 					id="menu"
 					className={styles.primary}
 					items={items}
-					slug={slug}
 				/>
 				<SocialNavigation
 					className={styles.social}
