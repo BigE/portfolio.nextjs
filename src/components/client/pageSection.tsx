@@ -14,7 +14,7 @@ export default function PageSection({
 	headline,
 	icon,
 	...props
-}: PageSectionType & JSX.IntrinsicElements["section"]) {
+}: PageSectionType & React.JSX.IntrinsicElements["section"]) {
 	props.className = [styles.section, dark ? styles.dark : "", props.className]
 		.join(" ")
 		.trim();

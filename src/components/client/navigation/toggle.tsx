@@ -10,7 +10,7 @@ export type ToggleType = {
 export default function Toggle({
 	icon,
 	...props
-}: ToggleType & JSX.IntrinsicElements["button"]) {
+}: ToggleType & React.JSX.IntrinsicElements["button"]) {
 	icon ??= "FaBars";
 	props.className = [styles.toggle, props.className || ""].join(" ").trim();
 

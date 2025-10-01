@@ -9,7 +9,7 @@ export type SocialNavigationProps = {
 export default function SocialNavigation({
 	items,
 	...props
-}: SocialNavigationProps & JSX.IntrinsicElements["nav"]) {
+}: SocialNavigationProps & React.JSX.IntrinsicElements["nav"]) {
 	const children: NavigationItemType[] = [];
 
 	props.role ??= "navigation";

@@ -20,7 +20,7 @@ export type PrimaryNavigationProps = {
 export default function PrimaryNavigation({
 	items,
 	...props
-}: PrimaryNavigationProps & JSX.IntrinsicElements["nav"]) {
+}: PrimaryNavigationProps & React.JSX.IntrinsicElements["nav"]) {
 	const [shouldScroll, setShouldScroll]: [
 		boolean,
 		Dispatch<SetStateAction<boolean>>,
@@ -71,7 +71,7 @@ export default function PrimaryNavigation({
 			icon: section.fields.icon?.fields.name,
 			iconClassName: styles.icon,
 			label: section.fields.headline,
-			onClick: () => toggleStyles(),
+			onClick: () => toggleStyles(props.id!),
 		});
 	}
 

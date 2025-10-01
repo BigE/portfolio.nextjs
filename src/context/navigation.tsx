@@ -1,8 +1,10 @@
 "use client";
 
-import { createContext, useEffect, useRef } from "react";
+import { MutableRefObject, createContext, useEffect, useRef } from "react";
 
-import { MenuItems } from "@/utils/navigation";
+export type MenuItems =
+	| MutableRefObject<NodeListOf<Element> | undefined>
+	| undefined;
 
 export const NavigationContext = createContext<MenuItems>(undefined);
 
@@ -11,7 +13,7 @@ export default function NavigationProvider({
 }: {
 	children: React.ReactNode;
 }) {
-	const menuItems: MenuItems = useRef();
+	const menuItems: MenuItems = useRef(undefined);
 
 	useEffect(() => {
 		menuItems.current = document.body.querySelectorAll(
