@@ -16,7 +16,7 @@ export default function NotFound() {
 	);
 
 	return (
-		<PageLayout params={Promise.resolve({ slug: "" })}>
+		<PageLayout>
 			<Hero
 				title="404 Not Found"
 				button={button}
