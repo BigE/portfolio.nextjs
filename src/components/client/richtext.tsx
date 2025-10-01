@@ -46,7 +46,7 @@ export default function RichText({
 	document,
 	options = Options,
 	...props
-}: RichTextProps & JSX.IntrinsicElements["span"]) {
+}: RichTextProps & React.JSX.IntrinsicElements["span"]) {
 	props.className = [styles.richtext, props.className || ""].join(" ").trim();
 
 	return (

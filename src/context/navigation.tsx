@@ -13,7 +13,7 @@ export default function NavigationProvider({
 }: {
 	children: React.ReactNode;
 }) {
-	const menuItems: MenuItems = useRef();
+	const menuItems: MenuItems = useRef(undefined);
 
 	useEffect(() => {
 		menuItems.current = document.body.querySelectorAll(

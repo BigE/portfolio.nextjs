@@ -24,7 +24,7 @@ export default function Resume({
 	professionalExperience,
 	personalExperience,
 	...props
-}: ResumeProps & JSX.IntrinsicElements["section"]) {
+}: ResumeProps & React.JSX.IntrinsicElements["section"]) {
 	props.className = [styles.resume, props.className].join(" ").trim();
 
 	return (

@@ -23,7 +23,7 @@ export type NavigationItemType = {
 export type NavigationProps = {
 	items: NavigationItemType[];
 	listClassName?: string;
-} & Omit<JSX.IntrinsicElements["nav"], "children">;
+} & Omit<React.JSX.IntrinsicElements["nav"], "children">;
 
 export default function Navigation({
 	items,

@@ -17,7 +17,7 @@ export default function Icon({
 	link,
 	icon,
 	...props
-}: IconProps & JSX.IntrinsicElements["span"]) {
+}: IconProps & React.JSX.IntrinsicElements["span"]) {
 	const FontAwesomeIcon = getFontAwesomeIcon(icon);
 
 	props.className = [styles.icon, link ? styles.link : "", props.className]
@@ -33,7 +33,7 @@ export default function Icon({
 export function ExternalLinkIcon({
 	link,
 	...props
-}: PartialIconProps & JSX.IntrinsicElements["span"]) {
+}: PartialIconProps & React.JSX.IntrinsicElements["span"]) {
 	return <Icon link={link} icon="FaArrowUpRightFromSquare" {...props} />;
 }
 

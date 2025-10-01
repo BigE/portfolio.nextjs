@@ -20,7 +20,7 @@ export default function Form({
 	iconClassName,
 	panelClassName,
 	...props
-}: FormProps & PanelExtraProps & JSX.IntrinsicElements["form"]) {
+}: FormProps & PanelExtraProps & React.JSX.IntrinsicElements["form"]) {
 	const buttons: React.ReactNode[] = [
 		<Button
 			key="submit"

@@ -12,7 +12,7 @@ export type MenuToggleType = ToggleType;
 export default function MenuToggle({
 	icon,
 	...props
-}: MenuToggleType & JSX.IntrinsicElements["button"]) {
+}: MenuToggleType & React.JSX.IntrinsicElements["button"]) {
 	icon ??= "FaBars";
 	props.id = "menuToggle";
 	props.className = [styles.toggle, styles["menu-toggle"], props.className]

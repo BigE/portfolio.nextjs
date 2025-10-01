@@ -20,7 +20,7 @@ export type PrimaryNavigationProps = {
 export default function PrimaryNavigation({
 	items,
 	...props
-}: PrimaryNavigationProps & JSX.IntrinsicElements["nav"]) {
+}: PrimaryNavigationProps & React.JSX.IntrinsicElements["nav"]) {
 	const [shouldScroll, setShouldScroll]: [
 		boolean,
 		Dispatch<SetStateAction<boolean>>,

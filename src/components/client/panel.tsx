@@ -27,7 +27,7 @@ export default function Panel({
 	iconClassName,
 	slug,
 	...props
-}: PanelProps & PanelExtraProps & JSX.IntrinsicElements["section"]) {
+}: PanelProps & PanelExtraProps & React.JSX.IntrinsicElements["section"]) {
 	const buttonAlignmentClassName =
 		styles[buttonAlignment.toLocaleLowerCase()] || "";
 	props.className = [

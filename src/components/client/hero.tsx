@@ -27,7 +27,7 @@ export default function Hero({
 	icon,
 	title,
 	...props
-}: HeroProps & JSX.IntrinsicElements["section"]) {
+}: HeroProps & React.JSX.IntrinsicElements["section"]) {
 	if (background && background.url.startsWith("//"))
 		background.url = `https:${background.url}`;
 
