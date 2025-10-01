@@ -71,7 +71,7 @@ export default function PrimaryNavigation({
 			icon: section.fields.icon?.fields.name,
 			iconClassName: styles.icon,
 			label: section.fields.headline,
-			onClick: () => toggleStyles(),
+			onClick: () => toggleStyles(props.id!),
 		});
 	}
 
