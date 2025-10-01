@@ -5,6 +5,7 @@ import styles from "@BigE/portfolio.css/scss/navigation/navigation.module.scss";
 import Link from "next/link";
 import Icon from "../icon";
 import { MouseEventHandler } from "react";
+import { usePathname } from "next/navigation";
 
 export type NavigationItemType = {
 	className?: string;
@@ -30,6 +31,7 @@ export default function Navigation({
 	...props
 }: NavigationProps) {
 	const children: React.ReactNode[] = [];
+	const pathName = usePathname();
 
 	listClassName = ["pure-menu-list", styles.list, listClassName || ""]
 		.join(" ")
@@ -55,7 +57,7 @@ export default function Navigation({
 			return;
 		}
 
-		const className = ["pure-menu-item", styles.item, item.className || ""]
+		let className = ["pure-menu-item", styles.item, item.className || ""]
 			.join(" ")
 			.trim();
 		const icon = !item.icon ? undefined : (
@@ -68,6 +70,10 @@ export default function Navigation({
 		]
 			.join(" ")
 			.trim();
+
+		if (item.href && pathName === item.href) {
+			className += ` pure-menu-active ${styles.active}`;
+		}
 
 		children.push(
 			<li key={item.key} className={className}>
