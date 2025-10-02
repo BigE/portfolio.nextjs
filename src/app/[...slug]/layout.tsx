@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import logo from "@BigE/portfolio.css/images/logo.png";
-import Icon, { ExternalLinkIcon } from "@/components/client/icon";
-import print from "@/styles/print.module.scss";
+import print from "@BigE/portfolio.css/scss/print.module.scss";
 import styles from "@BigE/portfolio.css/scss/layout.module.scss";
+import Icon, { ExternalLinkIcon } from "@/components/client/icon";
 import {
 	getPage,
 	getPages,
@@ -30,7 +30,7 @@ export default async function PageLayout({
 
 	return (
 		<>
-			<header className={print.noPrint} id={styles.header}>
+			<header className={print["no-print"]} id={styles.header}>
 				<Link href="/" className={`pure-menu-heading ${styles.logo}`}>
 					<span className={styles.image}>
 						<Image src={logo} alt="me" className={styles.avatar} />
@@ -57,7 +57,7 @@ export default async function PageLayout({
 				/>
 			</header>
 			<main id={styles.content}>{children}</main>
-			<footer className={print.noPrint} id={styles.footer}>
+			<footer className={print["no-print"]} id={styles.footer}>
 				<div className={styles.content}>
 					<span>
 						<Icon icon="FaRegCopyright" /> Eric Gach All Rights
@@ -85,8 +85,8 @@ export default async function PageLayout({
 					</span>
 				</div>
 			</footer>
-			<MenuToggle className={print.noPrint} />
-			<BackToTop className={print.noPrint} />
+			<MenuToggle className={print["no-print"]} />
+			<BackToTop className={print["no-print"]} />
 		</>
 	);
 }

@@ -6,7 +6,7 @@ import {
 } from "@contentful/rich-text-react-renderer";
 import { Document, INLINES } from "@contentful/rich-text-types";
 
-import print from "@/styles/print.module.scss";
+import print from "@BigE/portfolio.css/scss/print.module.scss";
 import styles from "@BigE/portfolio.css/scss/components/richtext.module.scss";
 import { ExternalLinkIcon } from "./icon";
 
@@ -26,7 +26,7 @@ export const Options: OptionsType = {
 					>
 						{children}
 						<ExternalLinkIcon
-							className={`${styles.icon} ${print.noPrint}`}
+							className={`${styles.icon} ${print["no-print"]}`}
 							link
 						/>
 					</a>

@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "@BigE/portfolio.css/scss/components/resume.module.scss";
+import printStyles from "@BigE/portfolio.css/scss/print.module.scss";
 import { Document } from "@contentful/rich-text-types";
 
 import RichText from "../richtext";
@@ -70,7 +71,7 @@ export default function Resume({
 				</section>
 			)}
 			{personalExperience && (
-				<section className={styles.section}>
+				<section className={`${styles.section} ${printStyles['break-inside-avoid']}`}>
 					<h2 className={styles.header}>Personal Experience</h2>
 					<section className={styles.content}>
 						{personalExperience}
