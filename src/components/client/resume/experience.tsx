@@ -68,7 +68,7 @@ export default function Experience({
 				</div>
 			)}
 			<div className={styles.body}>
-				<RichText document={description} />
+				<RichText className={styles.richtext} document={description} />
 			</div>
 		</section>
 	);
