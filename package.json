@@ -1,6 +1,6 @@
 {
   "name": "portfolio-nextjs",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "scripts": {
     "build": "next build",
@@ -10,7 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@BigE/portfolio.css": "^0.0.44",
+    "@BigE/portfolio.css": "^0.1.1",
     "@contentful/rich-text-react-renderer": "^16.1.5",
     "@contentful/rich-text-types": "^16.0.0",
     "@types/node": "^22.0.0",
