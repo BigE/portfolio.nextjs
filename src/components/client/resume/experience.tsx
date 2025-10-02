@@ -1,7 +1,7 @@
 import { Document } from "@contentful/rich-text-types";
 
-import print from "@/styles/print.module.scss";
-import styles from "@/styles/resume/experience.module.scss";
+import print from "@BigE/portfolio.css/scss/print.module.scss";
+import styles from "@BigE/portfolio.css/scss/components/experience.module.scss";
 import { ExternalLinkIcon } from "../icon";
 import RichText from "../richtext";
 
@@ -46,7 +46,7 @@ export default function Experience({
 				{(url && (
 					<a href={url}>
 						<h5 className={`${styles.location} float-left clear`}>
-							{url} <ExternalLinkIcon className={print.noPrint} />
+							{url} <ExternalLinkIcon className={print["no-print"]} />
 						</h5>
 					</a>
 				)) || (
