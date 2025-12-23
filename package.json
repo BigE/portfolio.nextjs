@@ -1,6 +1,6 @@
 {
   "name": "portfolio-nextjs",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "private": true,
   "scripts": {
     "build": "next build",
@@ -18,7 +18,7 @@
     "@types/react-dom": "^19.1.11",
     "axios": "^1.8.2",
     "contentful": "^10.2.3",
-    "next": "^15.5.4",
+    "next": "^15.5.7",
     "purecss": "^3.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
